@@ -6,15 +6,22 @@ import java.util.LinkedList;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
-
+	public ModuloPagos moduloDePagos;
+	
 	public TallerMecanico(Camion... camiones) {
 		this.camiones = Arrays.asList(camiones);
+		this.moduloDePagos = null;
 	}
 
+	public void agregarModuloPagos(ModuloPagos moduloDePagos) {
+		this.moduloDePagos = moduloDePagos;
+	}
+	
 	public void asistir(Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
 		Cliente cliente = pedido.getAutomovil().getCliente();
 		
