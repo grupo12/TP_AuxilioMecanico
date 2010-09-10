@@ -11,21 +11,19 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
+	private Collection<Cliente> Clientes;
+	
 	public ModuloPagos moduloDePagos;
 	
 	public TallerMecanico(Camion... camiones) {
 		this.camiones = Arrays.asList(camiones);
 		this.moduloDePagos = null;
 	}
-
-	public void agregarModuloPagos(ModuloPagos moduloDePagos) {
-		this.moduloDePagos = moduloDePagos;
-	}
 	
 	public void asistir(Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
 		Cliente cliente = pedido.getAutomovil().getCliente();
 		
-		if ( !cliente.isCuotaAlDia() )
+		if ( !cliente.isCuotaAlDia(this.moduloDePagos) )
 			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
 		if ( !pedido.sonServiciosValidos() )
 			throw new ServicioInvalidoException("El cliente no puede solicitar este servicio", pedido);
@@ -55,4 +53,13 @@ public class TallerMecanico {
 	private boolean algunCamionPuedeAtender(Pedido pedido) {
 		return !this.camionesPuedenAtender(pedido).isEmpty();
 	}
+	
+	public void agregarModuloPagos(ModuloPagos moduloDePagos) {
+		this.moduloDePagos = moduloDePagos;
+	}
+	
+	public void setClientes ( Cliente...clientes ){
+		this.Clientes = Arrays.asList(clientes);	
+	}
 }
+

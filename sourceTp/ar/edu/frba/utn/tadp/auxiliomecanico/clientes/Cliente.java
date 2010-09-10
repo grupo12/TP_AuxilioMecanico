@@ -1,6 +1,7 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.clientes;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.Plan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 public class Cliente {
 
@@ -10,8 +11,8 @@ public class Cliente {
 		this.plan = plan;
 	}
 
-	public boolean isCuotaAlDia() {
-		return plan.isCuotaAlDia(this);
+	public boolean isCuotaAlDia(ModuloPagos moduloPagos) {
+		return plan.isCuotaAlDia(this,moduloPagos);
 	}
 
 }
