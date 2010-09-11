@@ -5,15 +5,14 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.*;
 
 public class MockModuloPagos implements ModuloPagos {
 	
-	//public Collection<Cliente> clientes = Cliente;
-	public double NumeroMagico=200;
-		
+	public double NumeroMagico;
+	
+	public MockModuloPagos(){
+		this.NumeroMagico= 0 ;
+	}	
+	
 	public void setNumeroMagico(double numeroMagico) {
 		NumeroMagico = numeroMagico;
-	}
-
-	public MockModuloPagos(){
-		this.NumeroMagico= 1000 ;
 	}
 
 	public double moraDe(Cliente cliente){
