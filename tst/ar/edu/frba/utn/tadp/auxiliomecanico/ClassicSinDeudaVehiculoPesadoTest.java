@@ -9,6 +9,9 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minitaller;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.IPedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Remolque;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.servicios.RemolqueServicio;
 
@@ -16,7 +19,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	
 	private Cliente clienteClassicSinDeuda;
 	private Automovil automovilPesado;
-	private Pedido pedidoRemolque;
+	private IPedido pedidoRemolque;
 	private TallerMecanico tallerMecanico;
 	private Camion minitaller;
 	private Camion grangrua;
@@ -27,7 +30,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 		clienteClassicSinDeuda = new Cliente(new ClassicPlan());
 		automovilPesado = new Automovil(5, clienteClassicSinDeuda);
 		
-		pedidoRemolque = new Pedido(automovilPesado, new RemolqueServicio());
+		pedidoRemolque = new Remolque(new Pedido(automovilPesado));
 		
 		minitaller = new Minitaller();
 		grangrua = new Grangrua(true);

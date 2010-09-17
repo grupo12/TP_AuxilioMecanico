@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.IPedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 public class TallerMecanico {
@@ -31,26 +33,26 @@ public class TallerMecanico {
 		this.asignarCamion(pedido);
 	}
 
-	private void asignarCamion(Pedido pedido) throws CamionNoDisponibleException {
+	private void asignarCamion(IPedido pedido) throws CamionNoDisponibleException {
 		if ( !this.algunCamionPuedeAtender(pedido) )
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
 		
-		Camion camion = pedido.getAutomovil().getCliente().selectCamion( this.camionesPuedenAtender(pedido) );
+		Camion camion = pedido.getPlan().selectCamion( this.camionesPuedenAtender(pedido) );
 		camion.atender(pedido);
 	}
 
-	private Collection<Camion> camionesPuedenAtender(Pedido pedido) {
+	private Collection<Camion> camionesPuedenAtender(IPedido pedido) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
 		
 		for (Camion camion : camiones)
-			if ( pedido.puedeSerAtendidoPor(camion) )
+			if ( pedido.puedeSerAtendidoPorCamion(camion) )
 				camionesPuedenAtender.add(camion);
 		
 		return camionesPuedenAtender;
 	}
 
-	private boolean algunCamionPuedeAtender(Pedido pedido) {
+	private boolean algunCamionPuedeAtender(IPedido pedido) {
 		return !this.camionesPuedenAtender(pedido).isEmpty();
 	}
 	

@@ -1,5 +1,7 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico;
 
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+
 
 public class ServicioInvalidoException extends Exception {
 

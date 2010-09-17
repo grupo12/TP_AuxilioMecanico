@@ -1,5 +1,7 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.clientes;
 
+import ar.edu.frba.utn.tadp.auxiliomecanico.planes.Plan;
+
 public class Automovil {
 
 	private Cliente cliente;
@@ -14,4 +16,7 @@ public class Automovil {
 		return cliente;
 	}
 
+	public Plan getPlan(){
+		return this.cliente.getPlan();
+	}
 }

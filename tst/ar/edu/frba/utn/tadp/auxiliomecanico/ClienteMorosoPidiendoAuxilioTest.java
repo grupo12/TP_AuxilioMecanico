@@ -14,7 +14,7 @@ public class ClienteMorosoPidiendoAuxilioTest {
 	
 	//public void setUp(){ 
 		/*Creacion Taller y modulo pagos*/
-			private MockModuloPagos modulo = new MockModuloPagos(); 
+			private MockModuloPagos modulo = new MockModuloPagos(300); 
 			private TallerMecanico taller = new TallerMecanico();
 		/*fin Creacion Taller y modulo pagos*/
 		
@@ -29,7 +29,6 @@ public class ClienteMorosoPidiendoAuxilioTest {
 			public void setUp(){
 				this.taller.agregarModuloPagos(modulo);
 				this.taller.setClientes(juanClienteClasico,serguioClienteEconomic,marianoClientePlatinium);
-				modulo.setNumeroMagico(200);
 			}
 		/* fin Configuracion taller y modulo de pagos*/		
 		

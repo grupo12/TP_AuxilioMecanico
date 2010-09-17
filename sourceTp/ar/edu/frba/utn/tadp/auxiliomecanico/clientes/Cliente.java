@@ -15,4 +15,7 @@ public class Cliente {
 		return plan.isCuotaAlDia(this,moduloPagos);
 	}
 
+	public Plan getPlan(){
+		return this.plan;
+	}
 }
