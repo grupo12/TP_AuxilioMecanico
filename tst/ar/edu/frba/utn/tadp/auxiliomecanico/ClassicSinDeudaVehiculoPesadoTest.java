@@ -9,8 +9,8 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minitaller;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.IPedido;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Remolque;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.servicios.RemolqueServicio;
@@ -19,7 +19,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	
 	private Cliente clienteClassicSinDeuda;
 	private Automovil automovilPesado;
-	private IPedido pedidoRemolque;
+	private Pedido pedidoRemolque;
 	private TallerMecanico tallerMecanico;
 	private Camion minitaller;
 	private Camion grangrua;
@@ -27,10 +27,10 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		clienteClassicSinDeuda = new Cliente(new ClassicPlan());
+		clienteClassicSinDeuda = new Cliente(new ClassicPlan(), 100);
 		automovilPesado = new Automovil(5, clienteClassicSinDeuda);
 		
-		pedidoRemolque = new Remolque(new Pedido(automovilPesado));
+		pedidoRemolque = new Remolque(new ReparacionSimple());
 		
 		minitaller = new Minitaller();
 		grangrua = new Grangrua(true);
@@ -39,7 +39,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	}
 
 	@Test
-	public void testPedidoRemolqueAsistidoGranGrua() {
+	public void testPedidoRemolqueAsistidoPorGranGrua() {
 		
 	}
 }
