@@ -31,26 +31,29 @@ public class TallerMecanico {
 	}
 
 	private void asignarCamion(Automovil automovil, Pedido pedido) throws CamionNoDisponibleException {
-		if ( !this.algunCamionPuedeAtender(pedido) )
+		if ( !this.algunCamionPuedeAtender(pedido, automovil) )
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
 		
-		Camion camion = automovil.getCliente().selectCamion( this.camionesPuedenAtender(pedido) );
-		camion.atender(pedido);
+		this.camionParaAsignarA(automovil, pedido).atender(pedido);
 	}
 
-	protected Collection<Camion> camionesPuedenAtender(Pedido pedido) {
+	protected Camion camionParaAsignarA(Automovil automovil, Pedido pedido) {
+		return automovil.getCliente().selectCamion( this.camionesPuedenAtender(pedido, automovil) );
+	}
+
+	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
 		
 		for (Camion camion : camiones)
-			if ( pedido.puedeSerAtendidoPorCamion(camion) )
+			if ( pedido.puedeSerAtendidoPorCamion(camion, automovil) )
 				camionesPuedenAtender.add(camion);
 		
 		return camionesPuedenAtender;
 	}
 
-	private boolean algunCamionPuedeAtender(Pedido pedido) {
-		return !this.camionesPuedenAtender(pedido).isEmpty();
+	private boolean algunCamionPuedeAtender(Pedido pedido, Automovil automovil) {
+		return !this.camionesPuedenAtender(pedido, automovil).isEmpty();
 	}
 	
 	public void setModuloPagos(ModuloPagos moduloDePagos) {

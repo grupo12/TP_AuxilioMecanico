@@ -1,6 +1,7 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.pedido;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
 public class Remolque extends DecoradorPedido {
@@ -19,7 +20,7 @@ public class Remolque extends DecoradorPedido {
 	}
 
 	@Override
-	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion) {
-		return unCamion.puedeAtenderRemolque();
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+		return unCamion.puedeAtenderRemolque(automovil);
 	}
 }

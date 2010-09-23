@@ -1,6 +1,7 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.pedido;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
 /**
@@ -32,8 +33,8 @@ public abstract class DecoradorPedido implements Pedido {
 	}
 
 	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion) {
-		return this.doPuedeSerAtendidoPorCamion(unCamion) && this.sujeto.puedeSerAtendidoPorCamion(unCamion);
+	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+		return this.doPuedeSerAtendidoPorCamion(unCamion, automovil) && this.sujeto.puedeSerAtendidoPorCamion(unCamion, automovil);
 	}
 
 	/**
@@ -46,7 +47,8 @@ public abstract class DecoradorPedido implements Pedido {
 	/**
 	 * Responde únicamente para el decorador dado si puede ser o no atentido por un camión.
 	 * @param unCamion
+	 * @param automovil
 	 * @return booleano
 	 */
-	protected abstract boolean doPuedeSerAtendidoPorCamion(Camion unCamion);
+	protected abstract boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil);
 }

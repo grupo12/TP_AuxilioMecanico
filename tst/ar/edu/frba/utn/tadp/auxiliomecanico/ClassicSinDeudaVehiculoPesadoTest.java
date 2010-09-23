@@ -47,9 +47,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 
 	@Test
 	public void testAsignacionGrangrua() throws CamionNoDisponibleException {
-		Camion camionAsignado = this.clienteClassicSinDeuda.selectCamion(
-				this.tallerMecanico.camionesPuedenAtender(this.pedidoRemolque));
-		assertEquals(this.grangrua, camionAsignado);
+		assertEquals(this.grangrua, this.tallerMecanico.camionParaAsignarA(automovilPesado, pedidoRemolque));
 	}
 
 	@Test

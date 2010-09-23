@@ -1,12 +1,13 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.pedido;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
 public class ReparacionSimple implements Pedido {
 
 	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion) {
+	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return unCamion.puedeAtenderReparacionSimple();
 	}
 

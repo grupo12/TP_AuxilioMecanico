@@ -3,6 +3,7 @@ package ar.edu.frba.utn.tadp.auxiliomecanico.camiones;
 import java.util.LinkedList;
 import java.util.List;
 
+import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 
 public abstract class Camion {
@@ -24,7 +25,7 @@ public abstract class Camion {
 		return true;
 	}
 	
-	public abstract boolean puedeAtenderRemolque();
+	public abstract boolean puedeAtenderRemolque(Automovil automovil);
 
 	public abstract boolean puedeAtenderReparacionCompleja();
 
