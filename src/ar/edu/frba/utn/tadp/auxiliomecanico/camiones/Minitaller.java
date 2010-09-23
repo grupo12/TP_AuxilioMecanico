@@ -2,11 +2,10 @@ package ar.edu.frba.utn.tadp.auxiliomecanico.camiones;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 
-public class Minitaller implements Camion {
-
+public class Minitaller extends Camion {
+	
 	@Override
-	public void atender(Pedido unPedido) {
-		// TODO Auto-generated method stub
+	public int getEconomicidad() {
+		return 0;
 	}
-
 }

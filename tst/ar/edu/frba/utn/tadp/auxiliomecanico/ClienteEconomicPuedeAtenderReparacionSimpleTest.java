@@ -13,6 +13,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
 
 public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 
+	private static final int PESO_AUTO = 1;
 	private static final double CUOTA_CLIENTE_ECONOMIC = 25;
 	
 	private Automovil automovil;
@@ -20,7 +21,7 @@ public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 	
 	@Before
 	public void setUp(){
-		this.automovil = new Automovil(1, new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC));
+		this.automovil = new Automovil(PESO_AUTO, new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC));
 		this.reparacionSimple = new ReparacionSimple();
 	}
 	

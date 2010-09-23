@@ -1,14 +1,37 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.camiones;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 
-public interface Camion {
+public abstract class Camion {
 
-	public void atender(Pedido unPedido);
+	protected List<Pedido> pedidosAsignados;
 
-	public boolean puedeAtenderReparacionSimple();
+	public Camion() {
+		this.pedidosAsignados = new LinkedList<Pedido>();
+	}
 
-	public boolean puedeAtenderRemolque();
+	public void atender(Pedido unPedido) {
+		this.pedidosAsignados.add(unPedido);
+	}
+	public int cantidadPedidosPendientes() {
+		return this.pedidosAsignados.size();
+	}
 
-	public boolean puedeAtenderReparacionCompleja();
+	public boolean puedeAtenderReparacionSimple() {
+		return true;
+	}
+	
+	public abstract boolean puedeAtenderRemolque();
+
+	public abstract boolean puedeAtenderReparacionCompleja();
+
+	/**
+	 * Nivel de economicidad según el camión y sus características. Permite su
+	 * ordenamiento según valor.
+	 * 
+	 */
+	public abstract int getEconomicidad();
 }

@@ -2,11 +2,10 @@ package ar.edu.frba.utn.tadp.auxiliomecanico.camiones;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 
-public class Minigrua implements Camion {
-
+public class Minigrua extends Camion {
+	
 	@Override
-	public void atender(Pedido unPedido) {
-		// TODO Auto-generated method stub
+	public int getEconomicidad() {
+		return 1;
 	}
-
 }

@@ -1,6 +1,5 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.clientes;
 
-
 public class Automovil {
 
 	private Cliente cliente;

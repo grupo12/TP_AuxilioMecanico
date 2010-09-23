@@ -38,7 +38,7 @@ public class TallerMecanico {
 		camion.atender(pedido);
 	}
 
-	private Collection<Camion> camionesPuedenAtender(Pedido pedido) {
+	protected Collection<Camion> camionesPuedenAtender(Pedido pedido) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
 		
