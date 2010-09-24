@@ -35,7 +35,7 @@ public class ClienteMorosoPidiendoAuxilioTest {
 
 	@Test
 	public void clientePremiumPidiendoTest() {
-		modulo.setNumeroMagico(10);
+		modulo.setDeuda(10);
 		assertTrue(marianoClientePlatinium.isCuotaAlDia(modulo));
 	}
 

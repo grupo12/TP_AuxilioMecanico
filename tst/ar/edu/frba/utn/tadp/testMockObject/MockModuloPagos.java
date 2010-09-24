@@ -11,7 +11,7 @@ public class MockModuloPagos implements ModuloPagos {
 		this.Deuda = unaDeuda ;
 	}	
 	
-	public void setNumeroMagico(double numeroMagico) {
+	public void setDeuda(double numeroMagico) {
 		Deuda = numeroMagico;
 	}
 

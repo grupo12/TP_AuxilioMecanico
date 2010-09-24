@@ -22,6 +22,8 @@ public class TallerMecanico {
 	public void asistir(Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
 		Cliente cliente = pedido.getCliente();
 		
+		if ( this.moduloDePagos == null)
+			throw new ModuloPagosFaltanteException("No se inicializó el módulo de pagos del taller");
 		if ( !cliente.isCuotaAlDia(this.moduloDePagos) )
 			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
 		if ( !pedido.esValidoPara(cliente) )
