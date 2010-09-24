@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Grangrua;
+import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minitaller;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
@@ -35,13 +37,15 @@ public class ClienteEconomicNoPuedeAtenderseRemolque {
 			automovilEconomic);
 
 	private final Minitaller minitaller = new Minitaller();
+	private final Grangrua grangruaConTaller = new Grangrua(true);
+	private final Minigrua minigrua = new Minigrua();
 	private final TallerMecanico tallerMecanico = new TallerMecanico(
-			this.minitaller);
+			this.minitaller, this.minigrua, this.grangruaConTaller);
 
 	@Before
 	public void setUp() throws Exception {
-		this.tallerMecanico.setModuloPagos(new MockModuloPagos(
-				DEUDA_CLIENTE_ECONOMIC));
+		this.tallerMecanico.setModuloPagos(new MockModuloPagos(	DEUDA_CLIENTE_ECONOMIC));
+		this.minigrua.atender(new ReparacionSimple(automovilEconomic));
 	}
 
 	@Test(expected = ServicioInvalidoException.class)
@@ -56,7 +60,8 @@ public class ClienteEconomicNoPuedeAtenderseRemolque {
 	}
 
 	@Test(expected = ServicioInvalidoException.class)
-	public void clienteEconomicoPuedePedirComplejoSinRemolque() throws Exception {
+	public void clienteEconomicoPuedePedirComplejoSinRemolque()
+			throws Exception {
 		this.validarPedidoInvalido(this.pedidoComplejoSinRemolque);
 	}
 

@@ -22,7 +22,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	private static final int DEUDA_CLIENTE_CLASSIC = 0;
 	private static final int PESO_AUTO = 5;
 	private static final int CUOTA_MENSUAL = 100;
-	
+
 	private Cliente clienteClassicSinDeuda;
 	private Automovil automovilPesado;
 	private Pedido pedidoRemolque;
@@ -41,6 +41,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 		this.minitaller = new Minitaller();
 		this.grangruaConTaller = new Grangrua(true);
 		this.minigrua = new Minigrua();
+		this.minigrua.atender(new ReparacionSimple(automovilPesado));
 		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangruaConTaller);
 		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
 	}
@@ -54,7 +55,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	public void testPedidoRemolqueAsistidoPorGrangrua() throws Exception {
 		this.tallerMecanico.asistir(this.pedidoRemolque);
 		this.validarAsignacionPedido();
-		
+
 		this.tallerMecanico.finalizoPedido(this.grangruaConTaller, this.pedidoRemolque);
 		this.validarFinalizacionPedido();
 	}
@@ -63,7 +64,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 		Pedido pedidoAsignado = this.grangruaConTaller.getPedidosAsignados().iterator().next();
 		assertEquals(this.pedidoRemolque, pedidoAsignado);
 	}
-	
+
 	private void validarFinalizacionPedido() {
 		assertTrue(this.grangruaConTaller.getPedidosAsignados().isEmpty());
 		assertEquals(this.pedidoRemolque, this.clienteClassicSinDeuda.getPedidosRealizados().iterator().next());
