@@ -1,5 +1,6 @@
 package ar.edu.frba.utn.tadp.auxiliomecanico.camiones;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,4 +36,12 @@ public abstract class Camion {
 	 * 
 	 */
 	public abstract int getEconomicidad();
+
+	public Collection<Pedido> getPedidosAsignados() {
+		return this.pedidosAsignados;
+	}
+
+	public void finalizoPedido(Pedido pedido) {
+		this.pedidosAsignados.remove(pedido);
+	}
 }

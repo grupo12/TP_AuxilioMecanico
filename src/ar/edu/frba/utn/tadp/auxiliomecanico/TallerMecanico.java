@@ -19,26 +19,26 @@ public class TallerMecanico {
 		this.camiones = Arrays.asList(camiones);
 	}
 	
-	public void asistir(Automovil automovil, Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
-		Cliente cliente = automovil.getCliente();
+	public void asistir(Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
+		Cliente cliente = pedido.getCliente();
 		
 		if ( !cliente.isCuotaAlDia(this.moduloDePagos) )
 			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
 		if ( !pedido.esValidoPara(cliente) )
 			throw new ServicioInvalidoException("El cliente no puede solicitar este servicio", pedido);
 		
-		this.asignarCamion(automovil, pedido);
+		this.asignarCamion(pedido.getAutomovil(), pedido);
 	}
 
 	private void asignarCamion(Automovil automovil, Pedido pedido) throws CamionNoDisponibleException {
 		if ( !this.algunCamionPuedeAtender(pedido, automovil) )
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
 		
-		this.camionParaAsignarA(automovil, pedido).atender(pedido);
+		this.camionParaAsignarA(pedido).atender(pedido);
 	}
 
-	protected Camion camionParaAsignarA(Automovil automovil, Pedido pedido) {
-		return automovil.getCliente().selectCamion( this.camionesPuedenAtender(pedido, automovil) );
+	protected Camion camionParaAsignarA(Pedido pedido) {
+		return pedido.getAutomovil().getCliente().selectCamion( this.camionesPuedenAtender(pedido, pedido.getAutomovil()) );
 	}
 
 	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
@@ -59,5 +59,9 @@ public class TallerMecanico {
 	public void setModuloPagos(ModuloPagos moduloDePagos) {
 		this.moduloDePagos = moduloDePagos;
 	}
-}
 
+	public void finalizoPedido(Camion camion, Pedido pedido) {
+		camion.finalizoPedido(pedido);
+		pedido.getCliente().finalizoPedido(pedido);
+	}
+}

@@ -6,6 +6,12 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
 public class ReparacionSimple implements Pedido {
 
+	private final Automovil automovil;
+
+	public ReparacionSimple(Automovil automovil) {
+		this.automovil = automovil;
+	}
+	
 	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return unCamion.puedeAtenderReparacionSimple();
@@ -24,5 +30,13 @@ public class ReparacionSimple implements Pedido {
 	@Override
 	public boolean isRemolque() {
 		return false;
+	}
+	
+	public Cliente getCliente() {
+		return this.automovil.getCliente();
+	}
+
+	public Automovil getAutomovil() {
+		return this.automovil;
 	}
 }

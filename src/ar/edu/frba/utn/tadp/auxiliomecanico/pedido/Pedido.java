@@ -13,4 +13,8 @@ public interface Pedido {
 	public boolean isReparacionSimple();
 
 	public boolean isRemolque();
+
+	public Cliente getCliente();
+
+	public Automovil getAutomovil();
 }

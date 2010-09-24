@@ -51,4 +51,12 @@ public abstract class DecoradorPedido implements Pedido {
 	 * @return booleano
 	 */
 	protected abstract boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil);
+	
+	public Cliente getCliente() {
+		return this.sujeto.getCliente();
+	}
+
+	public Automovil getAutomovil() {
+		return this.sujeto.getAutomovil();
+	}
 }

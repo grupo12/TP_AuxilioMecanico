@@ -22,11 +22,11 @@ public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 	@Before
 	public void setUp(){
 		this.automovil = new Automovil(PESO_AUTO, new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC));
-		this.reparacionSimple = new ReparacionSimple();
+		this.reparacionSimple = new ReparacionSimple(this.automovil);
 	}
 	
 	@Test
 	public void ClienteEconomicPuedeAtenderReparacionSimple(){
-		assertTrue(this.reparacionSimple.esValidoPara(automovil.getCliente()));
+		assertTrue(this.reparacionSimple.esValidoPara(this.automovil.getCliente()));
 	}
 }

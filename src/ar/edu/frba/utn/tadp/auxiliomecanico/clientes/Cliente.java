@@ -23,7 +23,7 @@ public class Cliente {
 	public double getCuotaMensual() {
 		return this.cuotaMensual;
 	}
-	
+
 	public void agregarPedido(Pedido pedido) {
 		this.pedidosRealizados.add(pedido);
 	}
@@ -50,21 +50,29 @@ public class Cliente {
 
 	public int cantidadReparacionesSimplesRealizadas() {
 		int total = 0;
-		
-		for (Pedido pedidoRealizado: this.pedidosRealizados)
-			if ( pedidoRealizado.isReparacionSimple() )
+
+		for (Pedido pedidoRealizado : this.pedidosRealizados)
+			if (pedidoRealizado.isReparacionSimple())
 				total++;
-		
+
 		return total;
 	}
 
 	public int cantidadRemolquesRealizados() {
 		int total = 0;
-		
-		for (Pedido pedidoRealizado: this.pedidosRealizados)
-			if ( pedidoRealizado.isRemolque() )
+
+		for (Pedido pedidoRealizado : this.pedidosRealizados)
+			if (pedidoRealizado.isRemolque())
 				total++;
-		
+
 		return total;
+	}
+
+	public Collection<Pedido> getPedidosRealizados() {
+		return this.pedidosRealizados;
+	}
+
+	public void finalizoPedido(Pedido pedido) {
+		this.pedidosRealizados.add(pedido);
 	}
 }

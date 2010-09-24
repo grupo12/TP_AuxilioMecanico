@@ -28,7 +28,7 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 	private Pedido pedidoRemolque;
 	private TallerMecanico tallerMecanico;
 	private Camion minitaller;
-	private Camion grangrua;
+	private Camion grangruaConTaller;
 	private Camion minigrua;
 
 	@Before
@@ -36,22 +36,36 @@ public class ClassicSinDeudaVehiculoPesadoTest {
 		this.clienteClassicSinDeuda = new Cliente(new ClassicPlan(), CUOTA_MENSUAL);
 		this.automovilPesado = new Automovil(PESO_AUTO, this.clienteClassicSinDeuda);
 
-		this.pedidoRemolque = new Remolque(new ReparacionSimple());
+		this.pedidoRemolque = new Remolque(new ReparacionSimple(this.automovilPesado));
 
 		this.minitaller = new Minitaller();
-		this.grangrua = new Grangrua(true);
+		this.grangruaConTaller = new Grangrua(true);
 		this.minigrua = new Minigrua();
-		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangrua);
+		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangruaConTaller);
 		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
 	}
 
 	@Test
 	public void testAsignacionGrangrua() throws CamionNoDisponibleException {
-		assertEquals(this.grangrua, this.tallerMecanico.camionParaAsignarA(automovilPesado, pedidoRemolque));
+		assertEquals(this.grangruaConTaller, this.tallerMecanico.camionParaAsignarA(pedidoRemolque));
 	}
 
 	@Test
 	public void testPedidoRemolqueAsistidoPorGrangrua() throws Exception {
-		this.tallerMecanico.asistir(this.automovilPesado, this.pedidoRemolque);
+		this.tallerMecanico.asistir(this.pedidoRemolque);
+		this.validarAsignacionPedido();
+		
+		this.tallerMecanico.finalizoPedido(this.grangruaConTaller, this.pedidoRemolque);
+		this.validarFinalizacionPedido();
+	}
+
+	private void validarAsignacionPedido() {
+		Pedido pedidoAsignado = this.grangruaConTaller.getPedidosAsignados().iterator().next();
+		assertEquals(this.pedidoRemolque, pedidoAsignado);
+	}
+	
+	private void validarFinalizacionPedido() {
+		assertTrue(this.grangruaConTaller.getPedidosAsignados().isEmpty());
+		assertEquals(this.pedidoRemolque, this.clienteClassicSinDeuda.getPedidosRealizados().iterator().next());
 	}
 }
