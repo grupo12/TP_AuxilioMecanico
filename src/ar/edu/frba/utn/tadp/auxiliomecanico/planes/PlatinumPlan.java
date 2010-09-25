@@ -10,7 +10,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.MenosPedidosComparator;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
-public class PlatiniumPlan extends Plan {
+public class PlatinumPlan extends Plan {
 
 	@Override
 	public boolean esValidoRemolquePara(Cliente cliente) {

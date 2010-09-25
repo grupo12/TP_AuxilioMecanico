@@ -23,7 +23,7 @@ public class ClienteMorosoPidiendoAuxilioTest {
 	/* Creación de clientes con distintos planes */
 	private Cliente juanClienteClasico = new Cliente(new ClassicPlan(), CUOTA_CLIENTE_CLASSIC);
 	private Cliente serguioClienteEconomic = new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC);
-	private Cliente marianoClientePlatinium = new Cliente(new PlatiniumPlan(), CUOTA_CLIENTE_PLATINUM);
+	private Cliente marianoClientePlatinium = new Cliente(new PlatinumPlan(), CUOTA_CLIENTE_PLATINUM);
 	/* finCreación de clientes con distintos planes */
 
 	/* Configuracion taller y modulo de pagos */
