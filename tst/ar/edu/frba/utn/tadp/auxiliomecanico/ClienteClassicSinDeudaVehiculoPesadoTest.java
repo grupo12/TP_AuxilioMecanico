@@ -17,7 +17,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.testMockObject.MockModuloPagos;
 
-public class ClassicSinDeudaVehiculoPesadoTest {
+public class ClienteClassicSinDeudaVehiculoPesadoTest {
 
 	private static final int DEUDA_CLIENTE_CLASSIC = 0;
 	private static final int PESO_AUTO = 5;

@@ -15,7 +15,6 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Remolque;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
-import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.PlatinumPlan;
 import ar.edu.frba.utn.tadp.testMockObject.MockModuloPagos;
 
@@ -24,7 +23,6 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest {
 	private static final int DEUDA_CLIENTE = 0;
 	private static final int PESO_AUTO_LIVIANO = 1;
 	private static final int PESO_AUTO_PESADO = 3;
-	private static final int CUOTA_MENSUAL_ECONOMIC = 20;
 	private static final int CUOTA_MENSUAL_CLASIC = 50;
 	private static final int CUOTA_MENSUAL_PLATINUM = 100;
 
@@ -32,9 +30,6 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest {
 	private Automovil automovilLivianoPlatinum;
 	private Pedido pedidoPlatinum;
 
-	private Cliente clienteEconomic;
-	private Automovil automovilLivianoEconomic;
-	private Pedido pedidoEconomic;
 	
 	private Cliente clienteClassic;
 	private Automovil automovilPesadoClassic;
@@ -49,12 +44,8 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest {
 	public void setUp(){
 		this.clientePlatinumSinDeuda = new Cliente(new PlatinumPlan(), CUOTA_MENSUAL_PLATINUM);
 		this.automovilLivianoPlatinum = new Automovil(PESO_AUTO_LIVIANO, this.clientePlatinumSinDeuda);
-		this.pedidoPlatinum = new ReparacionSimple(this.automovilLivianoPlatinum);
+		this.pedidoPlatinum = new Remolque(new ReparacionSimple(this.automovilLivianoPlatinum));
 
-		this.clienteEconomic = new Cliente(new EconomicPlan(), CUOTA_MENSUAL_ECONOMIC);
-		this.automovilLivianoEconomic = new Automovil(PESO_AUTO_LIVIANO, this.clienteEconomic);
-		this.pedidoEconomic = new ReparacionSimple(this.automovilLivianoEconomic);
-		
 		this.clienteClassic = new Cliente(new ClassicPlan(), CUOTA_MENSUAL_CLASIC);
 		this.automovilPesadoClassic = new Automovil(PESO_AUTO_PESADO, this.clienteClassic);
 		this.pedidoClassic = new Remolque(new ReparacionSimple(this.automovilPesadoClassic));
@@ -63,7 +54,6 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest {
 		this.grangrua = new Grangrua(false);
 		this.minigrua = new Minigrua();
 		
-		this.minitaller.atender(this.pedidoEconomic);
 		this.minigrua.atender(this.pedidoClassic);
 		
 		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangrua);
@@ -73,7 +63,7 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest {
 	@Test
 	public void ClientePlatinumSeLeAsignaCamionMasLibre() throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException{
 		this.tallerMecanico.asistir(pedidoPlatinum);
-		validarAsignacionPedido();
+		this.validarAsignacionPedido();
 	}
 	
 	private void validarAsignacionPedido() {
