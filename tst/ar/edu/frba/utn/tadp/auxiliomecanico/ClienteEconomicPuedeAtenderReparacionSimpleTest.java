@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.ReparacionSimple;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
 
 public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
@@ -26,7 +26,7 @@ public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 	}
 	
 	@Test
-	public void ClienteEconomicPuedeAtenderReparacionSimple(){
+	public void ClienteEconomicPuedeAtenderReparacionSimple() {
 		assertTrue(this.reparacionSimple.esValidoPara(this.automovil.getCliente()));
 	}
 }

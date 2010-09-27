@@ -4,8 +4,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.*;
+import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.*;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.*;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.frba.utn.tadp.testMockObject.MockModuloPagos;
 //import ar.edu.frba.utn.tadp.auxiliomecanico.*;
 
@@ -55,7 +56,7 @@ public class ClienteMorosoPidiendoAuxilioTest {
 	}
 	
 	@Test (expected= CuotaDesactualizadaException.class)
-	public void clienteEcomonomicMorosoPedidoTest() throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
+	public void clienteEcomonomicMorosoPedidoTest() {
 		Pedido pedido = seteosPreviosDeCliente();
 		taller.asistir(pedido);	
 	}

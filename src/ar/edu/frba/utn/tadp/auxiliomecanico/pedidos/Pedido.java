@@ -1,4 +1,4 @@
-package ar.edu.frba.utn.tadp.auxiliomecanico.pedido;
+package ar.edu.frba.utn.tadp.auxiliomecanico.pedidos;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;

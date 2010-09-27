@@ -1,8 +1,8 @@
-package ar.edu.frba.utn.tadp.auxiliomecanico;
+package ar.edu.frba.utn.tadp.auxiliomecanico.excepciones;
 
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
 
-public class CamionNoDisponibleException extends Exception {
+public class CamionNoDisponibleException extends UserException {
 
 	private static final long serialVersionUID = 1L;
 

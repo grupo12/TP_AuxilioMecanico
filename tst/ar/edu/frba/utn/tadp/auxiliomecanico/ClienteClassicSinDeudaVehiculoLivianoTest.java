@@ -11,9 +11,9 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minitaller;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Remolque;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.ReparacionSimple;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Remolque;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
 import ar.edu.frba.utn.tadp.testMockObject.MockModuloPagos;
@@ -34,7 +34,7 @@ public class ClienteClassicSinDeudaVehiculoLivianoTest {
 	private Automovil automovilOtro;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.clienteClassicSinDeuda = new Cliente(new ClassicPlan(), CUOTA_MENSUAL);
 		this.automovilPesado = new Automovil(PESO_AUTO, this.clienteClassicSinDeuda);
 
@@ -51,12 +51,12 @@ public class ClienteClassicSinDeudaVehiculoLivianoTest {
 	}
 
 	@Test
-	public void testAsignacionGrangrua() throws CamionNoDisponibleException {
+	public void testAsignacionGrangrua() {
 		assertEquals(this.minigrua, this.tallerMecanico.camionParaAsignarA(pedidoRemolque));
 	}
 
 	@Test
-	public void testPedidoRemolqueAsistidoPorGrangrua() throws Exception {
+	public void testPedidoRemolqueAsistidoPorGrangrua() {
 		this.tallerMecanico.asistir(this.pedidoRemolque);
 
 		this.tallerMecanico.finalizoPedido(this.minigrua, this.pedidoRemolque);

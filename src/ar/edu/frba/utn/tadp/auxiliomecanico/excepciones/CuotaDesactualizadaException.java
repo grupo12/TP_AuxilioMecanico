@@ -1,8 +1,8 @@
-package ar.edu.frba.utn.tadp.auxiliomecanico;
+package ar.edu.frba.utn.tadp.auxiliomecanico.excepciones;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
-public class CuotaDesactualizadaException extends Exception {
+public class CuotaDesactualizadaException extends UserException {
 
 	private static final long serialVersionUID = 1L;
 	

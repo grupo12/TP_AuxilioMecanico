@@ -7,7 +7,11 @@ import java.util.LinkedList;
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
+import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
+import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.PedidoInvalidoException;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 public class TallerMecanico {
@@ -19,7 +23,7 @@ public class TallerMecanico {
 		this.camiones = Arrays.asList(camiones);
 	}
 	
-	public void asistir(Pedido pedido) throws CuotaDesactualizadaException, ServicioInvalidoException, CamionNoDisponibleException {
+	public void asistir(Pedido pedido) {
 		Cliente cliente = pedido.getCliente();
 		
 		if ( this.moduloDePagos == null)
@@ -27,12 +31,12 @@ public class TallerMecanico {
 		if ( !cliente.isCuotaAlDia(this.moduloDePagos) )
 			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
 		if ( !pedido.esValidoPara(cliente) )
-			throw new ServicioInvalidoException("El cliente no puede solicitar este servicio", pedido);
+			throw new PedidoInvalidoException("El cliente no puede solicitar este servicio", pedido);
 		
 		this.asignarCamion(pedido.getAutomovil(), pedido);
 	}
 
-	private void asignarCamion(Automovil automovil, Pedido pedido) throws CamionNoDisponibleException {
+	private void asignarCamion(Automovil automovil, Pedido pedido) {
 		if ( !this.algunCamionPuedeAtender(pedido, automovil) )
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
 		

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.Plan;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 

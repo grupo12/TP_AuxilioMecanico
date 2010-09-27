@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedido.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
 
 public abstract class Camion {
 

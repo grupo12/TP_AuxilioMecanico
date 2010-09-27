@@ -1,4 +1,4 @@
-package ar.edu.frba.utn.tadp.auxiliomecanico;
+package ar.edu.frba.utn.tadp.auxiliomecanico.excepciones;
 
 public class ModuloPagosFaltanteException extends SystemException {
 
