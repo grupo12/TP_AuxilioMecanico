@@ -8,6 +8,7 @@ import org.junit.Test;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Remolque;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.PlatinumPlan;
@@ -25,7 +26,7 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest extends AuxilioMecanico
 		super.setUp();
 		this.clientePlatinumSinDeuda = new Cliente(new PlatinumPlan(), CUOTA_MENSUAL_PLATINUM);
 		this.automovilLivianoPlatinum = new Automovil(PESO_AUTO_LIVIANO, this.clientePlatinumSinDeuda);
-		this.pedidoPlatinum = new Remolque(new ReparacionSimple(this.automovilLivianoPlatinum));
+		this.pedidoPlatinum = new Remolque(new ReparacionSimple(new PedidoBase(this.automovilLivianoPlatinum)));
 	}
 	
 	@Test

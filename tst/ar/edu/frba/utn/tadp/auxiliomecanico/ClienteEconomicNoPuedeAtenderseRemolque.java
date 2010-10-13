@@ -9,6 +9,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.PedidoInvalidoException;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Remolque;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionCompleja;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
@@ -23,17 +24,17 @@ public class ClienteEconomicNoPuedeAtenderseRemolque extends AuxilioMecanicoTest
 	private Cliente clienteEconomic = new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC);
 	private Automovil automovilEconomic = new Automovil(PESO_AUTO_ECONOMIC, this.clienteEconomic);
 
-	private Pedido pedidoComplejoConRemolque = new Remolque(new ReparacionCompleja(new ReparacionSimple(
+	private Pedido pedidoComplejoConRemolque = new Remolque(new ReparacionCompleja(new PedidoBase(
 			automovilEconomic)));
-	private Pedido pedidoComplejoSinRemolque = new ReparacionCompleja(new ReparacionSimple(automovilEconomic));
-	private Pedido pedidoSimpleConRemolque = new Remolque(new ReparacionSimple(automovilEconomic));
-	private Pedido pedidoSimpleSinRemolque = new ReparacionSimple(automovilEconomic);
+	private Pedido pedidoComplejoSinRemolque = new ReparacionCompleja(new PedidoBase(automovilEconomic));
+	private Pedido pedidoSimpleConRemolque = new Remolque(new ReparacionSimple(new PedidoBase(automovilEconomic)));
+	private Pedido pedidoSimpleSinRemolque = new ReparacionSimple(new PedidoBase(automovilEconomic));
 
 	@Before
 	public void setUp() {
 		super.setUp();
 		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_ECONOMIC));
-		this.minigrua.atender(new ReparacionSimple(automovilEconomic));
+		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilEconomic)));
 	}
 
 	@Test(expected = PedidoInvalidoException.class)

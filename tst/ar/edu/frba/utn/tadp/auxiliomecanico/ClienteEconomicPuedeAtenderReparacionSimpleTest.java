@@ -8,6 +8,7 @@ import org.junit.Test;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
 
@@ -22,7 +23,7 @@ public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 	@Before
 	public void setUp(){
 		this.automovil = new Automovil(PESO_AUTO, new Cliente(new EconomicPlan(), CUOTA_CLIENTE_ECONOMIC));
-		this.reparacionSimple = new ReparacionSimple(this.automovil);
+		this.reparacionSimple = new ReparacionSimple(new PedidoBase(this.automovil));
 	}
 	
 	@Test

@@ -4,7 +4,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 
-public class Remolque extends DecoradorPedido {
+public class Remolque extends EspecialidadPedido {
 
 	public Remolque(Pedido sujeto) {
 		super(sujeto);

@@ -9,21 +9,19 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
  * real) todas sus responsabilidades.
  * 
  */
-public abstract class DecoradorPedido implements Pedido {
+public abstract class EspecialidadPedido implements Pedido {
 
 	private Pedido sujeto;
 	
-	public DecoradorPedido(Pedido sujeto) {
+	public EspecialidadPedido(Pedido sujeto) {
 		this.sujeto = sujeto;
 	}
 	
 	public boolean isReparacionSimple() {
-		// No puede ser reparación simple porque estamos en un decorador (remolque o complejo)
 		return false;
 	}
 	
 	public boolean isRemolque() {
-		// No lo puedo saber, delego
 		return sujeto.isRemolque();
 	}
 

@@ -10,6 +10,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.frba.utn.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
@@ -73,7 +74,7 @@ public class ClienteMorosoPidiendoAuxilioTest extends AuxilioMecanicoTest {
 
 	private Pedido seteosPreviosDeCliente() {
 		Automovil auto = new Automovil(2, this.marianoClientePlatinium);
-		Pedido pedido = new ReparacionSimple(auto);
+		Pedido pedido = new ReparacionSimple(new PedidoBase(auto));
 		return pedido;
 	}
 }

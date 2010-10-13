@@ -7,6 +7,7 @@ import ar.edu.frba.utn.tadp.auxiliomecanico.camiones.Minitaller;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.frba.utn.tadp.auxiliomecanico.planes.EconomicPlan;
@@ -39,7 +40,7 @@ public abstract class AuxilioMecanicoTest {
 		this.minitaller = new Minitaller();
 		this.grangruaConTaller = new Grangrua(true);
 		this.minigrua = new Minigrua();
-		this.minigrua.atender(new ReparacionSimple(automovilOtro));
+		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilOtro)));
 		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangruaConTaller);
 		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
 	}

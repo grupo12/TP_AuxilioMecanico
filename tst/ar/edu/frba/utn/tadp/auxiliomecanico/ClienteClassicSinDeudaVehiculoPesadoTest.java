@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import ar.edu.frba.utn.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.Remolque;
-import ar.edu.frba.utn.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 
 public class ClienteClassicSinDeudaVehiculoPesadoTest extends AuxilioMecanicoTest {
 	private static final int PESO_AUTO_PESADO = 5;
@@ -21,7 +21,7 @@ public class ClienteClassicSinDeudaVehiculoPesadoTest extends AuxilioMecanicoTes
 	public void setUp() {
 		super.setUp();
 		this.automovilPesado = new Automovil(PESO_AUTO_PESADO, this.clienteClassicSinDeuda);
-		this.pedidoRemolque = new Remolque(new ReparacionSimple(this.automovilPesado));
+		this.pedidoRemolque = new Remolque(new PedidoBase(this.automovilPesado));
 	}
 
 	@Test
