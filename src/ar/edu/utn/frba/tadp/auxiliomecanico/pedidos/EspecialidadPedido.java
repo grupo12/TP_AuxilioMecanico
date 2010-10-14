@@ -9,7 +9,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
  * real) todas sus responsabilidades.
  * 
  */
-public abstract class EspecialidadPedido implements Pedido {
+public abstract class EspecialidadPedido extends Pedido {
 
 	private Pedido sujeto;
 

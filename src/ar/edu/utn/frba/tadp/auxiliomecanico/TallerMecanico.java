@@ -6,12 +6,7 @@ import java.util.LinkedList;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
-import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoInvalidoException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -23,7 +18,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
-	private ModuloPagos moduloDePagos;
 
 	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
@@ -43,17 +37,12 @@ public class TallerMecanico {
 	 *            Pedido de atención a un cliente
 	 */
 	public void asistir(Pedido pedido) {
-		Cliente cliente = pedido.getCliente();
-
-		if (this.moduloDePagos == null)
-			throw new ModuloPagosFaltanteException("No se inicializó el módulo de pagos del taller");
-		if (!cliente.isCuotaAlDia(this.moduloDePagos))
-			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
-		if (!pedido.esValidoPara(cliente))
-			throw new PedidoInvalidoException("El cliente no puede solicitar este servicio", pedido);
+		pedido.validar();
 
 		this.asignarCamion(pedido.getAutomovil(), pedido);
 	}
+
+
 
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
@@ -116,10 +105,6 @@ public class TallerMecanico {
 	 */
 	private boolean algunCamionPuedeAtender(Pedido pedido, Automovil automovil) {
 		return !this.camionesPuedenAtender(pedido, automovil).isEmpty();
-	}
-
-	public void setModuloPagos(ModuloPagos moduloDePagos) {
-		this.moduloDePagos = moduloDePagos;
 	}
 
 	/**

@@ -12,7 +12,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
  * de pedidos, para ser decorado con otros servicios.
  * 
  */
-public class PedidoBase implements Pedido {
+public class PedidoBase extends Pedido {
 
 	private final Automovil automovil;
 

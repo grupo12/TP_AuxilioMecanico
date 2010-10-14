@@ -43,6 +43,6 @@ public abstract class AuxilioMecanicoTest {
 		this.minigrua = new Minigrua();
 		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilOtro)));
 		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangruaConTaller);
-		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
+		Pedido.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
 	}
 }

@@ -40,7 +40,7 @@ public class ClienteMorosoPidiendoAuxilioTest extends AuxilioMecanicoTest {
 	@Before
 	public void setUp() {
 		super.setUp();
-		this.tallerMecanico.setModuloPagos(this.modulo);
+		Pedido.setModuloPagos(this.modulo);
 	}
 
 	/* fin Configuracion taller y modulo de pagos */

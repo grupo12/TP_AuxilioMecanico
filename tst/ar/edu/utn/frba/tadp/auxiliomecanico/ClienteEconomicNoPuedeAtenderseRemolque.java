@@ -33,7 +33,7 @@ public class ClienteEconomicNoPuedeAtenderseRemolque extends AuxilioMecanicoTest
 	@Before
 	public void setUp() {
 		super.setUp();
-		this.tallerMecanico.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_ECONOMIC));
+		Pedido.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_ECONOMIC));
 		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilEconomic)));
 	}
 
