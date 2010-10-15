@@ -11,12 +11,12 @@ public class ReparacionCompleja extends EspecialidadPedido {
 	}
 
 	@Override
-	protected boolean doEsValidoPara(Cliente cliente) {
-		return cliente.esValidoReparacionCompleja();
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+		return unCamion.puedeAtenderReparacionCompleja();
 	}
 
 	@Override
-	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderReparacionCompleja();
+	protected void doValidarEspecialidadPara(Cliente cliente) {
+		cliente.validarReparacionCompleja();
 	}
 }

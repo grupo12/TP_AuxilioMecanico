@@ -13,14 +13,14 @@ public class Remolque extends EspecialidadPedido {
 	public boolean isRemolque() {
 		return true;
 	}
-	
-	@Override
-	protected boolean doEsValidoPara(Cliente cliente) {
-		return cliente.esValidoRemolque();
-	}
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return unCamion.puedeAtenderRemolque(automovil);
+	}
+
+	@Override
+	protected void doValidarEspecialidadPara(Cliente cliente) {
+		cliente.validarRemolque();
 	}
 }

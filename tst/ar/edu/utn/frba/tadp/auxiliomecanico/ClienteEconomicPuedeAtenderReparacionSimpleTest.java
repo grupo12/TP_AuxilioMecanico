@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +26,7 @@ public class ClienteEconomicPuedeAtenderReparacionSimpleTest {
 	
 	@Test
 	public void ClienteEconomicPuedeAtenderReparacionSimple() {
-		assertTrue(this.reparacionSimple.esValidoPara(this.automovil.getCliente()));
+		// La validación no debe salir por ningún tipo de excepción.
+		this.reparacionSimple.validar();
 	}
 }

@@ -1,13 +1,12 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoInvalidoException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.EconomicNoPuedeAtenderRemolqueException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ReparacionComplejaInvalidaParaEconomicException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.MockModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
@@ -37,17 +36,17 @@ public class ClienteEconomicNoPuedeAtenderseRemolque extends AuxilioMecanicoTest
 		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilEconomic)));
 	}
 
-	@Test(expected = PedidoInvalidoException.class)
+	@Test(expected = EconomicNoPuedeAtenderRemolqueException.class)
 	public void clienteEconomicoPuedePedirComplejoConRemolque() {
 		this.validarPedidoInvalido(this.pedidoComplejoConRemolque);
 	}
 
-	@Test(expected = PedidoInvalidoException.class)
+	@Test(expected = EconomicNoPuedeAtenderRemolqueException.class)
 	public void clienteEconomicoPuedePedirSimpleConRemolque() {
 		this.validarPedidoInvalido(this.pedidoSimpleConRemolque);
 	}
 
-	@Test(expected = PedidoInvalidoException.class)
+	@Test(expected = ReparacionComplejaInvalidaParaEconomicException.class)
 	public void clienteEconomicoPuedePedirComplejoSinRemolque() throws Exception {
 		this.validarPedidoInvalido(this.pedidoComplejoSinRemolque);
 	}
@@ -58,7 +57,6 @@ public class ClienteEconomicNoPuedeAtenderseRemolque extends AuxilioMecanicoTest
 	}
 
 	private void validarPedidoInvalido(Pedido pedido) {
-		assertFalse(pedido.esValidoPara(clienteEconomic));
 		this.tallerMecanico.asistir(pedido);
 	}
 }

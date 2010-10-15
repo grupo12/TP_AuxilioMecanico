@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
@@ -46,6 +47,11 @@ public class Cliente {
 	public void agregarPedido(Pedido pedido) {
 		this.pedidosRealizados.add(pedido);
 	}
+	
+	public void validarCuotaAlDia(ModuloPagos moduloPagos) {
+		if (!this.isCuotaAlDia(moduloPagos))
+			throw new CuotaDesactualizadaException("La cuota está desactualizada", this); 
+	}
 
 	/**
 	 * Consulta si la cuota del cliente está al día
@@ -55,7 +61,7 @@ public class Cliente {
 	 * @return Booleano representativo de esta operación
 	 */
 	public boolean isCuotaAlDia(ModuloPagos moduloPagos) {
-		return this.plan.isCuotaAlDia(this, moduloPagos);
+		return moduloPagos.moraDe(this) <= this.plan.maximoMoraPara(this, moduloPagos);
 	}
 
 	/**
@@ -68,36 +74,6 @@ public class Cliente {
 	 */
 	public Camion selectCamion(Collection<Camion> camiones) {
 		return this.plan.selectCamion(camiones);
-	}
-
-	/**
-	 * Responde si es válido que el cliente quiera ser atendido con un servicio
-	 * de remolque.
-	 * 
-	 * @return Es válido o no
-	 */
-	public boolean esValidoRemolque() {
-		return this.plan.esValidoRemolquePara(this);
-	}
-
-	/**
-	 * Responde si es válido que el cliente quiera ser atendido con un servicio
-	 * de reparación simple.
-	 * 
-	 * @return Es válido o no
-	 */
-	public boolean esValidoReparacionSimple() {
-		return this.plan.esValidoReparacionSimplePara(this);
-	}
-
-	/**
-	 * Responde si es válido que el cliente quiera ser atendido con un servicio
-	 * de reparación compleja.
-	 * 
-	 * @return Es válido o no
-	 */
-	public boolean esValidoReparacionCompleja() {
-		return this.plan.esValidoReparacionComplejaPara(this);
 	}
 
 	/**
@@ -145,5 +121,17 @@ public class Cliente {
 	 */
 	public void finalizoPedido(Pedido pedido) {
 		this.pedidosRealizados.add(pedido);
+	}
+
+	public void validarRemolque() {
+		this.plan.validarRemolquePara(this);
+	}
+
+	public void validarReparacionSimple() {
+		this.plan.validarReparacionSimplePara(this);
+	}
+
+	public void validarReparacionCompleja() {
+		this.plan.validarReparacionComplejaPara(this);
 	}
 }

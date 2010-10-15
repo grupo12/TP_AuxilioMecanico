@@ -13,11 +13,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 public class PlatinumPlan extends Plan {
 
 	@Override
-	public boolean esValidoRemolquePara(Cliente cliente) {
-		return true;
-	}
-
-	@Override
 	public Camion selectCamion(Collection<Camion> camiones) {
 		List<Camion> camionesOrdenados = new ArrayList<Camion>(camiones);
 		
@@ -27,7 +22,12 @@ public class PlatinumPlan extends Plan {
 	}
 
 	@Override
-	protected double maximoMora(Cliente cliente, ModuloPagos moduloPagos) {
+	public double maximoMoraPara(Cliente cliente, ModuloPagos moduloPagos) {
 		return cliente.getCuotaMensual();
+	}
+
+	@Override
+	public void validarRemolquePara(Cliente cliente) {
+		// Un cliente con plan Platinum siempre puede pedir remolque
 	}
 }

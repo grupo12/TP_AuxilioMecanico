@@ -29,11 +29,6 @@ public class PedidoBase extends Pedido {
 	}
 
 	@Override
-	public boolean esValidoPara(Cliente cliente) {
-		return true;
-	}
-
-	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return true;
 	}
@@ -46,5 +41,11 @@ public class PedidoBase extends Pedido {
 	@Override
 	public boolean isRemolque() {
 		return false;
+	}
+
+	@Override
+	protected void validarEspecialidadPara(Cliente cliente) {
+		// No necesita validar nada específico ya que en sí el PedidoBase no es
+		// un pedido real.
 	}
 }

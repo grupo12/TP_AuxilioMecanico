@@ -26,25 +26,18 @@ public abstract class EspecialidadPedido extends Pedido {
 	}
 
 	@Override
-	public boolean esValidoPara(Cliente cliente) {
-		return this.doEsValidoPara(cliente) && this.sujeto.esValidoPara(cliente);
+	protected void validarEspecialidadPara(Cliente cliente) {
+		this.doValidarEspecialidadPara(cliente);
+		this.sujeto.validarEspecialidadPara(cliente);
 	}
+	
+	protected abstract void doValidarEspecialidadPara(Cliente cliente);
 
 	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return this.doPuedeSerAtendidoPorCamion(unCamion, automovil)
 				&& this.sujeto.puedeSerAtendidoPorCamion(unCamion, automovil);
 	}
-
-	/**
-	 * Responde únicamente para el decorador dado si puede ser o no atentido por
-	 * un plan.
-	 * 
-	 * @param cliente
-	 *            Cliente que solicitó el pedido
-	 * @return Booleano
-	 */
-	protected abstract boolean doEsValidoPara(Cliente cliente);
 
 	/**
 	 * Responde únicamente para el decorador dado si puede ser o no atentido por

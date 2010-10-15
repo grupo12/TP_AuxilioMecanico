@@ -3,9 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoInvalidoException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
@@ -14,30 +12,45 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
  * 
  */
 public abstract class Pedido {
-	
+
 	private static ModuloPagos ModuloDePagos;
 
+	/**
+	 * Realiza todas las operaciones correspondientes a la validación del mismo
+	 * en el sistema.
+	 */
 	public void validar() {
-		Cliente cliente = this.getCliente();
 
-		if (ModuloDePagos == null)
-			throw new ModuloPagosFaltanteException("No se inicializó el módulo de pagos del taller");
-		
-		if (!cliente.isCuotaAlDia(ModuloDePagos))
-			throw new CuotaDesactualizadaException("La cuota está desactualizada", cliente);
-		
-		if (!this.esValidoPara(cliente))
-			throw new PedidoInvalidoException("El cliente no puede solicitar este servicio", this);
+		this.validarExistenciaModuloPagos();
+		this.validarCliente();
 	}
 
 	/**
-	 * Determina si el mismo es válido para ser atendido a un cliente.
+	 * Realiza todas las validaciones del pedido en relación al cliente que lo
+	 * solicita.
+	 */
+	private void validarCliente() {
+		Cliente cliente = this.getCliente();
+		cliente.validarCuotaAlDia(ModuloDePagos);
+		this.validarEspecialidadPara(cliente);
+	}
+	
+	/**
+	 * Valida que haya efectivamente un módulo de pagos establecido.
+	 */
+	private void validarExistenciaModuloPagos() {
+		if (ModuloDePagos == null)
+			throw new ModuloPagosFaltanteException("No se inicializó el módulo de pagos del taller");
+	}
+
+	/**
+	 * Realiza las validaciones específicas de cada especialidad de pedido sobre
+	 * el cliente.
 	 * 
 	 * @param cliente
 	 *            Cliente que solicita el pedido
-	 * @return Booleano representativo de la respuesta
 	 */
-	public abstract boolean esValidoPara(Cliente cliente);
+	protected abstract void validarEspecialidadPara(Cliente cliente);
 
 	/**
 	 * Determina si el mismo es posible ser atendido por un camión dado.
