@@ -14,6 +14,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
+	
 
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
@@ -86,4 +87,6 @@ public abstract class Pedido {
 	public static void setModuloPagos(ModuloPagos moduloDePagos) {
 		ModuloDePagos = moduloDePagos;
 	}
+	
+	//public abstract int tiempoEnSerAtendido();
 }

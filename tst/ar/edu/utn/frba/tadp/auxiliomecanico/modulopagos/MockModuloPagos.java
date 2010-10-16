@@ -8,7 +8,7 @@ public class MockModuloPagos implements ModuloPagos {
 	
 	public MockModuloPagos(double unaDeuda){
 		this.Deuda = unaDeuda ;
-	}	
+	}//esto faltaba comentar
 	
 	public void setDeuda(double numeroMagico) {
 		Deuda = numeroMagico;

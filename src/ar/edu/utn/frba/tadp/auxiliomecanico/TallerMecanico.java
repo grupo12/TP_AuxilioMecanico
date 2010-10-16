@@ -3,6 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
@@ -18,6 +19,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
+	protected List<Pedido> pedidosFinalizados;
 
 	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
@@ -27,6 +29,7 @@ public class TallerMecanico {
 	 */
 	public TallerMecanico(Camion... camiones) {
 		this.camiones = Arrays.asList(camiones);
+		this.pedidosFinalizados = new LinkedList<Pedido>();
 	}
 
 	/**
@@ -119,5 +122,17 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.getCliente().finalizoPedido(pedido);
+		this.pedidosFinalizados.add(pedido);//lista de pedidos finalizados para estadisticas
+		}
+	
+	/**
+	 * Determina el camión para atender un cierto pedido.
+	 * 
+	 * @param pedido
+	 *            Pedido a ser atendido
+	 * @return int 
+	 */
+	public int tiempoDeAtencion(Pedido pedido) {
+	return pedido.tiempoEnSerAtendido();
 	}
 }
