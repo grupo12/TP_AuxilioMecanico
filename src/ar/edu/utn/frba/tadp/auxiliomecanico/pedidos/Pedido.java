@@ -4,6 +4,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /** SSSSSSSSSSSSSSSSSSSSSSs
@@ -88,5 +89,12 @@ public abstract class Pedido {
 		ModuloDePagos = moduloDePagos;
 	}
 	
-	//public abstract int tiempoEnSerAtendido();
+	/**
+	 * Determina el tiempo que tarda un tipo de pedido en ser atendido
+	 * 
+	 * @param pedido
+	 *            Pedido a calcular tiempo
+	 * @return Tiempo 
+	 */
+	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
 }

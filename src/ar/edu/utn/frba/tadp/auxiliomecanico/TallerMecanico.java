@@ -8,6 +8,7 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -125,14 +126,4 @@ public class TallerMecanico {
 		this.pedidosFinalizados.add(pedido);//lista de pedidos finalizados para estadisticas
 		}
 	
-	/**
-	 * Determina el camión para atender un cierto pedido.
-	 * 
-	 * @param pedido
-	 *            Pedido a ser atendido
-	 * @return int 
-	 */
-	public int tiempoDeAtencion(Pedido pedido) {
-	return pedido.tiempoEnSerAtendido();
-	}
 }

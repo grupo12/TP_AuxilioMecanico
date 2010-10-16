@@ -3,6 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 /**
  * Representa un pedido base, sin ningún tipo de servicio real asociado al
@@ -47,5 +48,11 @@ public class PedidoBase extends Pedido {
 	protected void validarEspecialidadPara(Cliente cliente) {
 		// No necesita validar nada específico ya que en sí el PedidoBase no es
 		// un pedido real.
+	}
+
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
