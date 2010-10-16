@@ -22,7 +22,7 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 * Bandera para saber si hay PedidoBase y cumple precondición.
 	 */
 	
-	private boolean pedidoBaseConstruido;
+	private boolean pedidoBaseConstruido = false;
 
 	@Override
 	public CPedidoBuilder pedidoBase(Automovil automovil) {
