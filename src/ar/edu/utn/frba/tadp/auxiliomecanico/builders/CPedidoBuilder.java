@@ -33,28 +33,28 @@ public class CPedidoBuilder implements IPedidoBuilder{
 
 	@Override
 	public CPedidoBuilder simple() {
-		pedidoBaseCreado();
+		pedidoBaseConstruido();
 		pedido = new ReparacionSimple(pedido);
 		return this;
 	}
 
 	@Override
 	public CPedidoBuilder complejidad() {
-		pedidoBaseCreado();
+		pedidoBaseConstruido();
 		pedido = new ReparacionCompleja(pedido);
 		return this;
 	}
 
 	@Override
 	public CPedidoBuilder remolque() {
-		pedidoBaseCreado();
+		pedidoBaseConstruido();
 		pedido = new Remolque(pedido);
 		return this;
 	}
 
 	@Override
 	public Pedido build() {
-		pedidoBaseCreado();
+		pedidoBaseConstruido();
 		pedido.validar();
 		pedidoBaseConstruido = false;
 		return pedido;
@@ -64,8 +64,8 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 * Controla que se cumpla la precondición de esta Clase.
 	 */
 	
-	private void pedidoBaseCreado() {
-		if (pedidoBaseConstruido)
+	private void pedidoBaseConstruido() {
+		if (!pedidoBaseConstruido)
 			throw new NoExistePedidoBaseException("Precondición: PedidoBase", pedido);
 	}
 
