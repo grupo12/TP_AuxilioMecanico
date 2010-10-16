@@ -6,7 +6,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
-/**
+/** SSSSSSSSSSSSSSSSSSSSSSs
  * Representa un pedido dado, realizado por un cliente al sistema de auxilio
  * mecánico.
  * 
