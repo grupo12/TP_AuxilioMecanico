@@ -17,10 +17,17 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 public class CPedidoBuilder implements IPedidoBuilder{
 	
 	protected Pedido pedido;
+	
+	/**
+	 * Bandera para saber si hay PedidoBase y cumple precondición.
+	 */
+	
+	private boolean pedidoBaseConstruido;
 
 	@Override
 	public CPedidoBuilder pedidoBase(Automovil automovil) {
 		pedido = new PedidoBase(automovil);
+		pedidoBaseConstruido = true;
 		return this;
 	}
 
@@ -30,7 +37,6 @@ public class CPedidoBuilder implements IPedidoBuilder{
 		pedido = new ReparacionSimple(pedido);
 		return this;
 	}
-	
 
 	@Override
 	public CPedidoBuilder complejidad() {
@@ -50,16 +56,17 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	public Pedido build() {
 		pedidoBaseCreado();
 		pedido.validar();
+		pedidoBaseConstruido = false;
 		return pedido;
 	}
 
 	/**
 	 * Controla que se cumpla la precondición de esta Clase.
 	 */
+	
 	private void pedidoBaseCreado() {
-		if (pedido.getClass().getName().compareTo("PedidoBase") == 0) {
-			throw new NoExistePedidoBaseException("Precondición: PedidoBase",
-					pedido);
-		}
+		if (pedidoBaseConstruido)
+			throw new NoExistePedidoBaseException("Precondición: PedidoBase", pedido);
 	}
+
 }
