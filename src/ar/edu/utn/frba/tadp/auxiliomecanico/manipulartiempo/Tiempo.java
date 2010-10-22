@@ -47,5 +47,25 @@ public void setMinutos(int minuto) {
 	}
 	this.minutos = minuto;
 }
-	
+
+public static Tiempo sumarTiempos(Tiempo primerTiempo, Tiempo sumando) {
+	int minutos=0;
+	int horas=0;
+	Tiempo tiempoDeRetorno= new Tiempo();
+	//Primero sumamos los minutos teniendo en cuenta el overflow de los mismos
+	minutos = primerTiempo.minutos + sumando.minutos;
+	if ( minutos>60 ){
+		horas = (minutos / 60);
+		minutos= ((minutos % 60)*60);
+	}else if (minutos==60){
+		minutos=0;
+		horas= 1;
+	}
+	//procedemos a sumar las horas
+	horas += primerTiempo.horas + sumando.horas ; 
+	tiempoDeRetorno.nuevoTiempo(horas, minutos);
+
+return tiempoDeRetorno.nuevoTiempo(horas, minutos);
+}
+
 }

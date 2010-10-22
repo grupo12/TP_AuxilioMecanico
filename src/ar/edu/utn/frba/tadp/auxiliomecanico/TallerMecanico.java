@@ -20,7 +20,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
-	protected List<Pedido> pedidosFinalizados;
 
 	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
@@ -30,7 +29,6 @@ public class TallerMecanico {
 	 */
 	public TallerMecanico(Camion... camiones) {
 		this.camiones = Arrays.asList(camiones);
-		this.pedidosFinalizados = new LinkedList<Pedido>();
 	}
 
 	/**
@@ -123,7 +121,6 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.getCliente().finalizoPedido(pedido);
-		this.pedidosFinalizados.add(pedido);//lista de pedidos finalizados para estadisticas
 		}
 	
 }

@@ -7,8 +7,16 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class ReparacionSimple extends EspecialidadPedido {
 
+	private static Tiempo tiempoEmpleadoEnReparacion;
+	private static int cantidadAtendidos;
+	private boolean terminado;
+	
 	public ReparacionSimple(Pedido sujeto) {
 		super(sujeto);
+		tiempoEmpleadoEnReparacion=new Tiempo();
+		tiempoEmpleadoEnReparacion.nuevoTiempo(0, 0);
+		cantidadAtendidos=0;
+		terminado=false;
 	}
 
 	@Override
@@ -36,4 +44,11 @@ public class ReparacionSimple extends EspecialidadPedido {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void terminarPedido(Tiempo tiempo) {
+		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(ReparacionSimple.tiempoEmpleadoEnReparacion, tiempo);
+		cantidadAtendidos += 1;
+		terminado = true;
+	}
+
 }
