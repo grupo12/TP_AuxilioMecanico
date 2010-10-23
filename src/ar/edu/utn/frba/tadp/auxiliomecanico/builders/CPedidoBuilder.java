@@ -22,12 +22,9 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 * Bandera para saber si hay PedidoBase y cumple precondición.
 	 */
 	
-	private boolean pedidoBaseConstruido = false;
-
 	@Override
 	public CPedidoBuilder pedidoBase(Automovil automovil) {
 		pedido = new PedidoBase(automovil);
-		pedidoBaseConstruido = true;
 		return this;
 	}
 
@@ -56,7 +53,6 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	public Pedido build() {
 		pedidoBaseConstruido();
 		pedido.validar();
-		pedidoBaseConstruido = false;
 		return pedido;
 	}
 
@@ -65,8 +61,7 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 */
 	
 	private void pedidoBaseConstruido() {
-		if (!pedidoBaseConstruido)
+		if (pedido == null)
 			throw new NoExistePedidoBaseException("Precondición: PedidoBase", pedido);
 	}
-
 }
