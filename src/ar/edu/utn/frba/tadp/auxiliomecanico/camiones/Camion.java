@@ -87,6 +87,7 @@ public abstract class Camion {
 	 *            Pedido finalizado
 	 */
 	public void finalizoPedido(Pedido pedido) {
+		pedido.aumentarEconomicidad(this.getEconomicidad());
 		this.pedidosAsignados.remove(pedido);
 	}
 }

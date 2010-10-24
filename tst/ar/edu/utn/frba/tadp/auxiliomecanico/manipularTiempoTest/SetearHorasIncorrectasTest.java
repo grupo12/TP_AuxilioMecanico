@@ -20,11 +20,6 @@ public class SetearHorasIncorrectasTest {
 		segundotiempoDePrueba= new Tiempo();
 		
 	}
-	@Test (expected = HorasIncorrectas.class)
-	public void quieroCrearTiempoDe26Horas (){
-		
-	  tiempoDePrueba = tiempoDePrueba.nuevoTiempo(26, 10);
-	}
 	
 	@Test (expected = MinutosIncorrectos.class)
 	public void quieroCrearTiempoDe61Minutos (){
@@ -50,6 +45,13 @@ public class SetearHorasIncorrectasTest {
 		
 		assertEquals(tiempoDePrueba.getHoras(),21);
 		assertEquals(tiempoDePrueba.getMinutos(),00);
+	}
+	
+	@Test 
+	public void convertiAminutosTest (){
+	  
+		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 10);
+		assertEquals(tiempoDePrueba.aMinutos(),610);
 	}
 
 }

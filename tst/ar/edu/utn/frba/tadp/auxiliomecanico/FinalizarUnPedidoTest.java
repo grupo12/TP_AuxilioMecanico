@@ -50,7 +50,7 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	public void finalizarUnPedidoBase(){
 		
 		Pedido pedidoBase = builderPedido.pedidoBase(autoDePrueba).build(); 
-		pedidoBase.terminarPedido(null);
+		pedidoBase.terminarServicioDelPedido(null);
 	}
 
 

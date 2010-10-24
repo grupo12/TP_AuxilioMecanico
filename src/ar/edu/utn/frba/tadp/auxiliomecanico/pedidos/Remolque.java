@@ -42,7 +42,7 @@ public class Remolque extends EspecialidadPedido {
 	}
 
 	@Override
-	public void terminarPedido(Tiempo tiempo) {
+	public void terminarServicioDelPedido(Tiempo tiempo) {
 		cantidadAtendidos += 1;
 		terminado = true;
 	}

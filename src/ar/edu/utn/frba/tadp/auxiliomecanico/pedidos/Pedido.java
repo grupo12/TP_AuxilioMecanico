@@ -15,7 +15,8 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
-	
+	private double economicidad;
+
 
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
@@ -113,5 +114,13 @@ public abstract class Pedido {
 	 *luego finalizarla 
 	 * @param tiempo 
 	 */
-	public abstract void terminarPedido(Tiempo tiempo);
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public double getEconomicidad() {
+		return economicidad;
+	}
+
+	public void aumentarEconomicidad(double economicidad) {
+		this.economicidad += economicidad;
+	}
 }

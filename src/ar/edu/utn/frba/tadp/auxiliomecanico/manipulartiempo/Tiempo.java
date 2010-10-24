@@ -27,7 +27,7 @@ public int getHoras() {
 }
 
 public void setHoras(int hora) {
-	if ( ( hora>25 ) || (hora<0) ){
+	if ( (hora<0) ){
 		this.horas = 0;
 		this.minutos = 0;
 		throw new HorasIncorrectas("La cantidad de horas es incorrecta");
@@ -66,6 +66,18 @@ public static Tiempo sumarTiempos(Tiempo primerTiempo, Tiempo sumando) {
 	tiempoDeRetorno.nuevoTiempo(horas, minutos);
 
 return tiempoDeRetorno.nuevoTiempo(horas, minutos);
+}
+
+public int aMinutos(){
+int minutosTotales=0;
+	minutosTotales=(horas*60)+minutos;
+return minutosTotales;
+}
+
+public double costoPara(double precioServicio) {
+int minutos=this.aMinutos();
+
+return (precioServicio*minutos);
 }
 
 }

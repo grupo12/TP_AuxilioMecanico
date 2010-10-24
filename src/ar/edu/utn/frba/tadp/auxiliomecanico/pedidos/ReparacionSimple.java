@@ -45,7 +45,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 		return null;
 	}
 	@Override
-	public void terminarPedido(Tiempo tiempo) {
+	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(ReparacionSimple.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
 		terminado = true;
