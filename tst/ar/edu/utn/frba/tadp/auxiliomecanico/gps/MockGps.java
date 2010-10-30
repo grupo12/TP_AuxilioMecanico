@@ -1,17 +1,33 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.gps;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+
+import java.util.ArrayList;
 import java.util.Random;
 public class MockGps {
 private MockGps Gps;
+private ArrayList<TallerAuxiliar>  talleresConocidos;
 
 /*Singleton para la creacion del gps*/
 public MockGps nuevoGps(){
 	if (this.Gps == null){
-		return new MockGps();
+		MockGps gps = new MockGps();
+		gps.setearTalleresConocido();
+		Gps=gps;
+		return this.Gps;
 	}
 	else 
 		return this.Gps;
+}
+
+private void setearTalleresConocido(){
+	talleresConocidos.add(TallerAuxiliar.tallerPM);
+	talleresConocidos.add(TallerAuxiliar.sanchezSolucionesMecánicas);
+	talleresConocidos.add(TallerAuxiliar.levelCars);
+	talleresConocidos.add(TallerAuxiliar.autoproSA);
+	talleresConocidos.add(TallerAuxiliar.bonattiTeamRacing);
+	talleresConocidos.add(TallerAuxiliar.gabrielFalzone);
 }
 public int distantaciaEntre(Lugar primerLugar, Lugar segundoLugar){
 	int distancia = 0;
@@ -79,4 +95,39 @@ public Lugar ubicacionCamion(Camion unCamion){
 	}
 }
 
+/*
+ * Coincidamos que el metodo tiene la misma implementacion que ubicacionCamion
+ * y que no se usa el Parametro unCliente , pero al tratarse de un mock object 
+ * lo mas importante no es que la implementacion sino la interfaz del objeto gps
+ * */
+public Lugar ubicacionCliente(Cliente uncliente){
+	Random rand = new Random();
+	int numero = (int)((rand.nextInt()%6)*6);
+	switch(numero){
+	case(0):{return Lugar.moreno;}
+	case(1):{return Lugar.palermo;}
+	case(2):{return Lugar.lugano;}
+	case(3):{return Lugar.tigre;}
+	case(4):{return Lugar.urquiza;}
+	case(5):{return Lugar.lujan;}
+	default :{return Lugar.lujan;}
+	}
+}
+private Lugar dondeQuedaHospital(Hospital hospital){
+return hospital.getDondeEsta();
+}
+
+private Lugar dondeQuedaTaller(TallerAuxiliar taller){
+	return taller.getDondeEsta();
+}
+
+public Lugar dondeQuedaMasCercano(Hospital hospital){
+	
+	return Lugar.lujan;
+}
+
+public Lugar dondeQuedaMasCercano(TallerAuxiliar taller){
+	
+	return Lugar.lujan;
+}
 }
