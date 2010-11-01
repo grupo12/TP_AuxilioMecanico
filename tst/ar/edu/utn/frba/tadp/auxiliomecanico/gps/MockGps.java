@@ -2,18 +2,21 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.gps;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import java.util.Iterator;
 
 import java.util.ArrayList;
 import java.util.Random;
 public class MockGps {
 private MockGps Gps;
 private ArrayList<TallerAuxiliar>  talleresConocidos;
+private ArrayList<Hospital>  hospitalesConocidos;
 
 /*Singleton para la creacion del gps*/
 public MockGps nuevoGps(){
 	if (this.Gps == null){
 		MockGps gps = new MockGps();
 		gps.setearTalleresConocido();
+		gps.setearHospitalesConocido();
 		Gps=gps;
 		return this.Gps;
 	}
@@ -29,6 +32,16 @@ private void setearTalleresConocido(){
 	talleresConocidos.add(TallerAuxiliar.bonattiTeamRacing);
 	talleresConocidos.add(TallerAuxiliar.gabrielFalzone);
 }
+
+private void setearHospitalesConocido(){
+	hospitalesConocidos.add(Hospital.HospitalCeciliaGrierson);
+	hospitalesConocidos.add(Hospital.HospitalFernadez);
+	hospitalesConocidos.add(Hospital.HospitalGuemes);
+	hospitalesConocidos.add(Hospital.HospitalMarianoYLucianoDeLavega);
+	hospitalesConocidos.add(Hospital.Hospitalpirovano);
+	hospitalesConocidos.add(Hospital.HospitalTigre);
+}
+
 public int distantaciaEntre(Lugar primerLugar, Lugar segundoLugar){
 	int distancia = 0;
 	if (primerLugar == segundoLugar){return distancia=0;};
@@ -121,13 +134,28 @@ private Lugar dondeQuedaTaller(TallerAuxiliar taller){
 	return taller.getDondeEsta();
 }
 
-public Lugar dondeQuedaMasCercano(Hospital hospital){
+public Hospital dondeQuedaHospitalMasCercano(Lugar lugarDado){
+	Iterator  <Hospital> iterador = hospitalesConocidos.iterator() ;
+	Hospital hospitalRetorno;
 	
-	return Lugar.lujan;
+	while( iterador.hasNext()){
+		hospitalRetorno = iterador.next();
+		if ( hospitalRetorno.getDondeEsta() == lugarDado)
+			return hospitalRetorno;
+	 }
+	return Hospital.noHospital ;
 }
 
-public Lugar dondeQuedaMasCercano(TallerAuxiliar taller){
+public TallerAuxiliar dondeQuedaTallerMasCercano(Lugar lugarDado){
+	Iterator  <TallerAuxiliar> iterador = talleresConocidos.iterator() ;
+	TallerAuxiliar tallerRetorno;
 	
-	return Lugar.lujan;
+	while( iterador.hasNext()){
+		tallerRetorno = iterador.next();
+		if ( tallerRetorno.getDondeEsta() == lugarDado)
+			return tallerRetorno;
+	 }
+	return TallerAuxiliar.noTaller ;
 }
+
 }

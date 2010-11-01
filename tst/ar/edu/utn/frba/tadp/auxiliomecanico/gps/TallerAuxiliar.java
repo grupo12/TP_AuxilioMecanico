@@ -6,7 +6,8 @@ public enum TallerAuxiliar {
 	levelCars(Lugar.lujan),/*zona lujan*/
 	autoproSA(Lugar.tigre),
 	bonattiTeamRacing(Lugar.lugano), /*zona lugano*/
-	gabrielFalzone(Lugar.palermo); /*zona palermo*/
+	gabrielFalzone(Lugar.palermo), /*zona palermo*/
+	noTaller(Lugar.noLugar);
 	
 	private final Lugar dondeEsta;   // in kilograms
 	TallerAuxiliar(Lugar unLugar) {
