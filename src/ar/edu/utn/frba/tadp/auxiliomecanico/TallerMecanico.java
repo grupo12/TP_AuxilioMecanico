@@ -38,11 +38,8 @@ public class TallerMecanico {
 	 */
 	public void asistir(Pedido pedido) {
 		pedido.validar();
-
 		this.asignarCamion(pedido.getAutomovil(), pedido);
 	}
-
-
 
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
@@ -53,10 +50,22 @@ public class TallerMecanico {
 	 *            Pedido de atención
 	 */
 	private void asignarCamion(Automovil automovil, Pedido pedido) {
+		this.validarCamionesParaPedido(automovil, pedido);
+		this.camionParaAsignarA(pedido).atender(pedido);
+	}
+
+	/**
+	 * Valida que haya algún camión disponible para atender las exigencias del
+	 * pedido entrado al sistema.
+	 * 
+	 * @param automovil
+	 *            Automóvil sobre el cual se aplica el pedido
+	 * @param pedido
+	 *            Pedido de atención
+	 */
+	private void validarCamionesParaPedido(Automovil automovil, Pedido pedido) {
 		if (!this.algunCamionPuedeAtender(pedido, automovil))
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
-
-		this.camionParaAsignarA(pedido).atender(pedido);
 	}
 
 	/**

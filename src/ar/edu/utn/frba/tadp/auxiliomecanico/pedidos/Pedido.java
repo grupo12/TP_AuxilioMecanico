@@ -20,7 +20,6 @@ public abstract class Pedido {
 	 * en el sistema.
 	 */
 	public void validar() {
-
 		this.validarExistenciaModuloPagos();
 		this.validarCliente();
 	}
