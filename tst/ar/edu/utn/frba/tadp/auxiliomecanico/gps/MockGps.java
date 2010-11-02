@@ -5,14 +5,14 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 
 import java.util.ArrayList;
 import java.util.Random;
-public class MockGps {
-private MockGps Gps;
+public class MockGPS {
+private MockGPS Gps;
 private ArrayList<TallerAuxiliar>  talleresConocidos;
 
 /*Singleton para la creacion del gps*/
-public MockGps nuevoGps(){
+public MockGPS nuevoGps(){
 	if (this.Gps == null){
-		MockGps gps = new MockGps();
+		MockGPS gps = new MockGPS();
 		gps.setearTalleresConocido();
 		Gps=gps;
 		return this.Gps;
