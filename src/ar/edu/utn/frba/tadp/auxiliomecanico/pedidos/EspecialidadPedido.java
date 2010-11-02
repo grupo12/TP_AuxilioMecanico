@@ -57,5 +57,5 @@ public abstract class EspecialidadPedido extends Pedido {
 
 	public Automovil getAutomovil() {
 		return this.sujeto.getAutomovil();
-	}
+	}	
 }

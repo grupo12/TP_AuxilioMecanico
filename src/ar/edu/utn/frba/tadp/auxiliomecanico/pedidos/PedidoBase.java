@@ -3,7 +3,8 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ElPedidoBaseNoPuedeFinalizarseExcepcion;
 /**
  * Representa un pedido base, sin ningún tipo de servicio real asociado al
  * mismo.<br>
@@ -47,5 +48,16 @@ public class PedidoBase extends Pedido {
 	protected void validarEspecialidadPara(Cliente cliente) {
 		// No necesita validar nada específico ya que en sí el PedidoBase no es
 		// un pedido real.
+	}
+
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void terminarServicioDelPedido(Tiempo tiempo) {
+		throw new ElPedidoBaseNoPuedeFinalizarseExcepcion("El pedido debe al menos componerse con algun otro");	
 	}
 }

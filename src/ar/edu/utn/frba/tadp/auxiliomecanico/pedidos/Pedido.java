@@ -3,10 +3,11 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
-/**
+/** SSSSSSSSSSSSSSSSSSSSSSs
  * Representa un pedido dado, realizado por un cliente al sistema de auxilio
  * mecánico.
  * 
@@ -14,6 +15,8 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
+	private double economicidad;
+
 
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
@@ -84,5 +87,39 @@ public abstract class Pedido {
 
 	public static void setModuloPagos(ModuloPagos moduloDePagos) {
 		ModuloDePagos = moduloDePagos;
+	}
+	
+	/**
+	 * FALTA IMPLEMENTAR TAMBIEN
+	 * Determina el tiempo que tarda un tipo de pedido en ser atendido
+	 * 
+	 * @param pedido
+	 *            Pedido a calcular tiempo
+	 * @return Tiempo 
+	 */
+	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
+	
+	/**
+	 * FALTA IMPLEMENTAR TAMBIEN
+	 *finaliza el pedido siempre y cuando sea posible hacerlo, es decir que el mismo sea 
+	 *previamente terminado  
+	 */
+	public boolean finalizarElPedido(){
+		return false;};
+	
+	/**
+	 *A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario que hay que 
+	 *llevar a cabo para que la instancia de pedido este terminada, dando la posibilidad de
+	 *luego finalizarla 
+	 * @param tiempo 
+	 */
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public double getEconomicidad() {
+		return economicidad;
+	}
+
+	public void aumentarEconomicidad(double economicidad) {
+		this.economicidad += economicidad;
 	}
 }

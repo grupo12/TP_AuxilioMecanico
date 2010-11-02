@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
@@ -120,7 +121,7 @@ public class Cliente {
 	 *            Pedido finalizado
 	 */
 	public void finalizoPedido(Pedido pedido) {
-		this.pedidosRealizados.add(pedido);
+		
 	}
 
 	public void validarRemolque() {
@@ -133,5 +134,31 @@ public class Cliente {
 
 	public void validarReparacionCompleja() {
 		this.plan.validarReparacionComplejaPara(this);
+	}
+
+	public boolean EsRentableElCliente() {
+		double gastadoEnCliente= injectInto();
+		double cuotaAnual= getCuotaAnual();
+		
+		return gastadoEnCliente <= cuotaAnual ;
+	}
+
+	private double injectInto() {
+		double total = 0;
+		for ( Pedido pedido : this.pedidosRealizados){
+			total += calcularCostoAtencion(pedido);	
+		}
+		return total;
+	}
+
+	private double calcularCostoAtencion(Pedido pedido) {
+		Tiempo tiempoEmpleadoParaPedido=pedido.calcularTiempoDeAtencion(pedido);		
+		return tiempoEmpleadoParaPedido.costoPara(pedido.getEconomicidad());
+	}
+	
+	private double getCuotaAnual(){
+		double cuotaAnual=0;
+		cuotaAnual = getCuotaMensual()*12;
+	return cuotaAnual;
 	}
 }

@@ -3,9 +3,13 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class Remolque extends EspecialidadPedido {
-
+	
+	private static int cantidadAtendidos;
+	private boolean terminado;
+	
 	public Remolque(Pedido sujeto) {
 		super(sujeto);
 	}
@@ -23,4 +27,24 @@ public class Remolque extends EspecialidadPedido {
 	protected void doValidarEspecialidadPara(Cliente cliente) {
 		cliente.validarRemolque();
 	}
+
+	
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean finalizarElPedido() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void terminarServicioDelPedido(Tiempo tiempo) {
+		cantidadAtendidos += 1;
+		terminado = true;
+	}
+	
 }

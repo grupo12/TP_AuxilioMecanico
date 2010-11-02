@@ -3,10 +3,12 @@ package ar.edu.utn.frba.tadp.auxiliomecanico;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -128,5 +130,6 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.getCliente().finalizoPedido(pedido);
-	}
+		}
+	
 }
