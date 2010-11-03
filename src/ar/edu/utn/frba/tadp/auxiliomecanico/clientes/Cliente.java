@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
@@ -48,10 +49,10 @@ public class Cliente {
 	public void agregarPedido(Pedido pedido) {
 		this.pedidosRealizados.add(pedido);
 	}
-	
+
 	public void validarCuotaAlDia(ModuloPagos moduloPagos) {
 		if (!this.isCuotaAlDia(moduloPagos))
-			throw new CuotaDesactualizadaException("La cuota está desactualizada", this); 
+			throw new CuotaDesactualizadaException("La cuota está desactualizada", this);
 	}
 
 	/**
@@ -121,7 +122,7 @@ public class Cliente {
 	 *            Pedido finalizado
 	 */
 	public void finalizoPedido(Pedido pedido) {
-		
+
 	}
 
 	public void validarRemolque() {
@@ -137,28 +138,31 @@ public class Cliente {
 	}
 
 	public boolean EsRentableElCliente() {
-		double gastadoEnCliente= injectInto();
-		double cuotaAnual= getCuotaAnual();
-		
-		return gastadoEnCliente <= cuotaAnual ;
+		double gastadoEnCliente = injectInto();
+		double cuotaAnual = getCuotaAnual();
+
+		return gastadoEnCliente <= cuotaAnual;
 	}
 
 	private double injectInto() {
 		double total = 0;
-		for ( Pedido pedido : this.pedidosRealizados){
-			total += calcularCostoAtencion(pedido);	
+		for (Pedido pedido : this.pedidosRealizados) {
+			total += calcularCostoAtencion(pedido);
 		}
 		return total;
 	}
 
 	private double calcularCostoAtencion(Pedido pedido) {
-		Tiempo tiempoEmpleadoParaPedido=pedido.calcularTiempoDeAtencion(pedido);		
+		Tiempo tiempoEmpleadoParaPedido = pedido.calcularTiempoDeAtencion(pedido);
 		return tiempoEmpleadoParaPedido.costoPara(pedido.getEconomicidad());
 	}
-	
-	private double getCuotaAnual(){
-		double cuotaAnual=0;
-		cuotaAnual = getCuotaMensual()*12;
-	return cuotaAnual;
+
+	private double getCuotaAnual() {
+		return this.getCuotaMensual() * 12;
+	}
+
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategiasPuedenAtender) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 }

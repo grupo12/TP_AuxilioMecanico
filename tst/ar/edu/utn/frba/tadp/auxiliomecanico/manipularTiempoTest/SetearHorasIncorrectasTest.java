@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.MinutosIncorrectos;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.excepciones.MinutosIncorrectosException;
 
 public class SetearHorasIncorrectasTest {
 
@@ -20,7 +20,7 @@ public class SetearHorasIncorrectasTest {
 		
 	}
 	
-	@Test (expected = MinutosIncorrectos.class)
+	@Test (expected = MinutosIncorrectosException.class)
 	public void quieroCrearTiempoDe61Minutos (){
 	  
 		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 61);

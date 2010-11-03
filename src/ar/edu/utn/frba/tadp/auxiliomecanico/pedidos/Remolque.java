@@ -36,9 +36,9 @@ public class Remolque extends EspecialidadPedido {
 	}
 
 	@Override
-	public boolean finalizarElPedido() {
+	public void finalizarElPedido() {
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

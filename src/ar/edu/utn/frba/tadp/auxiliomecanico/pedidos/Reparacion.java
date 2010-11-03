@@ -8,26 +8,26 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.Especialidad;
 
 public class Reparacion extends EspecialidadPedido {
-	
+
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
-	
+
 	private Especialidad especialidad;
 	private Complejidad complejidad;
 	private boolean terminado;
-	
+
 	static {
 		// Inicialización de variables del tiempo de reparación
 		tiempoEmpleadoEnReparacion = new Tiempo();
 		tiempoEmpleadoEnReparacion.nuevoTiempo(0, 0);
-		
+
 		// Inicialización de cantidad de atendidos
-		cantidadAtendidos=0;
+		cantidadAtendidos = 0;
 	}
-	
+
 	public Reparacion(Pedido sujeto, Especialidad especialidad, Complejidad complejidad) {
 		super(sujeto);
-		terminado=false;
+		this.terminado = false;
 	}
 
 	@Override
@@ -45,12 +45,18 @@ public class Reparacion extends EspecialidadPedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(Reparacion.tiempoEmpleadoEnReparacion, tiempo);
+		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(Reparacion.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
-		
-		terminado = true;
+
+		this.terminado = true;
+	}
+
+	@Override
+	public void finalizarElPedido() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 }
