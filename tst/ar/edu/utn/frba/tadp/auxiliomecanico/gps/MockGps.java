@@ -3,9 +3,9 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.gps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import java.util.Iterator;
-
 import java.util.ArrayList;
 import java.util.Random;
+
 public class MockGps {
 private MockGps Gps;
 private ArrayList<TallerAuxiliar>  talleresConocidos;
