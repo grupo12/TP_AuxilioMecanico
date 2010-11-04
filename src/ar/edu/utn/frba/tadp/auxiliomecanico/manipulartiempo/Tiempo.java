@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo;
 
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.excepciones.*;
 /**
  * La idea de la clase tiempo es poder manejar horas y minutos de manera independiente, y si el dia de
  * mañana se encuentra una solucion mejor para la manipulacion del tiempo se puede solo cambiar la clase
@@ -30,7 +30,7 @@ public void setHoras(int hora) {
 	if ( (hora<0) ){
 		this.horas = 0;
 		this.minutos = 0;
-		throw new HorasIncorrectas("La cantidad de horas es incorrecta");
+		throw new HorasIncorrectasException("La cantidad de horas es incorrecta");
 	}
 	this.horas = hora;
 }
@@ -43,7 +43,7 @@ public void setMinutos(int minuto) {
 	if ( ( minuto>60 ) || (minuto<0) ){
 		this.horas = 0;
 		this.minutos = 0;
-		throw new MinutosIncorrectos("La cantidad de minutos es incorrecta"); 
+		throw new MinutosIncorrectosException("La cantidad de minutos es incorrecta"); 
 	}
 	this.minutos = minuto;
 }

@@ -3,12 +3,11 @@ package ar.edu.utn.frba.tadp.auxiliomecanico;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -40,11 +39,9 @@ public class TallerMecanico {
 	 */
 	public void asistir(Pedido pedido) {
 		pedido.validar();
-
 		this.asignarCamion(pedido.getAutomovil(), pedido);
+		this.asignarEstrategia(pedido);
 	}
-
-
 
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
@@ -55,10 +52,27 @@ public class TallerMecanico {
 	 *            Pedido de atención
 	 */
 	private void asignarCamion(Automovil automovil, Pedido pedido) {
+		this.validarCamionesParaPedido(automovil, pedido);
+		this.camionParaAsignarA(pedido).atender(pedido);
+	}
+
+	private void asignarEstrategia(Pedido pedido) {
+		this.validarCamionesParaPedido(pedido.getAutomovil(), pedido);
+		this.estrategiaParaAsignarA(pedido).atender(pedido);
+	}
+
+	/**
+	 * Valida que haya algún camión disponible para atender las exigencias del
+	 * pedido entrado al sistema.
+	 * 
+	 * @param automovil
+	 *            Automóvil sobre el cual se aplica el pedido
+	 * @param pedido
+	 *            Pedido de atención
+	 */
+	private void validarCamionesParaPedido(Automovil automovil, Pedido pedido) {
 		if (!this.algunCamionPuedeAtender(pedido, automovil))
 			throw new CamionNoDisponibleException("No hay camión disponible para atender el pedido", pedido);
-
-		this.camionParaAsignarA(pedido).atender(pedido);
 	}
 
 	/**
@@ -69,8 +83,11 @@ public class TallerMecanico {
 	 * @return Camión seleccionado para ser asignado
 	 */
 	protected Camion camionParaAsignarA(Pedido pedido) {
-		return pedido.getAutomovil().getCliente()
-				.selectCamion(this.camionesPuedenAtender(pedido, pedido.getAutomovil()));
+		return pedido.getCliente().selectCamion(this.camionesPuedenAtender(pedido, pedido.getAutomovil()));
+	}
+
+	private Estrategia estrategiaParaAsignarA(Pedido pedido) {
+		return pedido.getCliente().selectEstrategia(this.estrategiasPuedenAtender(pedido));
 	}
 
 	/**
@@ -92,6 +109,20 @@ public class TallerMecanico {
 				camionesPuedenAtender.add(camion);
 
 		return camionesPuedenAtender;
+	}
+
+	private Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
+		// #select:
+		Collection<Estrategia> estrategiasPuedenAtender = new LinkedList<Estrategia>();
+
+		// TODO Acá de alguna forma debo poder armar todas las estrategias
+		// posibles en base a mis camiones, para atender al pedidito, lalala.
+		//
+		// for (Camion camion : camiones)
+		// if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
+		// camionesPuedenAtender.add(camion);
+
+		return estrategiasPuedenAtender;
 	}
 
 	/**
@@ -120,7 +151,6 @@ public class TallerMecanico {
 	 */
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
-		pedido.getCliente().finalizoPedido(pedido);
-		}
-	
+		pedido.finalizar();
+	}
 }
