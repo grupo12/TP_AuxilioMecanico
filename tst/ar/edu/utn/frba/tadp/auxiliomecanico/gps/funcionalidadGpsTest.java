@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class FuncionalidadGPSTest {
+public class funcionalidadGpsTest {
 	
-	public MockGPS gps = new MockGPS();
+	public MockGps gps = new MockGps();
 
 	@Test
 	public void distanciEntreLujanLugano() {

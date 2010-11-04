@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo;
 
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.*;
 /**
  * La idea de la clase tiempo es poder manejar horas y minutos de manera independiente, y si el dia de
  * mañana se encuentra una solucion mejor para la manipulacion del tiempo se puede solo cambiar la clase

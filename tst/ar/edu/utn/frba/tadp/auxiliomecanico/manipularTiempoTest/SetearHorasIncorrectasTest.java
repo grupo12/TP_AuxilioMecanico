@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.excepciones.MinutosIncorrectosException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.MinutosIncorrectosException;;
 
 public class SetearHorasIncorrectasTest {
 
