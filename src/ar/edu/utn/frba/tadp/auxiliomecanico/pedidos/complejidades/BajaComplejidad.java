@@ -11,4 +11,9 @@ public class BajaComplejidad extends Complejidad {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public int cantAyudantesRequeridos() {
+		return 0;
+	}
+
 }

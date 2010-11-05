@@ -10,5 +10,11 @@ public class MediaComplejidad extends Complejidad {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+	
+	@Override
+	public int cantAyudantesRequeridos(){
+		return 1;
+	}
+	
 
 }

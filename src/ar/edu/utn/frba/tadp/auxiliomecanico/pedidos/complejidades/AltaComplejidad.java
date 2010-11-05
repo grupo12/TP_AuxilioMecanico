@@ -10,4 +10,9 @@ public class AltaComplejidad extends Complejidad {
 		cliente.validarReparacionCompleja();		
 	}
 
+	@Override
+	public int cantAyudantesRequeridos(){
+		return 2;
+	}
+	
 }

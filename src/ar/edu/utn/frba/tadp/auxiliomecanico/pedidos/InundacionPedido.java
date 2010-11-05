@@ -64,3 +64,13 @@ public class InundacionPedido extends DesastrePedido {
 		InundacionPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(InundacionPedido.tiempoEmpleadoEnReparacion,tiempo); 
 	}
 }
+
+	// BEGIN SANTI
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		return camion.puedeAtenderRemolque(super.getAutomovil())
+				&& camion.hayTecnicoExpertoInundaciones();
+
+	}
+	// END SANTI
+}

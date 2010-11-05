@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.builders;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.AsignaPedidoBaseAUnoExistenteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoExistePedidoBaseException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
@@ -16,37 +17,41 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 
 public class CPedidoBuilder implements IPedidoBuilder{
 	
+	
+	
 	protected Pedido pedido;
 	
 	/**
 	 * Bandera para saber si hay PedidoBase y cumple precondición.
+	 * @throws AsignaPedidoBaseAUnoExistenteException 
 	 */
 	
-	private boolean pedidoBaseConstruido = false;
-
 	@Override
-	public CPedidoBuilder pedidoBase(Automovil automovil) {
-		pedido = new PedidoBase(automovil);
-		pedidoBaseConstruido = true;
+	public CPedidoBuilder armarPedidoBase(Automovil automovil){
+		if(pedido == null)
+			pedido = new PedidoBase(automovil);
+//		else
+		//throw new AsignaPedidoBaseAUnoExistenteException("El pedido ya tiene un pedido base.", pedido);
+			
 		return this;
 	}
 
 	@Override
-	public CPedidoBuilder simple() {
+	public CPedidoBuilder addReparacionSimple() {
 		pedidoBaseConstruido();
 		pedido = new ReparacionSimple(pedido);
 		return this;
 	}
 
 	@Override
-	public CPedidoBuilder complejidad() {
+	public CPedidoBuilder addReparacionCompleja() {
 		pedidoBaseConstruido();
 		pedido = new ReparacionCompleja(pedido);
 		return this;
 	}
 
 	@Override
-	public CPedidoBuilder remolque() {
+	public CPedidoBuilder addRemolque() {
 		pedidoBaseConstruido();
 		pedido = new Remolque(pedido);
 		return this;
@@ -56,7 +61,6 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	public Pedido build() {
 		pedidoBaseConstruido();
 		pedido.validar();
-		pedidoBaseConstruido = false;
 		return pedido;
 	}
 
@@ -65,8 +69,7 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 */
 	
 	private void pedidoBaseConstruido() {
-		if (!pedidoBaseConstruido)
+		if (pedido == null)
 			throw new NoExistePedidoBaseException("Precondición: PedidoBase", pedido);
 	}
-
 }

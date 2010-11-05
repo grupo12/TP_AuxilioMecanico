@@ -106,7 +106,7 @@ public abstract class Pedido {
 	 */
 	public abstract void terminarServicioDelPedido(Tiempo tiempo);
 
-	public double getEconomicidad() {
+public double getEconomicidad() {
 		return economicidad;
 	}
 

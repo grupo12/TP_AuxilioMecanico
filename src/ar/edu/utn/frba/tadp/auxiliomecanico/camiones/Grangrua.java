@@ -5,7 +5,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 public class Grangrua extends Camion {
 
 	private final boolean tallerAltaComplejidad;
-
+	
 	public Grangrua(boolean tallerAltaComplejidad) {
 		this.tallerAltaComplejidad = tallerAltaComplejidad;
 	}
@@ -24,4 +24,10 @@ public class Grangrua extends Camion {
 	public boolean puedeAtenderReparacionCompleja() {
 		return this.tallerAltaComplejidad;
 	}
+
+	@Override
+	public boolean tenesEquipoEspecial() {
+		return true;
+	}
+
 }

@@ -65,3 +65,22 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 }
+// BEGIN SANTI
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		if (this.isPeligroso())
+			return camion.tenesEquipoEspecial();
+		return true; // no es peligroso, puede manejarlo cualquier camión de
+						// auxilio
+
+	}
+
+	public void setPeligroso(boolean isPeligroso) {
+		this.isPeligroso = isPeligroso;
+	}
+
+	public boolean isPeligroso() {
+		return isPeligroso;
+	}
+}
+//END SANTI

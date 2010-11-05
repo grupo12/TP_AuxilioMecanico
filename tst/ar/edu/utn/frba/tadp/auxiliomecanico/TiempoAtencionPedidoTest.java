@@ -36,7 +36,7 @@ public class TiempoAtencionPedidoTest {
 	}
 	@Test 
 	public void tiempoDeAtencionDeUnaInundacion(){
-		InundacionPedido pedidoNuevo = new InundacionPedido();
+		InundacionPedido pedidoNuevo = new InundacionPedido(pedidoNuevo);
 		
 		sumarTiempos(pedidoNuevo);
 		

@@ -103,7 +103,7 @@ public class TallerMecanico {
 	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
-
+		
 		for (Camion camion : camiones)
 			if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
 				camionesPuedenAtender.add(camion);
@@ -152,5 +152,13 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.finalizar();
+	}
+
+	/**
+	 * Revisar personal hasta encontrar un experto.
+	 * @return
+	 */
+	public boolean tenesExpertoDisponible() {
+		return false;
 	}
 }

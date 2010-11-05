@@ -67,13 +67,13 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	
 	private void doClienteRealizarPedidos() {
 		Pedido pedidoBase;
-		pedidoBase = builderPedido.pedidoBase(super.automovilOtro).complejidad().build(); 
+		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
-		pedidoBase = builderPedido.pedidoBase(super.automovilOtro).remolque().build(); 
+		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
-		pedidoBase = builderPedido.pedidoBase(super.automovilOtro).simple().build(); 
+		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
 		tratarUnPedido(clienteDeTest,pedidoBase);
 	}
 	/*

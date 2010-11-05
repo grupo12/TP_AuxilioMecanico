@@ -42,7 +42,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion() {
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -52,6 +52,22 @@ public class ReparacionSimple extends EspecialidadPedido {
 		cantidadAtendidos += 1;
 		
 		terminado = true;
+	}
+
+	/**
+	 * Cada EspecialidadPedido (Incendio, Vuelco, etc.) debe responderle a un
+	 * camión si puede ser atendido por él. Esto es así, ya que cada
+	 * EspecialidadPedido conoce lo que necesita. Ej.: Una reparación mecánica
+	 * con complejidad alta necesita de 2 ayudantes, entonces el decorator le
+	 * pregunta al camión si tiene dos ayudantes. En caso afirmativo, el camión
+	 * puede decir que es capaz de atender ese problema de complejidad alta. La
+	 * desición fue provisoriamente mantener a ReparacionSimple y Compleja como
+	 * estaba en la 1era entrega, pero luego se utilizará una forma común a
+	 * todo.
+	 */
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		return this.doPuedeSerAtendidoPorCamion(camion, super.getAutomovil());
 	}
 
 }

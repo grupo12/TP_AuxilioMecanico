@@ -2,7 +2,6 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.camiones;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 
-
 public class Minitaller extends Camion {
 	
 	@Override
@@ -19,4 +18,5 @@ public class Minitaller extends Camion {
 	public boolean puedeAtenderReparacionCompleja() {
 		return false;
 	}
+	
 }

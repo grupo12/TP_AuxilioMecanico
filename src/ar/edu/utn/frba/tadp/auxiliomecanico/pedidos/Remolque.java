@@ -30,7 +30,7 @@ public class Remolque extends EspecialidadPedido {
 
 	
 	@Override
-	public Tiempo calcularTiempoDeAtencion() {
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -46,5 +46,13 @@ public class Remolque extends EspecialidadPedido {
 		cantidadAtendidos += 1;
 		terminado = true;
 	}
-	
+
+	// BEGIN SANTI
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		Automovil a = super.getAutomovil();
+		return camion.puedeAtenderRemolque(a);
+	}
+	// END SANTI
+
 }
