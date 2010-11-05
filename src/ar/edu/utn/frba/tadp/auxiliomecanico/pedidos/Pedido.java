@@ -3,24 +3,25 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
-/** 
- * Representa un pedido dado, realizado por un cliente al sistema de auxilio
- * mecánico.
+/**
+ * SSSSSSSSSSSSSSSSSSSSSSs Representa un pedido dado, realizado por un cliente
+ * al sistema de auxilio mecánico.
  * 
  */
 public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
+	private double economicidad;
 
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
 	 * en el sistema.
 	 */
 	public void validar() {
-
 		this.validarExistenciaModuloPagos();
 		this.validarCliente();
 	}
@@ -34,7 +35,7 @@ public abstract class Pedido {
 		cliente.validarCuotaAlDia(ModuloDePagos);
 		this.validarEspecialidadPara(cliente);
 	}
-	
+
 	/**
 	 * Valida que haya efectivamente un módulo de pagos establecido.
 	 */
@@ -85,5 +86,45 @@ public abstract class Pedido {
 
 	public static void setModuloPagos(ModuloPagos moduloDePagos) {
 		ModuloDePagos = moduloDePagos;
+	}
+
+	/**
+	 * FALTA IMPLEMENTAR TAMBIEN Determina el tiempo que tarda un tipo de pedido
+	 * en ser atendido
+	 * 
+	 * @param pedido
+	 *            Pedido a calcular tiempo
+	 * @return Tiempo
+	 */
+	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
+
+
+	/**
+	 * A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario
+	 * que hay que llevar a cabo para que la instancia de pedido este terminada,
+	 * dando la posibilidad de luego finalizarla
+	 * 
+	 * @param tiempo
+	 */
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public double getEconomicidad() {
+		return economicidad;
+	}
+
+	public void aumentarEconomicidad(double economicidad) {
+		this.economicidad += economicidad;
+	}
+
+	/**
+	 * FALTA IMPLEMENTAR TAMBIEN finaliza el pedido siempre y cuando sea posible
+	 * hacerlo, es decir que el mismo sea previamente terminado
+	 */
+	public void finalizarElPedido() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void finalizar() {
+		this.getCliente().finalizoPedido(this);
 	}
 }
