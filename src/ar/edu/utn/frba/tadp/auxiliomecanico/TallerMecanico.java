@@ -111,25 +111,31 @@ public class TallerMecanico {
 		return camionesPuedenAtender;
 	}
 
+	/**
+	 * Arma todas las estrategias que pueden resolver el Pedido
+	 * 
+	 * @param pedido
+	 * 			Pedido de atención
+	 * @return Estrategias que pueden resolver el pedido
+	 * 	 */
 	private Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
-		// #select:
-		Collection<Estrategia> estrategiasPuedenAtender = new LinkedList<Estrategia>();
+		Collection<Estrategia> posiblesEstrategias = new LinkedList<Estrategia>();
+		Collection<Estrategia> estrategiasResultantes = new LinkedList<Estrategia>();
 
 		for(Camion camion: camiones){
-			for(Estrategia estrategia: estrategiasPuedenAtender){
+			for(Estrategia estrategia: posiblesEstrategias){
 				estrategia.agregarCamion(camion);
 			}
 			if(pedido.puedeSerAtendidoPorCamion(camion, pedido.getAutomovil()))
-				estrategiasPuedenAtender.add(new Estrategia(pedido, camion));
+				posiblesEstrategias.add(new Estrategia(pedido, camion));
 		}
-		// TODO Acá de alguna forma debo poder armar todas las estrategias
-		// posibles en base a mis camiones, para atender al pedidito, lalala.
-		//
-		// for (Camion camion : camiones)
-		// if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
-		// camionesPuedenAtender.add(camion);
 
-		return estrategiasPuedenAtender;
+		for(Estrategia estrategia: posiblesEstrategias){
+			if (estrategia.puedeResolverPedido())
+				estrategiasResultantes.add(estrategia);
+		}
+		
+		return estrategiasResultantes;
 	}
 
 	/**
