@@ -42,7 +42,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

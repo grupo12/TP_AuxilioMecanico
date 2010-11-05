@@ -153,7 +153,7 @@ public class Cliente {
 	}
 
 	private double calcularCostoAtencion(Pedido pedido) {
-		Tiempo tiempoEmpleadoParaPedido = pedido.calcularTiempoDeAtencion(pedido);
+		Tiempo tiempoEmpleadoParaPedido = pedido.calcularTiempoDeAtencion();
 		return tiempoEmpleadoParaPedido.costoPara(pedido.getEconomicidad());
 	}
 

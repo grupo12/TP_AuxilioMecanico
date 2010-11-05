@@ -19,12 +19,15 @@ public class SetearHorasIncorrectasTest {
 		segundotiempoDePrueba= new Tiempo();
 		
 	}
-	
-	@Test (expected = MinutosIncorrectosException.class)
-	public void quieroCrearTiempoDe61Minutos (){
-	  
-		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 61);
+
+	@Test
+	public void quieroCrearUnTiempoConOverflowDeMinutos(){
+		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 150);
+
+		assertEquals(tiempoDePrueba.getHoras(),12);
+		assertEquals(tiempoDePrueba.getMinutos(),30);
 	}
+
 	
 	@Test
 	public void quieroCrearUnTiempoCorrecto(){
@@ -46,6 +49,17 @@ public class SetearHorasIncorrectasTest {
 		assertEquals(tiempoDePrueba.getMinutos(),00);
 	}
 	
+	@Test
+	public void quieroCrearUnTiempoSumados(){
+		
+		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 45);
+		segundotiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 110);
+		
+		tiempoDePrueba = Tiempo.sumarTiempos(tiempoDePrueba, segundotiempoDePrueba);
+		
+		assertEquals(tiempoDePrueba.getHoras(),22);
+		assertEquals(tiempoDePrueba.getMinutos(),35);
+	}
 	@Test 
 	public void convertiAminutosTest (){
 	  

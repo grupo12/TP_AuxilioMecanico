@@ -51,9 +51,9 @@ public class PedidoBase extends Pedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

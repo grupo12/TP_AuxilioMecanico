@@ -6,7 +6,17 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class VuelvoPedido extends DesastrePedido {
+	
+	private static Tiempo tiempoEmpleadoEnReparacion;
+	private static int cantidadAtendidos;
 
+	static {
+		// Inicialización de variables del tiempo de reparación
+		tiempoEmpleadoEnReparacion = new Tiempo().nuevoTiempo(0, 0);
+		// Inicialización de cantidad de atendidos
+		cantidadAtendidos = 0;
+	}
+	
 	@Override
 	protected void validarEspecialidadPara(Cliente cliente) {
 		// TODO Auto-generated method stub
@@ -30,6 +40,7 @@ public class VuelvoPedido extends DesastrePedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+	
 
 	@Override
 	public Cliente getCliente() {
@@ -44,15 +55,14 @@ public class VuelvoPedido extends DesastrePedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public Tiempo calcularTiempoDeAtencion() {
+		return VuelvoPedido.tiempoEmpleadoEnReparacion;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		VuelvoPedido.cantidadAtendidos += 1;
+		VuelvoPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(VuelvoPedido.tiempoEmpleadoEnReparacion, tiempo);
 	}
 
 }

@@ -30,7 +30,7 @@ public class ReparacionCompleja extends EspecialidadPedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
 		return null;
 	}

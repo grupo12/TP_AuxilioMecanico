@@ -32,7 +32,7 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	 * finalizarUnPedidoDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 
 	 * de un pedido 
 	 * */
-	@Test (expected = PedidoNoFinalizadoCorrectamente.class )
+	@Test (expected = UnsupportedOperationException.class )
 	public void finalizarUnPedidoDeUnClient(){
 		
 		Pedido pedidoAgregar = builderPedido.pedidoBase(autoDePrueba).simple().build(); 
