@@ -7,7 +7,6 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
-import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 
 /**
  * Representa la unidad básica de atención de un taller mecánico. Se encarga de
@@ -120,6 +119,16 @@ public abstract class Camion {
 
 	public boolean tenesEquipoEspecial() {
 		return tieneEquipoEspecial;
+	}
+
+	public boolean puedeAtenderIncendio() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean puedeAtenderInundacion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 	
 	

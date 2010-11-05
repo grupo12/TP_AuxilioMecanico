@@ -115,6 +115,13 @@ public class TallerMecanico {
 		// #select:
 		Collection<Estrategia> estrategiasPuedenAtender = new LinkedList<Estrategia>();
 
+		for(Camion camion: camiones){
+			for(Estrategia estrategia: estrategiasPuedenAtender){
+				estrategia.agregarCamion(camion);
+			}
+			if(pedido.puedeSerAtendidoPorCamion(camion, pedido.getAutomovil()))
+				estrategiasPuedenAtender.add(new Estrategia(pedido, camion));
+		}
 		// TODO Acá de alguna forma debo poder armar todas las estrategias
 		// posibles en base a mis camiones, para atender al pedidito, lalala.
 		//

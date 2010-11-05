@@ -1,13 +1,15 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.builders;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.AsignaPedidoBaseAUnoExistenteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoExistePedidoBaseException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.IncendioPedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.InundacionPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Remolque;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionCompleja;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.VuelcoPedido;
 
 /**
  * Implementa IPedidoBuilder.
@@ -15,9 +17,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
  * Centraliza validaciones concernientes a un Pedido.
  */
 
-public class CPedidoBuilder implements IPedidoBuilder{
-	
-	
+public class CPedidoBuilder {
 	
 	protected Pedido pedido;
 	
@@ -26,7 +26,6 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	 * @throws AsignaPedidoBaseAUnoExistenteException 
 	 */
 	
-	@Override
 	public CPedidoBuilder armarPedidoBase(Automovil automovil){
 		if(pedido == null)
 			pedido = new PedidoBase(automovil);
@@ -36,28 +35,30 @@ public class CPedidoBuilder implements IPedidoBuilder{
 		return this;
 	}
 
-	@Override
 	public CPedidoBuilder addReparacionSimple() {
 		pedidoBaseConstruido();
 		pedido = new ReparacionSimple(pedido);
 		return this;
 	}
 
-	@Override
 	public CPedidoBuilder addReparacionCompleja() {
 		pedidoBaseConstruido();
 		pedido = new ReparacionCompleja(pedido);
 		return this;
 	}
 
-	@Override
 	public CPedidoBuilder addRemolque() {
 		pedidoBaseConstruido();
 		pedido = new Remolque(pedido);
 		return this;
 	}
+	
+	public CPedidoBuilder addIncendio(){
+		pedidoBaseConstruido();
+		pedido = new IncendioPedido(pedido);
+		return this;
+	}
 
-	@Override
 	public Pedido build() {
 		pedidoBaseConstruido();
 		pedido.validar();
@@ -71,5 +72,17 @@ public class CPedidoBuilder implements IPedidoBuilder{
 	private void pedidoBaseConstruido() {
 		if (pedido == null)
 			throw new NoExistePedidoBaseException("Precondición: PedidoBase", pedido);
+	}
+
+	public CPedidoBuilder addInundacion() {
+		pedidoBaseConstruido();
+		pedido = new InundacionPedido(pedido);
+		return this;
+	}
+
+	public CPedidoBuilder addVuelco() {
+		pedidoBaseConstruido();
+		pedido = new VuelcoPedido(pedido);
+		return this;
 	}
 }

@@ -13,7 +13,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
 
 public class SeleccionEstrategiaReparacionTest {
 
-	protected IPedidoBuilder pedidoBuilder = new CPedidoBuilder();
+	protected CPedidoBuilder pedidoBuilder = new CPedidoBuilder();
 
 	private final Plan planClassic = new ClassicPlan();
 	private final Cliente cliente = new Cliente(planClassic, 300);
@@ -23,7 +23,7 @@ public class SeleccionEstrategiaReparacionTest {
 
 	@Before
 	public void setUp() throws Exception {
-		pedidoReparacionMecanica = pedidoBuilder.pedidoBase(automovil).build();
+		pedidoReparacionMecanica = pedidoBuilder.armarPedidoBase(automovil).build();
 	}
 
 	@Test

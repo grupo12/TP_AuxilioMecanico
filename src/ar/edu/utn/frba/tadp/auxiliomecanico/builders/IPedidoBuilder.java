@@ -10,13 +10,13 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 public interface IPedidoBuilder {
 	
-	public abstract CPedidoBuilder pedidoBase(Automovil automovil);
+	public abstract CPedidoBuilder armarPedidoBase(Automovil automovil);
 	
-	public abstract CPedidoBuilder simple();
+	public abstract CPedidoBuilder addReparacionSimple();
 	
-	public abstract CPedidoBuilder complejidad();
+	public abstract CPedidoBuilder addReparacionCompleja();
 
-	public abstract CPedidoBuilder remolque();
+	public abstract CPedidoBuilder addRemolque();
 	
 	public abstract Pedido build();
 

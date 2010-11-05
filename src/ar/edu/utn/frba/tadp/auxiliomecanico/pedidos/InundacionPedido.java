@@ -7,6 +7,11 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class InundacionPedido extends DesastrePedido {
 
+	public InundacionPedido(Pedido sujeto) {
+		super(sujeto);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
@@ -63,7 +68,11 @@ public class InundacionPedido extends DesastrePedido {
 		InundacionPedido.cantidadAtendidos +=1;
 		InundacionPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(InundacionPedido.tiempoEmpleadoEnReparacion,tiempo); 
 	}
-}
+	
+	@Override
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+		return unCamion.puedeAtenderInundacion();
+	}
 
 	// BEGIN SANTI
 	@Override

@@ -7,6 +7,12 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class IncendioPedido extends DesastrePedido {
 	
+	boolean isPeligroso;
+	public IncendioPedido(Pedido sujeto) {
+		super(sujeto);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
@@ -23,11 +29,7 @@ public class IncendioPedido extends DesastrePedido {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
+
 
 	@Override
 	public boolean isReparacionSimple() {
@@ -64,7 +66,6 @@ public class IncendioPedido extends DesastrePedido {
 		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(IncendioPedido.tiempoEmpleadoEnReparacion,tiempo); 
 	}
 
-}
 // BEGIN SANTI
 	@Override
 	public boolean puedoAtenderte(Camion camion) {
@@ -81,6 +82,11 @@ public class IncendioPedido extends DesastrePedido {
 
 	public boolean isPeligroso() {
 		return isPeligroso;
+	}
+
+	@Override
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+		return unCamion.puedeAtenderIncendio();
 	}
 }
 //END SANTI

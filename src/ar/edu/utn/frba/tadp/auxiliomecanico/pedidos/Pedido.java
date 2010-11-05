@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
+import java.util.Collection;
+
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
@@ -106,7 +108,7 @@ public abstract class Pedido {
 	 */
 	public abstract void terminarServicioDelPedido(Tiempo tiempo);
 
-public double getEconomicidad() {
+	public double getEconomicidad() {
 		return economicidad;
 	}
 
@@ -125,4 +127,10 @@ public double getEconomicidad() {
 	public void finalizar() {
 		this.getCliente().finalizoPedido(this);
 	}
+	
+	public abstract boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones);
+	
+	public abstract boolean algunCamionPuedeResolver(Collection<Camion> camiones);
+	
+	public abstract boolean seComplementan(Collection<Camion> camiones, Camion camion);
 }
