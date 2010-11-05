@@ -37,13 +37,11 @@ public class TallerMecanico {
 	 *            Pedido de atención a un cliente
 	 */
 	public void asistir(Pedido pedido) {
-		pedido.validar();
-
+	
 		this.asignarCamion(pedido.getAutomovil(), pedido);
+	
 	}
-
-
-
+	
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
 	 * 
@@ -84,7 +82,7 @@ public class TallerMecanico {
 	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
-
+		
 		for (Camion camion : camiones)
 			if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
 				camionesPuedenAtender.add(camion);
@@ -119,5 +117,13 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.getCliente().finalizoPedido(pedido);
+	}
+
+	/**
+	 * Revisar personal hasta encontrar un experto.
+	 * @return
+	 */
+	public boolean tenesExpertoDisponible() {
+		return false;
 	}
 }

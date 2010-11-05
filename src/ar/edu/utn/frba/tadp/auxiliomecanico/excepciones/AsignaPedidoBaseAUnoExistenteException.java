@@ -2,13 +2,13 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.excepciones;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
-public class NoExistePedidoBaseException extends UserException {
+public class AsignaPedidoBaseAUnoExistenteException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
 	private Pedido pedido;
 
-	public NoExistePedidoBaseException(String string, Pedido pedido) {
+	public AsignaPedidoBaseAUnoExistenteException(String string, Pedido pedido) {
 		super(string);
 		this.pedido = pedido;
 	}
@@ -16,4 +16,5 @@ public class NoExistePedidoBaseException extends UserException {
 	public Pedido getPedido() {
 		return pedido;
 	}
+
 }

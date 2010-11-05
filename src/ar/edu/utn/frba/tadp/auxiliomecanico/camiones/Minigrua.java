@@ -20,4 +20,5 @@ public class Minigrua extends Camion {
 	public boolean puedeAtenderReparacionCompleja() {
 		return false;
 	}
+
 }
