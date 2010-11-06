@@ -164,4 +164,6 @@ public abstract class Pedido {
 		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
 	}
 
+	public abstract Tiempo calcularTiempoEstimado();
+
 }

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -121,8 +122,8 @@ public class TallerMecanico {
 	 * @return Estrategias que pueden resolver el pedido
 	 * 	 */
 	private Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
-		Collection<Estrategia> posiblesEstrategias = new LinkedList<Estrategia>();
-		Collection<Estrategia> estrategiasResultantes = new LinkedList<Estrategia>();
+		ArrayList<Estrategia> posiblesEstrategias = new ArrayList<Estrategia>();
+		ArrayList<Estrategia> estrategiasResultantes = new ArrayList<Estrategia>();
 
 		for(Camion camion: camiones){
 			for(Estrategia estrategia: posiblesEstrategias){

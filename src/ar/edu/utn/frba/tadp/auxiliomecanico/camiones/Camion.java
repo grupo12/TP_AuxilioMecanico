@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
@@ -131,5 +132,11 @@ public abstract class Camion {
 		throw new UnsupportedOperationException();
 	}
 	
-	
+	public Tiempo tiempoDePedidosPendientes() {
+		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
+		for(Pedido pedido: pedidosAsignados){
+			tiempoEstimado = Tiempo.sumarTiempos(tiempoEstimado, pedido.calcularTiempoEstimado());
+		}
+		return tiempoEstimado;
+	}
 }

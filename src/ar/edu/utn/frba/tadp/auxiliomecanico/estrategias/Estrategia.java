@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 public class Estrategia {
@@ -59,5 +60,21 @@ public class Estrategia {
 	 */
 	public boolean haceFalta(Camion camion){
 		return pedido.seComplementan(camiones, camion);
+	}
+	
+	
+	public Tiempo getTiempoEstimado(){
+		return Tiempo.sumarTiempos(this.tiempoDePedidosPendientes(),pedido.calcularTiempoEstimado());
+	}
+	
+	public Tiempo tiempoDePedidosPendientes(){
+		Tiempo max = new Tiempo().nuevoTiempo(0,0);
+		Tiempo aux = new Tiempo().nuevoTiempo(0,0);
+		for(Camion camion: camiones){
+			aux = camion.tiempoDePedidosPendientes();
+			if (Tiempo.esMayor(aux, max))
+				max = aux;
+		}
+		return max;
 	}
 }

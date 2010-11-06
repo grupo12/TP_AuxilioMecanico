@@ -89,4 +89,9 @@ public abstract class EspecialidadPedido extends Pedido {
 
 	public abstract Tiempo calcularTiempoDeAtencion();
 
+	@Override
+	public Tiempo calcularTiempoEstimado(){
+		return Tiempo.sumarTiempos(this.calcularTiempoDeAtencion(), sujeto.calcularTiempoEstimado());
+	}
+
 }

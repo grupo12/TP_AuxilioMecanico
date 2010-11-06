@@ -82,4 +82,9 @@ public class PedidoBase extends Pedido {
 	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
 		return new Tiempo().nuevoTiempo(0,0);
 	}
+	
+	@Override
+	public Tiempo calcularTiempoEstimado(){
+		return new Tiempo().nuevoTiempo(0,0);
+	}
 }
