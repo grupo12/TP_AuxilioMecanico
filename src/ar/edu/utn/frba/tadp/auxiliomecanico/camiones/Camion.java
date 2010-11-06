@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.camionSinPersonalAsignadoException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
@@ -137,6 +138,8 @@ public abstract class Camion {
 	}
 
 	public boolean podesAtender(EspecialidadPedido ep) {
+		if(this.personal == null)
+			throw new camionSinPersonalAsignadoException("No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",ep);
 		return ep.puedoAtenderte(this);
 	}
 

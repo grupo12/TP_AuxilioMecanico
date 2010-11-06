@@ -21,39 +21,42 @@ public class ProblemasElectricosTest extends AuxilioMecanicoTest {
 	 * 
 	 * 
 	 */
-	private IPedidoBuilder builder; 
+	private IPedidoBuilder builder;
+	private Personal trioLoco;
+
 	@Before
 	public void setUp() {
 		builder = new CPedidoBuilder();
 		super.setUp();
+		trioLoco = new Personal();
+
+		Tecnico srMecanico = new Tecnico(new EspecialidadMecanica());
+		Tecnico ingElectrico = new Tecnico(new EspecialidadElectricidad());
+		Tecnico mecanicoPepe = new Tecnico(new EspecialidadMecanica());
+
+		trioLoco.addTecnico(srMecanico);
+		trioLoco.addTecnico(ingElectrico);
+		trioLoco.addTecnico(mecanicoPepe);
+
 	}
 
 	@Test
 	public void pedidoConVuelcoGruaSoportaPesoTest() {
-		EspecialidadPedido p = (EspecialidadPedido)builder.armarPedidoBase(automovilOtro).addVuelco().build();
+		EspecialidadPedido p = (EspecialidadPedido) builder
+				.armarPedidoBase(automovilOtro).addVuelco().build();
 		assertTrue(p.puedoAtenderte(minigrua));
 	}
 
 	@Test
 	public void pedidoMecanicoComplejidadAltaPuedeAtenderseTest() {
-		
+
 		Automovil a = new Automovil(1, new Cliente(new ClassicPlan(), 5));
-		Pedido p = builder.armarPedidoBase(a).addReparacionMecanica(new AltaComplejidad()).build();
-		
-		Personal trioLoco = new Personal();
-		
-		Tecnico srMecanico = new Tecnico(new EspecialidadMecanica());
-		Tecnico ingElectrico = new Tecnico(new EspecialidadElectricidad());
-		Tecnico mecanicoPepe = new Tecnico(new EspecialidadMecanica());
-		
-		trioLoco.addTecnico(srMecanico);
-		trioLoco.addTecnico(ingElectrico);
-		trioLoco.addTecnico(mecanicoPepe);
-		
+		Pedido p = builder.armarPedidoBase(a)
+				.addReparacionMecanica(new AltaComplejidad()).build();
+
 		this.grangruaConTaller.asignarPersonal(trioLoco);
-		
-		
+
 		assertTrue(this.grangruaConTaller.podesAtender((EspecialidadPedido) p));
 	}
-	
+
 }
