@@ -54,6 +54,7 @@ public class TallerMecanico {
 	private void asignarCamion(Automovil automovil, Pedido pedido) {
 		this.validarCamionesParaPedido(automovil, pedido);
 		this.camionParaAsignarA(pedido).atender(pedido);
+		pedido.setCamion(this.camionParaAsignarA(pedido));
 	}
 
 	private void asignarEstrategia(Pedido pedido) {

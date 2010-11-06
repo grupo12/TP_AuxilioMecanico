@@ -26,6 +26,7 @@ public abstract class Pedido {
 	private static ModuloPagos ModuloDePagos;
 	private double economicidad;
 	private static modeloGps gps;
+	public Camion camionAtendio;
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
 	 * en el sistema.
@@ -137,18 +138,12 @@ public abstract class Pedido {
 
 	
 	public Tiempo CuantoTardasEnTerminarte() {
-		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), Lugar.lujan);
+		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), gps.ubicacionCamion(camionAtendio));
 	}
 	
 	public void finalizar() {
 		this.getCliente().finalizoPedido(this);
 	}
-
-
-
-
-
-
 	
 	public abstract boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones);
 	
@@ -173,6 +168,10 @@ public abstract class Pedido {
 
 	public static modeloGps getGps() {
 		return gps;
+	}
+
+	public void setCamion(Camion camionParaAsignarA) {
+		camionAtendio = camionParaAsignarA;
 	}
 
 }
