@@ -8,6 +8,7 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.MasEconomicoComparator;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
@@ -51,5 +52,10 @@ public abstract class Plan {
 
 	public void validarReparacionComplejaPara(Cliente cliente) {
 		// Por defecto es válida una reparación compleja para los planes
+	}
+
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 }

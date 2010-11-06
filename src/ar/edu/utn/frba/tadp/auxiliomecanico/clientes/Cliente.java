@@ -161,8 +161,7 @@ public class Cliente {
 		return this.getCuotaMensual() * 12;
 	}
 
-	public Estrategia selectEstrategia(Collection<Estrategia> estrategiasPuedenAtender) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
+		return this.plan.selectEstrategia(estrategias);
 	}
 }

@@ -57,7 +57,9 @@ public class TallerMecanico {
 	}
 
 	private void asignarEstrategia(Pedido pedido) {
-		this.validarCamionesParaPedido(pedido.getAutomovil(), pedido);
+		// FIXME La posta sería validar que si no hay estrategias para asistir
+		// el pedido, se tira LA excepción
+		// this.validarCamionesParaPedido(pedido.getAutomovil(), pedido);
 		this.estrategiaParaAsignarA(pedido).atender(pedido);
 	}
 
@@ -86,7 +88,7 @@ public class TallerMecanico {
 		return pedido.getCliente().selectCamion(this.camionesPuedenAtender(pedido, pedido.getAutomovil()));
 	}
 
-	private Estrategia estrategiaParaAsignarA(Pedido pedido) {
+	public Estrategia estrategiaParaAsignarA(Pedido pedido) {
 		return pedido.getCliente().selectEstrategia(this.estrategiasPuedenAtender(pedido));
 	}
 
@@ -121,6 +123,7 @@ public class TallerMecanico {
 		// for (Camion camion : camiones)
 		// if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
 		// camionesPuedenAtender.add(camion);
+		pedido.estrategiasAtencionEn(this);
 
 		return estrategiasPuedenAtender;
 	}

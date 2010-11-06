@@ -7,38 +7,19 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class InundacionPedido extends DesastrePedido {
 
+	public InundacionPedido(Pedido sujeto) {
+		super(sujeto);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
-	protected void validarEspecialidadPara(Cliente cliente) {
+	protected void doValidarEspecialidadPara(Cliente cliente) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isReparacionSimple() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Automovil getAutomovil() {
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -54,4 +35,5 @@ public class InundacionPedido extends DesastrePedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+
 }

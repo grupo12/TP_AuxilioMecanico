@@ -1,15 +1,19 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
+import java.util.Collection;
+
+import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
- * SSSSSSSSSSSSSSSSSSSSSSs Representa un pedido dado, realizado por un cliente
- * al sistema de auxilio mecánico.
+ * Representa un pedido dado, realizado por un cliente al sistema de auxilio
+ * mecánico.
  * 
  */
 public abstract class Pedido {
@@ -98,7 +102,6 @@ public abstract class Pedido {
 	 */
 	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
 
-
 	/**
 	 * A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario
 	 * que hay que llevar a cabo para que la instancia de pedido este terminada,
@@ -126,5 +129,14 @@ public abstract class Pedido {
 
 	public void finalizar() {
 		this.getCliente().finalizoPedido(this);
+	}
+
+	public Collection<Estrategia> estrategiasAtencionEn(TallerMecanico tallerMecanico) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+		// taller camiones para atender (especialidad propia)
+		// una colección de camiones por especialidad (salvo el pedidobase que está todo mal)
+		// con esas colecciones, buscar las distintas variaciones para atender el pedido (armar TODAS las estrategias)
+		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
 	}
 }
