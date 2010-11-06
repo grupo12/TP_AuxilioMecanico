@@ -18,9 +18,7 @@ public class Reparacion extends EspecialidadPedido {
 
 	static {
 		// Inicialización de variables del tiempo de reparación
-		tiempoEmpleadoEnReparacion = new Tiempo();
-		tiempoEmpleadoEnReparacion.nuevoTiempo(0, 0);
-
+		tiempoEmpleadoEnReparacion = new Tiempo().nuevoTiempo(0, 0);
 		// Inicialización de cantidad de atendidos
 		cantidadAtendidos = 0;
 	}
@@ -42,8 +40,7 @@ public class Reparacion extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return Reparacion.tiempoEmpleadoEnReparacion;
 	}
 
 	@Override

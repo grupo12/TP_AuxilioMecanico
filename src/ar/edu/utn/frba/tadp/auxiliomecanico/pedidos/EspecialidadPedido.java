@@ -5,6 +5,7 @@ import java.util.Collection;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 /**
  * Decorador abstracto de un pedido. Por defecto, delega al sujeto (el pedido
@@ -83,4 +84,9 @@ public abstract class EspecialidadPedido extends Pedido {
 	public boolean seComplementan(Collection<Camion> camiones, Camion camion){
 		return ((!this.algunCamionPuedeResolver(camiones) && this.puedeSerAtendidoPorCamion(camion, this.getAutomovil())) || sujeto.seComplementan(camiones, camion));
 	}
+
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public abstract Tiempo calcularTiempoDeAtencion();
+
 }

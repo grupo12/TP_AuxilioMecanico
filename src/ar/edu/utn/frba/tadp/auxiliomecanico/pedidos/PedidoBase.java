@@ -52,10 +52,10 @@ public class PedidoBase extends Pedido {
 		// un pedido real.
 	}
 
+
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new ElPedidoBaseNoPuedeFinalizarseExcepcion("No es correcto pedir el tiempo de atencion a un pedido base");
 	}
 
 	@Override

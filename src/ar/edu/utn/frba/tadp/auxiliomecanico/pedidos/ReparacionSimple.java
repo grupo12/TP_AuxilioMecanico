@@ -41,10 +41,10 @@ public class ReparacionSimple extends EspecialidadPedido {
 		cliente.validarReparacionSimple();
 	}
 
+
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return ReparacionSimple.tiempoEmpleadoEnReparacion;
 	}
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {

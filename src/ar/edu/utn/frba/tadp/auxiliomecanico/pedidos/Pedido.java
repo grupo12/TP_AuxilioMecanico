@@ -91,7 +91,7 @@ public abstract class Pedido {
 	}
 
 	/**
-	 * FALTA IMPLEMENTAR TAMBIEN Determina el tiempo que tarda un tipo de pedido
+	 *Determina el tiempo que tarda un tipo de pedido
 	 * en ser atendido
 	 * 
 	 * @return Tiempo
@@ -123,7 +123,12 @@ public abstract class Pedido {
 	public void finalizarElPedido() {
 		throw new UnsupportedOperationException();
 	}
-
+	
+	public void CuantoTardasEnTerminarte() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+	
 	public void finalizar() {
 		this.getCliente().finalizoPedido(this);
 	}

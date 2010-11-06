@@ -7,6 +7,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class IncendioPedido extends DesastrePedido {
 	
+	
 	boolean isPeligroso;
 	public IncendioPedido(Pedido sujeto) {
 		super(sujeto);

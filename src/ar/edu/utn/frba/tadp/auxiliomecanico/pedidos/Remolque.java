@@ -9,9 +9,15 @@ public class Remolque extends EspecialidadPedido {
 	
 	private static int cantidadAtendidos;
 	private boolean terminado;
+
+	static {
+		cantidadAtendidos = 0;
+		
+	}
 	
 	public Remolque(Pedido sujeto) {
 		super(sujeto);
+		terminado = false;
 	}
 	
 	public boolean isRemolque() {
