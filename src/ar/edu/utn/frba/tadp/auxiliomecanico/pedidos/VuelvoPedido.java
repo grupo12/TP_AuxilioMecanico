@@ -36,4 +36,16 @@ public class VuelvoPedido extends DesastrePedido {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Tiempo calcularTiempoDeAtencion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 }

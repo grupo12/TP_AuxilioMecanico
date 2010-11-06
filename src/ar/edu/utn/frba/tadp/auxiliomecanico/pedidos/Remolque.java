@@ -61,4 +61,10 @@ public class Remolque extends EspecialidadPedido {
 	}
 	// END SANTI
 
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 }

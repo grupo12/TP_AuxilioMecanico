@@ -70,4 +70,10 @@ public class ReparacionSimple extends EspecialidadPedido {
 		return this.doPuedeSerAtendidoPorCamion(camion, super.getAutomovil());
 	}
 
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 }

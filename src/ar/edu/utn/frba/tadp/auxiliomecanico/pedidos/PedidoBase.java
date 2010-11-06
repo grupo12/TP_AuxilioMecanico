@@ -77,4 +77,9 @@ public class PedidoBase extends Pedido {
 	public boolean algunCamionPuedeResolver(Collection<Camion> camiones) {
 		return true;
 	}
+
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		return new Tiempo().nuevoTiempo(0,0);
+	}
 }

@@ -88,4 +88,10 @@ public class VuelcoPedido extends DesastrePedido {
 		return camion.puedeAtenderRemolque(super.getAutomovil());
 	}
 	// END SANTI
+
+	@Override
+	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 }

@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.tadp.auxiliomecanecanico.pedidos;
+package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
@@ -14,10 +14,6 @@ public class IncendioPedido extends DesastrePedido {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	protected void validarEspecialidadPara(Cliente cliente) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
@@ -51,24 +47,6 @@ public class IncendioPedido extends DesastrePedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-
-	@Override
-	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Automovil getAutomovil() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
 	
 	@Override
 	public Cliente getCliente() {
@@ -86,14 +64,14 @@ public class IncendioPedido extends DesastrePedido {
 	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
+	}
+	
 	public Tiempo calcularTiempoDeAtencion() {
 		return IncendioPedido.tiempoEmpleadoEnReparacion;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 		IncendioPedido.cantidadAtendidos +=1;
 		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(IncendioPedido.tiempoEmpleadoEnReparacion,tiempo); 
 	}

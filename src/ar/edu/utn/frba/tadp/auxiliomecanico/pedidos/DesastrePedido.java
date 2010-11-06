@@ -1,6 +1,5 @@
-packagege ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
+package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
-public abstract class DesastrePedido extends Pedido {
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
