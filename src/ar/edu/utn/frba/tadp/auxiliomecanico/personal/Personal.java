@@ -1,10 +1,16 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.personal;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Personal {
 
 	private Collection<Tecnico> tecnicos;
+
+	public Personal() {
+		super();
+		tecnicos = new ArrayList<Tecnico>();
+	}
 
 	public boolean hayUnExperto() {
 		for (Tecnico t : tecnicos)
@@ -23,8 +29,9 @@ public class Personal {
 		}
 	}
 
+	//Así modelo los ayudantes, todo lo que no sea 
 	public int cantidadAyudantesDisponibles() {
-		return 0;
+		return this.cantPersonas() - 1;
 	}
 
 	public boolean hayUnElectricista() {

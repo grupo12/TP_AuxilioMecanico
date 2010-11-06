@@ -25,6 +25,8 @@ public class Reparacion extends EspecialidadPedido {
 
 	public Reparacion(Pedido sujeto, Especialidad especialidad, Complejidad complejidad) {
 		super(sujeto);
+		this.especialidad = especialidad;
+		this.complejidad = complejidad;
 		this.terminado = false;
 	}
 
