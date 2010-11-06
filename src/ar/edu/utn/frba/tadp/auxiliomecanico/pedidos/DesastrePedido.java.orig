@@ -1,0 +1,32 @@
+<<<<<<< HEAD
+package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
+
+public abstract class DesastrePedido extends EspecialidadPedido {
+
+	public DesastrePedido(Pedido sujeto) {
+		super(sujeto);
+		// TODO Auto-generated constructor stub
+	}
+
+}
+=======
+package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
+
+import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+
+public abstract class DesastrePedido extends EspecialidadPedido {
+
+	public DesastrePedido(Pedido sujeto) {
+		super(sujeto);
+	}
+
+	@Override
+	public abstract boolean puedoAtenderte(Camion camion);
+
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public abstract Tiempo calcularTiempoDeAtencion();
+
+}
+>>>>>>> 273cbb8aecd48047439953a0178a167cefdb98d7
