@@ -26,6 +26,16 @@ public abstract class Camion {
 		this.pedidosAsignados = new LinkedList<Pedido>();
 	}
 
+	private static int costoHora;
+	
+	public static void setCostoHora(int unValor){
+		costoHora = unValor;
+	}
+	
+	public int getCostoHora(){
+		return costoHora;
+	}
+	
 	/**
 	 * Realiza las acciones necesarias a la hora de ser asignado a un pedido.
 	 * 
@@ -34,6 +44,15 @@ public abstract class Camion {
 	 */
 	public void atender(Pedido unPedido) {
 		this.pedidosAsignados.add(unPedido);
+	}
+	
+	/**
+	 * Realiza las acciones necesarias a la hora de atender un pedido que es una urgencia.
+	 * @param unPedido
+	 * 				Pedido que tiene la condicion de urgente
+	 */
+	public void atenderUrgencia(Pedido unPedido) {
+		this.pedidosAsignados.add(1, unPedido);
 	}
 
 	/**
@@ -132,6 +151,13 @@ public abstract class Camion {
 		throw new UnsupportedOperationException();
 	}
 	
+	public Tiempo tiempoDePedidosPendientes() {
+		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
+		for(Pedido pedido: pedidosAsignados){
+			tiempoEstimado = Tiempo.sumarTiempos(tiempoEstimado, pedido.calcularTiempoEstimado());
+		}
+		return tiempoEstimado;
+	}
 	public Tiempo cuantoTeFaltaParaFinalizarPendiente(){
 		Collection<Pedido> pedidoAsignados = getPedidosAsignados();
 		Tiempo total = new Tiempo().nuevoTiempo(0, 0);
