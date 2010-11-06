@@ -20,4 +20,10 @@ public interface IPedidoBuilder {
 	
 	public abstract Pedido build();
 
+	IPedidoBuilder addIncendio();
+
+	IPedidoBuilder addInundacion();
+
+	IPedidoBuilder addVuelco();
+
 }
