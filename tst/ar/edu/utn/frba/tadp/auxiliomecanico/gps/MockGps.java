@@ -2,16 +2,21 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.gps;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.modeloGps;
 import java.util.Iterator;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
-public class MockGps {
+public class MockGps extends modeloGps{
 private MockGps Gps;
-private ArrayList<TallerAuxiliar>  talleresConocidos;
-private ArrayList<Hospital>  hospitalesConocidos;
+private List<TallerAuxiliar>  talleresConocidos;
+private List<Hospital>  hospitalesConocidos;
+private Tiempo minutosPorUnidadKilometros = new Tiempo().nuevoTiempo(0, 5);
 
 /*Singleton para la creacion del gps*/
+@Override
 public MockGps nuevoGps(){
 	if (this.Gps == null){
 		MockGps gps = new MockGps();
@@ -25,6 +30,7 @@ public MockGps nuevoGps(){
 }
 
 private void setearTalleresConocido(){
+	this.talleresConocidos = new LinkedList<TallerAuxiliar>() ;
 	talleresConocidos.add(TallerAuxiliar.tallerPM);
 	talleresConocidos.add(TallerAuxiliar.sanchezSolucionesMecánicas);
 	talleresConocidos.add(TallerAuxiliar.levelCars);
@@ -34,6 +40,7 @@ private void setearTalleresConocido(){
 }
 
 private void setearHospitalesConocido(){
+	this.hospitalesConocidos = new LinkedList<Hospital>() ;
 	hospitalesConocidos.add(Hospital.HospitalCeciliaGrierson);
 	hospitalesConocidos.add(Hospital.HospitalFernadez);
 	hospitalesConocidos.add(Hospital.HospitalGuemes);
@@ -41,7 +48,7 @@ private void setearHospitalesConocido(){
 	hospitalesConocidos.add(Hospital.Hospitalpirovano);
 	hospitalesConocidos.add(Hospital.HospitalTigre);
 }
-
+@Override
 public int distantaciaEntre(Lugar primerLugar, Lugar segundoLugar){
 	int distancia = 0;
 	if (primerLugar == segundoLugar){return distancia=0;};
@@ -93,10 +100,10 @@ public int distantaciaEntre(Lugar primerLugar, Lugar segundoLugar){
 	
 	return distancia;
 }
-
+@Override
 public Lugar ubicacionCamion(Camion unCamion){
 	Random rand = new Random();
-	int numero = (int)((rand.nextInt()%6)*6);
+	int numero = (int)((rand.nextInt()%6));
 	switch(numero){
 	case(0):{return Lugar.moreno;}
 	case(1):{return Lugar.palermo;}
@@ -107,12 +114,19 @@ public Lugar ubicacionCamion(Camion unCamion){
 	default :{return Lugar.lujan;}
 	}
 }
+public Tiempo getMinutosPorUnidadKilometros() {
+	return minutosPorUnidadKilometros;
+}
 
+public void setMinutosPorUnidadKilometros(Tiempo minutosPorUnidadKilometros) {
+	this.minutosPorUnidadKilometros = minutosPorUnidadKilometros;
+}
 /*
  * Coincidamos que el metodo tiene la misma implementacion que ubicacionCamion
  * y que no se usa el Parametro unCliente , pero al tratarse de un mock object 
  * lo mas importante no es que la implementacion sino la interfaz del objeto gps
  * */
+@Override
 public Lugar ubicacionCliente(Cliente uncliente){
 	Random rand = new Random();
 	int numero = (int)((rand.nextInt()%6)*6);
@@ -134,6 +148,7 @@ private Lugar dondeQuedaTaller(TallerAuxiliar taller){
 	return taller.getDondeEsta();
 }
 
+@Override
 public Hospital dondeQuedaHospitalMasCercano(Lugar lugarDado){
 	Iterator  <Hospital> iterador = hospitalesConocidos.iterator() ;
 	Hospital hospitalRetorno;
@@ -146,6 +161,7 @@ public Hospital dondeQuedaHospitalMasCercano(Lugar lugarDado){
 	return Hospital.noHospital ;
 }
 
+@Override
 public TallerAuxiliar dondeQuedaTallerMasCercano(Lugar lugarDado){
 	Iterator  <TallerAuxiliar> iterador = talleresConocidos.iterator() ;
 	TallerAuxiliar tallerRetorno;
@@ -158,4 +174,10 @@ public TallerAuxiliar dondeQuedaTallerMasCercano(Lugar lugarDado){
 	return TallerAuxiliar.noTaller ;
 }
 
+@Override
+public Tiempo paraIrDesdeHasta(Lugar primerLugar, Lugar segundoLugar){
+	
+	return Tiempo.multiplicarTiempo(minutosPorUnidadKilometros,distantaciaEntre(primerLugar , segundoLugar));
+
+}
 }

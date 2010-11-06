@@ -66,5 +66,24 @@ public class SetearHorasIncorrectasTest {
 		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 10);
 		assertEquals(tiempoDePrueba.aMinutos(),610);
 	}
+	@Test
+	public void multiplicarPorCero(){
+		
+		Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),0); 
+		assertEquals(tiempoDePrueba.getHoras(),0);
+		assertEquals(tiempoDePrueba.getMinutos(),0);
+	}
+	@Test
+	public void multiplicarPorPositivo(){
+		
+		tiempoDePrueba = Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),10); 
+		assertEquals(tiempoDePrueba.getHoras(),101);
+		assertEquals(tiempoDePrueba.getMinutos(),40);
+	}
+	
+	@Test(expected = MinutosIncorrectosException.class)
+	public void multiplicarPorNegativo(){
 
+		tiempoDePrueba = Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),-10); 
+	}
 }

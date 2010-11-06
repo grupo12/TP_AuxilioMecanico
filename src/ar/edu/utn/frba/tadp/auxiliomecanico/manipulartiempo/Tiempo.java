@@ -79,6 +79,28 @@ public static Tiempo sumarTiempos(Tiempo primerTiempo, Tiempo sumando) {
 return tiempoDeRetorno.nuevoTiempo(horas, minutosInt);
 }
 
+public static Tiempo multiplicarTiempo(Tiempo primerTiempo,int scalar) {
+	int minutos=0;
+	int minutosInt=0;
+	int horas=0;
+	Tiempo tiempoDeRetorno= new Tiempo();
+	//Primero sumamos los minutos teniendo en cuenta el overflow de los mismos
+	minutos = primerTiempo.minutos * scalar ;
+	if ( minutos>60 ){
+		minutosInt = ((minutos % 60));
+		horas = (minutos / 60);
+	}else if (minutos==60){
+		minutos =0;
+		horas = 1;
+	}else{
+		minutosInt= minutos ;
+	}
+	//procedemos a sumar las horas
+	horas += primerTiempo.horas * scalar ; 
+	
+return tiempoDeRetorno.nuevoTiempo(horas, minutosInt);
+}
+
 public int aMinutos(){
 int minutosTotales=0;
 	minutosTotales=(horas*60)+minutos;
@@ -96,3 +118,4 @@ public static boolean sonTiemposIguales(Tiempo t1, Tiempo t2){
 }
 
 }
+
