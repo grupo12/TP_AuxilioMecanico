@@ -19,7 +19,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
-
+	
 	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
 	 * 

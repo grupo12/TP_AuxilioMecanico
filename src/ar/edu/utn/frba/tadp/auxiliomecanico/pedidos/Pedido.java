@@ -11,7 +11,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.modeloGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
@@ -23,7 +25,7 @@ public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
 	private double economicidad;
-
+	private static modeloGps gps;
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
 	 * en el sistema.
@@ -134,9 +136,8 @@ public abstract class Pedido {
 	}
 
 	
-	public void CuantoTardasEnTerminarte() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public Tiempo CuantoTardasEnTerminarte() {
+		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), Lugar.lujan);
 	}
 	
 	public void finalizar() {
@@ -162,6 +163,14 @@ public abstract class Pedido {
 		// una colección de camiones por especialidad (salvo el pedidobase que está todo mal)
 		// con esas colecciones, buscar las distintas variaciones para atender el pedido (armar TODAS las estrategias)
 		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
+	}
+
+	public static void setGps(modeloGps gps) {
+		Pedido.gps = gps;
+	}
+
+	public static modeloGps getGps() {
+		return gps;
 	}
 
 }

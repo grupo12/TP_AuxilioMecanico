@@ -75,5 +75,9 @@ public class ReparacionSimple extends EspecialidadPedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-
+	
+	@Override
+	public Tiempo CuantoTardasEnTerminarte() {
+		return this.calcularTiempoDeAtencion();
+	}
 }
