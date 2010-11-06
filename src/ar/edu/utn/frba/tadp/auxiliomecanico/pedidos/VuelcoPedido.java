@@ -23,8 +23,7 @@ public class VuelcoPedido extends DesastrePedido {
 
 	@Override
 	protected void validarEspecialidadPara(Cliente cliente) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.doValidarEspecialidadPara(cliente);
 	}
 
 	@Override
@@ -47,8 +46,7 @@ public class VuelcoPedido extends DesastrePedido {
 
 	@Override
 	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return super.getCliente();
 	}
 
 	@Override
@@ -68,11 +66,9 @@ public class VuelcoPedido extends DesastrePedido {
 		VuelcoPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(VuelcoPedido.tiempoEmpleadoEnReparacion, tiempo);
 	}
 
-		
+	//Queda vacío porque el enunciado no especifica nada.
 	@Override
 	protected void doValidarEspecialidadPara(Cliente cliente) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

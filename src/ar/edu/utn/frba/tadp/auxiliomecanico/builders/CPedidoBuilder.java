@@ -4,6 +4,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.AsignaPedidoBaseAUnoExistenteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoExistePedidoBaseException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.ElectricaEspecialidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.MecanicaEspecialidad;
 
 /**
  * Implementa IPedidoBuilder. Precondición: pedidoBase(Automovil automovil) como
@@ -69,6 +72,20 @@ public class CPedidoBuilder implements IPedidoBuilder {
 	public IPedidoBuilder addIncendio() {
 		pedidoBaseConstruido();
 		pedido = new IncendioPedido(pedido);
+		return this;
+	}
+	
+	@Override
+	public IPedidoBuilder addReparacionElectrica(Complejidad c) {
+		pedidoBaseConstruido();
+		pedido = new Reparacion(pedido, new ElectricaEspecialidad(), c);
+		return this;
+	}
+	
+	@Override
+	public IPedidoBuilder addReparacionMecanica(Complejidad c) {
+		pedidoBaseConstruido();
+		pedido = new Reparacion(pedido, new MecanicaEspecialidad(), c);
 		return this;
 	}
 

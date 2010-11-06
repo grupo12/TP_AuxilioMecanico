@@ -2,6 +2,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.builders;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
 
 /**
  * BUILDER PATTERN: Crea PedidoBase y lo decora a piacere.
@@ -25,5 +26,9 @@ public interface IPedidoBuilder {
 	IPedidoBuilder addInundacion();
 
 	IPedidoBuilder addVuelco();
+
+	IPedidoBuilder addReparacionElectrica(Complejidad c);
+
+	IPedidoBuilder addReparacionMecanica(Complejidad c);
 
 }
