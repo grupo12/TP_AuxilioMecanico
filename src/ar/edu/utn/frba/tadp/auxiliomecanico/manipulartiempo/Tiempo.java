@@ -127,4 +127,8 @@ public class Tiempo {
 		return ((t1.horas >= t2.horas) && (t1.minutos > t2.minutos));
 	}
 
+	public static int calcularCosto(Tiempo unTiempo, int costoHora) {
+		return ((unTiempo.horas * costoHora) + (unTiempo.minutos * costoHora / 60));
+	}
+
 }

@@ -77,4 +77,24 @@ public class Estrategia {
 		}
 		return max;
 	}
+
+	public int getCosto() {
+		int costoHoraCamiones = 0;
+		for(Camion camion: camiones){
+			costoHoraCamiones += camion.getCostoHora();
+		}
+		return Tiempo.calcularCosto(pedido.calcularTiempoEstimado(), costoHoraCamiones);
+	}
+	
+	public void atender() {
+		for(Camion camion: camiones){
+			camion.atender(pedido);
+		}
+	}
+	
+	public void atenderUrgencia() {
+		for(Camion camion: camiones){
+			camion.atenderUrgencia(pedido);
+		}
+	}
 }

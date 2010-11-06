@@ -6,6 +6,7 @@ public class Grangrua extends Camion {
 
 	private final boolean tallerAltaComplejidad;
 	
+
 	public Grangrua(boolean tallerAltaComplejidad) {
 		this.tallerAltaComplejidad = tallerAltaComplejidad;
 	}

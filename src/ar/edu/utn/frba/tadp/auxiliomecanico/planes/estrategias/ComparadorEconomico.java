@@ -8,7 +8,6 @@ public class ComparadorEconomico implements Comparator<Estrategia>{
 
 	@Override
 	public int compare(Estrategia o1, Estrategia o2) {
-		/*return o1.getCosto() - o2.getCosto();*/
-		return 0;
+		return o1.getCosto() - o2.getCosto();
 	}
 }
