@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.excepciones.MinutosIncorrectosException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.MinutosIncorrectosException;;
 
 public class SetearHorasIncorrectasTest {
 
@@ -19,12 +19,15 @@ public class SetearHorasIncorrectasTest {
 		segundotiempoDePrueba= new Tiempo();
 		
 	}
-	
-	@Test (expected = MinutosIncorrectosException.class)
-	public void quieroCrearTiempoDe61Minutos (){
-	  
-		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 61);
+
+	@Test
+	public void quieroCrearUnTiempoConOverflowDeMinutos(){
+		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 150);
+
+		assertEquals(tiempoDePrueba.getHoras(),12);
+		assertEquals(tiempoDePrueba.getMinutos(),30);
 	}
+
 	
 	@Test
 	public void quieroCrearUnTiempoCorrecto(){
@@ -46,11 +49,41 @@ public class SetearHorasIncorrectasTest {
 		assertEquals(tiempoDePrueba.getMinutos(),00);
 	}
 	
+	@Test
+	public void quieroCrearUnTiempoSumados(){
+		
+		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 45);
+		segundotiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 110);
+		
+		tiempoDePrueba = Tiempo.sumarTiempos(tiempoDePrueba, segundotiempoDePrueba);
+		
+		assertEquals(tiempoDePrueba.getHoras(),22);
+		assertEquals(tiempoDePrueba.getMinutos(),35);
+	}
 	@Test 
 	public void convertiAminutosTest (){
 	  
 		tiempoDePrueba = tiempoDePrueba.nuevoTiempo(10, 10);
 		assertEquals(tiempoDePrueba.aMinutos(),610);
 	}
+	@Test
+	public void multiplicarPorCero(){
+		
+		Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),0); 
+		assertEquals(tiempoDePrueba.getHoras(),0);
+		assertEquals(tiempoDePrueba.getMinutos(),0);
+	}
+	@Test
+	public void multiplicarPorPositivo(){
+		
+		tiempoDePrueba = Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),10); 
+		assertEquals(tiempoDePrueba.getHoras(),101);
+		assertEquals(tiempoDePrueba.getMinutos(),40);
+	}
+	
+	@Test(expected = MinutosIncorrectosException.class)
+	public void multiplicarPorNegativo(){
 
+		tiempoDePrueba = Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),-10); 
+	}
 }

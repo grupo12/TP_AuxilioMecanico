@@ -9,9 +9,15 @@ public class Remolque extends EspecialidadPedido {
 	
 	private static int cantidadAtendidos;
 	private boolean terminado;
+
+	static {
+		cantidadAtendidos = 0;
+		
+	}
 	
 	public Remolque(Pedido sujeto) {
 		super(sujeto);
+		terminado = false;
 	}
 	
 	public boolean isRemolque() {
@@ -30,9 +36,9 @@ public class Remolque extends EspecialidadPedido {
 
 	
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -47,4 +53,12 @@ public class Remolque extends EspecialidadPedido {
 		terminado = true;
 	}
 	
+	// BEGIN SANTI
+	@Override
+	public boolean puedoAtenderte(Camion camion) {
+		Automovil a = super.getAutomovil();
+		return camion.puedeAtenderRemolque(a);
+	}
+	// END SANTI
+
 }

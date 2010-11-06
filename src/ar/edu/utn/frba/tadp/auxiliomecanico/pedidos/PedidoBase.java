@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
+import java.util.Collection;
+
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
@@ -50,14 +52,29 @@ public class PedidoBase extends Pedido {
 		// un pedido real.
 	}
 
+
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		return null;
+	public Tiempo calcularTiempoDeAtencion() {
+		throw new ElPedidoBaseNoPuedeFinalizarseExcepcion("No es correcto pedir el tiempo de atencion a un pedido base");
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		throw new ElPedidoBaseNoPuedeFinalizarseExcepcion("El pedido debe al menos componerse con algun otro");	
+	}
+	
+	@Override
+	public boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones){
+		return true;
+	}
+	
+	@Override
+	public boolean seComplementan(Collection<Camion> camiones, Camion camion){
+		return false;
+	}
+
+	@Override
+	public boolean algunCamionPuedeResolver(Collection<Camion> camiones) {
+		return true;
 	}
 }

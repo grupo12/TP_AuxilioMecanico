@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -16,6 +17,10 @@ public abstract class Camion {
 
 	protected List<Pedido> pedidosAsignados;
 
+	protected boolean tieneEquipoPrimerosAuxilios; //cada camion puede tenerlo o no
+	protected boolean tieneEquipoEspecial;
+	protected Personal personal;
+	
 	public Camion() {
 		this.pedidosAsignados = new LinkedList<Pedido>();
 	}
@@ -90,4 +95,41 @@ public abstract class Camion {
 		pedido.aumentarEconomicidad(this.getEconomicidad());
 		this.pedidosAsignados.remove(pedido);
 	}
+	
+	public boolean podesAtender(EspecialidadPedido ep){
+		return ep.puedoAtenderte(this);
+	}
+
+	
+	public int cantidadAyudantes() {
+		return personal.cantidadAyudantesDisponibles();
+	}
+
+	public boolean tenesUnElectricista() {
+		return personal.hayUnElectricista();
+	}
+
+	public boolean hayUnMecanico() {
+		return personal.hayUnMecanico();
+	}
+
+	public boolean hayTecnicoExpertoInundaciones() {
+		return personal.hayTecnicoExpertoInundaciones();
+	}
+
+	public boolean tenesEquipoEspecial() {
+		return tieneEquipoEspecial;
+	}
+
+	public boolean puedeAtenderIncendio() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean puedeAtenderInundacion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+	
+	
 }

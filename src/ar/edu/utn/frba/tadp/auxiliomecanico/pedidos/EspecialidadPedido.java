@@ -1,8 +1,11 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
+import java.util.Collection;
+
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 /**
  * Decorador abstracto de un pedido. Por defecto, delega al sujeto (el pedido
@@ -31,12 +34,14 @@ public abstract class EspecialidadPedido extends Pedido {
 		this.sujeto.validarEspecialidadPara(cliente);
 	}
 	
-	protected abstract void doValidarEspecialidadPara(Cliente cliente);
+	protected void doValidarEspecialidadPara(Cliente cliente){
+		throw new UnsupportedOperationException();
+	}
 
 	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return this.doPuedeSerAtendidoPorCamion(unCamion, automovil)
-				&& this.sujeto.puedeSerAtendidoPorCamion(unCamion, automovil);
+				|| this.sujeto.puedeSerAtendidoPorCamion(unCamion, automovil);
 	}
 
 	/**
@@ -57,5 +62,31 @@ public abstract class EspecialidadPedido extends Pedido {
 
 	public Automovil getAutomovil() {
 		return this.sujeto.getAutomovil();
-	}	
+	}
+
+	public abstract boolean puedoAtenderte(Camion camion);
+
+	@Override
+	public boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones){
+		return this.algunCamionPuedeResolver(camiones) && sujeto.puedeSerAtendidoPorCamiones(camiones);		
+	}
+	
+	@Override
+	public boolean algunCamionPuedeResolver(Collection<Camion> camiones){
+		for(Camion camion: camiones ){
+			if (this.puedeSerAtendidoPorCamion(camion, this.getAutomovil()))
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean seComplementan(Collection<Camion> camiones, Camion camion){
+		return ((!this.algunCamionPuedeResolver(camiones) && this.puedeSerAtendidoPorCamion(camion, this.getAutomovil())) || sujeto.seComplementan(camiones, camion));
+	}
+
+	public abstract void terminarServicioDelPedido(Tiempo tiempo);
+
+	public abstract Tiempo calcularTiempoDeAtencion();
+
 }

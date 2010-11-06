@@ -1,5 +1,9 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades;
 
-public class Especialidad {
+import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 
+public abstract class Especialidad {
+
+	public abstract boolean puedeAtenderte(Camion camion);
+	
 }

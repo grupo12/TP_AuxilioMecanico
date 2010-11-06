@@ -1,19 +1,20 @@
-package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
+package ar.edu.utn.frba.tadp.auxios;
+
+
 
 import java.util.Collection;
 
-import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
+
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
- * Representa un pedido dado, realizado por un cliente al sistema de auxilio
- * mecánico.
+ * SSSSSSSSSSSSSSSSSSSSSSs Representa un pedido dado, realizado por un cliente
+ * al sistema de auxilio mecánico.
  * 
  */
 public abstract class Pedido {
@@ -94,6 +95,7 @@ public abstract class Pedido {
 
 	/**
 	 * FALTA IMPLEMENTAR TAMBIEN Determina el tiempo que tarda un tipo de pedido
+	 *Determina el tiempo que tarda un tipo de pedido
 	 * en ser atendido
 	 * 
 	 * @param pedido
@@ -101,6 +103,8 @@ public abstract class Pedido {
 	 * @return Tiempo
 	 */
 	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
+	public abstract Tiempo calcularTiempoDeAtencion();
+
 
 	/**
 	 * A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario
@@ -127,9 +131,27 @@ public abstract class Pedido {
 		throw new UnsupportedOperationException();
 	}
 
+	
+	public void CuantoTardasEnTerminarte() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+	
 	public void finalizar() {
 		this.getCliente().finalizoPedido(this);
 	}
+
+
+
+
+
+
+	
+	public abstract boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones);
+	
+	public abstract boolean algunCamionPuedeResolver(Collection<Camion> camiones);
+	
+	public abstract boolean seComplementan(Collection<Camion> camiones, Camion camion);
 
 	public Collection<Estrategia> estrategiasAtencionEn(TallerMecanico tallerMecanico) {
 		// TODO Auto-generated method stub
@@ -139,4 +161,5 @@ public abstract class Pedido {
 		// con esas colecciones, buscar las distintas variaciones para atender el pedido (armar TODAS las estrategias)
 		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
 	}
+
 }

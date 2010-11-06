@@ -105,7 +105,7 @@ public class TallerMecanico {
 	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
-
+		
 		for (Camion camion : camiones)
 			if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
 				camionesPuedenAtender.add(camion);
@@ -113,19 +113,32 @@ public class TallerMecanico {
 		return camionesPuedenAtender;
 	}
 
+	/**
+	 * Arma todas las estrategias que pueden resolver el Pedido
+	 * 
+	 * @param pedido
+	 * 			Pedido de atención
+	 * @return Estrategias que pueden resolver el pedido
+	 * 	 */
 	private Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
-		// #select:
-		Collection<Estrategia> estrategiasPuedenAtender = new LinkedList<Estrategia>();
+		Collection<Estrategia> posiblesEstrategias = new LinkedList<Estrategia>();
+		Collection<Estrategia> estrategiasResultantes = new LinkedList<Estrategia>();
 
-		// TODO Acá de alguna forma debo poder armar todas las estrategias
-		// posibles en base a mis camiones, para atender al pedidito, lalala.
-		//
-		// for (Camion camion : camiones)
-		// if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
-		// camionesPuedenAtender.add(camion);
+		for(Camion camion: camiones){
+			for(Estrategia estrategia: posiblesEstrategias){
+				estrategia.agregarCamion(camion);
+			}
+			if(pedido.puedeSerAtendidoPorCamion(camion, pedido.getAutomovil()))
+				posiblesEstrategias.add(new Estrategia(pedido, camion));
+		}
 		pedido.estrategiasAtencionEn(this);
 
-		return estrategiasPuedenAtender;
+		for(Estrategia estrategia: posiblesEstrategias){
+			if (estrategia.puedeResolverPedido())
+				estrategiasResultantes.add(estrategia);
+		}
+		
+		return estrategiasResultantes;
 	}
 
 	/**
@@ -155,5 +168,13 @@ public class TallerMecanico {
 	public void finalizoPedido(Camion camion, Pedido pedido) {
 		camion.finalizoPedido(pedido);
 		pedido.finalizar();
+	}
+
+	/**
+	 * Revisar personal hasta encontrar un experto.
+	 * @return
+	 */
+	public boolean tenesExpertoDisponible() {
+		return false;
 	}
 }

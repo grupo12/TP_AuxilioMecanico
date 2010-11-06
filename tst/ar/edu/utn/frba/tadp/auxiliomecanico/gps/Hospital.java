@@ -6,8 +6,10 @@ public enum Hospital {
 	HospitalGuemes(Lugar.lujan),/*zona lujan*/
 	HospitalTigre(Lugar.tigre),
 	HospitalCeciliaGrierson(Lugar.lugano), /*zona lugano*/
-	HospitalFernadez(Lugar.palermo); /*zona palermo*/
-	private final Lugar dondeEsta;   // in kilograms
+	HospitalFernadez(Lugar.palermo), /*zona palermo*/
+	noHospital(Lugar.noLugar);
+	
+	final Lugar dondeEsta;   // in kilograms
 	Hospital(Lugar unLugar) {
         this.dondeEsta = unLugar;
 	}
