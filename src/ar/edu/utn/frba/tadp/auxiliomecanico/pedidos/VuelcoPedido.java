@@ -57,13 +57,15 @@ public class VuelcoPedido extends DesastrePedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		return VuelcoPedido.tiempoEmpleadoEnReparacion;
+		Tiempo tiempoRetorno = Tiempo.multiplicarTiempo(VuelcoPedido.tiempoEmpleadoEnReparacion,VuelcoPedido.cantidadAtendidos);
+		return tiempoRetorno;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		VuelcoPedido.cantidadAtendidos += 1;
 		VuelcoPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(VuelcoPedido.tiempoEmpleadoEnReparacion, tiempo);
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
 	//Queda vacío porque el enunciado no especifica nada.

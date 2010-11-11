@@ -17,7 +17,6 @@ public class ReparacionSimple extends EspecialidadPedido {
 		tiempoEmpleadoEnReparacion=new Tiempo();
 		tiempoEmpleadoEnReparacion.nuevoTiempo(0, 0);
 		cantidadAtendidos=0;
-		
 		terminado=false;
 	}
 
@@ -44,15 +43,16 @@ public class ReparacionSimple extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		return ReparacionSimple.tiempoEmpleadoEnReparacion;
+		Tiempo tiempoReparacionTiempo = Tiempo.multiplicarTiempo(ReparacionSimple.tiempoEmpleadoEnReparacion, ReparacionSimple.cantidadAtendidos);
+		return tiempoReparacionTiempo;
 	}
 	
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(ReparacionSimple.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
-		
 		terminado = true;
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
 	/**

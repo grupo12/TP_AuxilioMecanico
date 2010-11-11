@@ -60,7 +60,7 @@ public class PedidoBase extends Pedido {
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		throw new ElPedidoBaseNoPuedeFinalizarseExcepcion("El pedido debe al menos componerse con algun otro");	
+		//No se hace nada porque es el final del camino y al pedido base no se le solicita el tiempo.
 	}
 	
 	@Override

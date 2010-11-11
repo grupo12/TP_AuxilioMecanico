@@ -61,13 +61,15 @@ public class InundacionPedido extends DesastrePedido {
 
 	
 	public Tiempo calcularTiempoDeAtencion() {
-		return InundacionPedido.tiempoEmpleadoEnReparacion;
+		Tiempo tiempoARetornar = Tiempo.promediarTiempo(InundacionPedido.tiempoEmpleadoEnReparacion, InundacionPedido.cantidadAtendidos);
+		return tiempoARetornar;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		InundacionPedido.cantidadAtendidos +=1;
 		InundacionPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(InundacionPedido.tiempoEmpleadoEnReparacion,tiempo); 
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 	
 	@Override

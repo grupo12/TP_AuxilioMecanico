@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.MinutosIncorrectosException;;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.MinutosIncorrectosException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.ValorEscalarIncorrectoException;
 
 public class SetearHorasIncorrectasTest {
 
@@ -85,5 +86,21 @@ public class SetearHorasIncorrectasTest {
 	public void multiplicarPorNegativo(){
 
 		tiempoDePrueba = Tiempo.multiplicarTiempo(tiempoDePrueba.nuevoTiempo(10, 10),-10); 
+	}
+	
+	@Test
+	public void promediarTiempos(){
+		tiempoDePrueba = Tiempo.multiplicarTiempo(new Tiempo().nuevoTiempo(2, 27),3);
+		
+		tiempoDePrueba = Tiempo.promediarTiempo(tiempoDePrueba, 3);
+		assertEquals(tiempoDePrueba.getHoras(),2);
+		assertEquals(tiempoDePrueba.getMinutos(),27);
+	}
+	
+	@Test( expected = ValorEscalarIncorrectoException.class)
+	public void promediarTiemposConValoresIncorrectos(){
+		tiempoDePrueba = Tiempo.multiplicarTiempo(new Tiempo().nuevoTiempo(2, 27),3);
+		
+		tiempoDePrueba = Tiempo.promediarTiempo(tiempoDePrueba, 0);
 	}
 }

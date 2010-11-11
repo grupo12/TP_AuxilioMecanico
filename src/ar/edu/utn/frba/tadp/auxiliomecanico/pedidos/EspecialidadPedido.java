@@ -14,7 +14,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
  */
 public abstract class EspecialidadPedido extends Pedido {
 
-	private Pedido sujeto;
+	protected Pedido sujeto;
 
 	public EspecialidadPedido(Pedido sujeto) {
 		this.sujeto = sujeto;

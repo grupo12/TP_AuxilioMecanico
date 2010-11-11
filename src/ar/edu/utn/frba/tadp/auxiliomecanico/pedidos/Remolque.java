@@ -37,6 +37,7 @@ public class Remolque extends EspecialidadPedido {
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		cantidadAtendidos += 1;
 		terminado = true;
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 	
 	// BEGIN SANTI
@@ -47,9 +48,9 @@ public class Remolque extends EspecialidadPedido {
 	}
 	// END SANTI
 
+	/*Esto lo resuelve el objeto gps*/
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 

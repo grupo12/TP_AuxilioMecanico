@@ -130,5 +130,19 @@ public class Tiempo {
 	public static int calcularCosto(Tiempo unTiempo, int costoHora) {
 		return ((unTiempo.horas * costoHora) + (unTiempo.minutos * costoHora / 60));
 	}
-
+	
+	public static Tiempo promediarTiempo(Tiempo primerTiempo, int cantidad){
+		Tiempo respuesta = new Tiempo().nuevoTiempo(0,0);
+		int soloMinutos = primerTiempo.aMinutos();//Paso todo a minutos
+		
+		if (cantidad<=0){
+			throw new ValorEscalarIncorrectoException("Es Incorrecto que el parámetro cantidad tenga valor menor o igual a cero ");
+		}
+		soloMinutos = ( soloMinutos / cantidad );//divido la totalidad de minutos sobre la cantidad de veces
+		
+		respuesta.setMinutos(soloMinutos);// Lo convierto a horas desbordando los minutos
+		
+		return respuesta;//retorno el tiempo 
+		
+	}	
 }

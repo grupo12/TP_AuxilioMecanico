@@ -61,13 +61,15 @@ public class IncendioPedido extends DesastrePedido {
 	}
 	
 	public Tiempo calcularTiempoDeAtencion() {
-		return IncendioPedido.tiempoEmpleadoEnReparacion;
+		Tiempo tiempoARetornar = Tiempo.promediarTiempo(IncendioPedido.tiempoEmpleadoEnReparacion, IncendioPedido.cantidadAtendidos);
+		return tiempoARetornar ;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		IncendioPedido.cantidadAtendidos +=1;
 		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(IncendioPedido.tiempoEmpleadoEnReparacion,tiempo); 
+		sujeto.terminarServicioDelPedido(tiempo) ;
 	}
 
 // BEGIN SANTI

@@ -45,8 +45,8 @@ public class Reparacion extends EspecialidadPedido {
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(Reparacion.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
-
-		this.terminado = true;
+		terminado = true;
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
 	// BEGIN SANTI
@@ -63,8 +63,8 @@ public class Reparacion extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Tiempo tiempoRetorno = Tiempo.promediarTiempo(Reparacion.tiempoEmpleadoEnReparacion, Reparacion.cantidadAtendidos);
+	return tiempoRetorno;
 	}
 
 }

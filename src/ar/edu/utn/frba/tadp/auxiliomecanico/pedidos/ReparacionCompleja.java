@@ -31,7 +31,8 @@ public class ReparacionCompleja extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		return ReparacionCompleja.tiempoEmpleadoEnReparacion;
+		Tiempo tiempoRetorno = Tiempo.promediarTiempo(ReparacionCompleja.tiempoEmpleadoEnReparacion, ReparacionCompleja.cantidadAtendidos);
+		return tiempoRetorno;
 	}
 	
 	@Override
@@ -39,6 +40,7 @@ public class ReparacionCompleja extends EspecialidadPedido {
 		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(ReparacionCompleja.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
 		terminado = true;
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 	
 	//BEGIN SANTI
