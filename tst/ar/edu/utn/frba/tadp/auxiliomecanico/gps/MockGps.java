@@ -102,8 +102,7 @@ public int distantaciaEntre(Lugar primerLugar, Lugar segundoLugar){
 }
 @Override
 public Lugar ubicacionCamion(Camion unCamion){
-	Random rand = new Random();
-	int numero = (int)((rand.nextInt()%6));
+	int numero = 3;
 	switch(numero){
 	case(0):{return Lugar.moreno;}
 	case(1):{return Lugar.palermo;}
@@ -128,8 +127,7 @@ public void setMinutosPorUnidadKilometros(Tiempo minutosPorUnidadKilometros) {
  * */
 @Override
 public Lugar ubicacionCliente(Cliente uncliente){
-	Random rand = new Random();
-	int numero = (int)((rand.nextInt()%6)*6);
+	int numero = 0;
 	switch(numero){
 	case(0):{return Lugar.moreno;}
 	case(1):{return Lugar.palermo;}

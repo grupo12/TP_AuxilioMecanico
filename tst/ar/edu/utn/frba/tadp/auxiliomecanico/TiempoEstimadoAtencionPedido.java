@@ -39,8 +39,7 @@ public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {
 		super.minitaller.atender(pedido);
 		
 		tiempoParaProbar= new Tiempo().nuevoTiempo(0, 0);
-		gps = new MockGps();
-		gps = gps.nuevoGps();	
+		gps = new MockGps().nuevoGps();
 		
 		clienteClassicSinDeuda = new Cliente(new PlatinumPlan(), CUOTA_MENSUAL_CLIENTE_CLASSIC);
 		this.automovilOtro = new Automovil(1, clienteClassicSinDeuda);
@@ -49,20 +48,21 @@ public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {
 	@Test
 	public void probarCuantoTardaEnTerminarseElTrabajoEnElLugar(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addReparacionSimple().build();
-		pedidoNuevo.setCamion(minitaller);
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.CuantoTardasEnTerminarte(), new Tiempo().nuevoTiempo(34, 2)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.CuantoTardasEnTerminarte(), new Tiempo().nuevoTiempo(0, 0)));
 	}
 	
 	@Test
 	public void probarCuantoTardaEnTerminarseElTrabajoQueDigaElGps(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addRemolque().build();
-		pedidoNuevo.CuantoTardasEnTerminarte();
+		pedidoNuevo.setCamion(minitaller);
+		Pedido.setGps(gps);
+		assertTrue(Tiempo.sonTiemposIguales( gps.paraIrDesdeHasta(Lugar.tigre, Lugar.moreno), pedidoNuevo.CuantoTardasEnTerminarte()));
 	}
 	
 	@Test
 	public void cuantoTardaEnFinalizarPendientes(){
 		assertEquals(minitaller.cantidadPedidosPendientes(),3);
-		assertTrue(Tiempo.sonTiemposIguales(minitaller.cuantoTeFaltaParaFinalizarPendiente(), new Tiempo().nuevoTiempo(102, 6)));	
+		assertTrue(Tiempo.sonTiemposIguales(minitaller.cuantoTeFaltaParaFinalizarPendiente(), new Tiempo().nuevoTiempo(34, 0)));	
 	}
 	
 	@Test

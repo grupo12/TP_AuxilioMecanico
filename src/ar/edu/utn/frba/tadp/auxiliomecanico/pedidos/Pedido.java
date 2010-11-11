@@ -128,7 +128,7 @@ public abstract class Pedido {
 	}
 	
 	public Tiempo CuantoTardasEnTerminarte() {
-		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), gps.ubicacionCamion(camionAtendio));
+		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), gps.ubicacionCamion(this.camionAtendio));
 	}
 	
 	/*Todos los servicios deben terminarse utilizando esta funcion la cual avisa al cliente y 

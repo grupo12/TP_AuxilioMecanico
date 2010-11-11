@@ -136,7 +136,8 @@ public class Tiempo {
 		int soloMinutos = primerTiempo.aMinutos();//Paso todo a minutos
 		
 		if (cantidad<=0){
-			throw new ValorEscalarIncorrectoException("Es Incorrecto que el parámetro cantidad tenga valor menor o igual a cero ");
+			soloMinutos = 0;
+			cantidad = 1;
 		}
 		soloMinutos = ( soloMinutos / cantidad );//divido la totalidad de minutos sobre la cantidad de veces
 		
