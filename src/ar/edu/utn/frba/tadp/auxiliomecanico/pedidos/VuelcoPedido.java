@@ -57,7 +57,7 @@ public class VuelcoPedido extends DesastrePedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		Tiempo tiempoRetorno = Tiempo.multiplicarTiempo(VuelcoPedido.tiempoEmpleadoEnReparacion,VuelcoPedido.cantidadAtendidos);
+		Tiempo tiempoRetorno = Tiempo.promediarTiempo(VuelcoPedido.tiempoEmpleadoEnReparacion,VuelcoPedido.cantidadAtendidos);
 		return tiempoRetorno;
 	}
 

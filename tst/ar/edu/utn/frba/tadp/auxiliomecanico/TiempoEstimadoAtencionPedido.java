@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.builders.CPedidoBuilder;
+import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.MockGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
@@ -12,6 +14,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionCompleja;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.PlatinumPlan;
 
 public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {
 	public MockGps gps;
@@ -36,18 +41,21 @@ public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {
 		tiempoParaProbar= new Tiempo().nuevoTiempo(0, 0);
 		gps = new MockGps();
 		gps = gps.nuevoGps();	
+		
+		clienteClassicSinDeuda = new Cliente(new PlatinumPlan(), CUOTA_MENSUAL_CLIENTE_CLASSIC);
+		this.automovilOtro = new Automovil(1, clienteClassicSinDeuda);
 	}
 		
 	@Test
 	public void probarCuantoTardaEnTerminarseElTrabajoEnElLugar(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addReparacionSimple().build();
-		aRodarPedidos(pedidoNuevo);
+		pedidoNuevo.setCamion(minitaller);
 		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.CuantoTardasEnTerminarte(), new Tiempo().nuevoTiempo(34, 2)));
 	}
 	
 	@Test
 	public void probarCuantoTardaEnTerminarseElTrabajoQueDigaElGps(){
-		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addReparacionSimple().build();
+		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addRemolque().build();
 		pedidoNuevo.CuantoTardasEnTerminarte();
 	}
 	

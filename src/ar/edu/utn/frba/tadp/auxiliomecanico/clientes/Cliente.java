@@ -114,17 +114,6 @@ public class Cliente {
 		return this.pedidosRealizados;
 	}
 
-	/**
-	 * Realiza las acciones correspondientes al finalizar un pedido que el
-	 * cliente haya solicitado.
-	 * 
-	 * @param pedido
-	 *            Pedido finalizado
-	 */
-	public void finalizoPedido(Pedido pedido) {
-
-	}
-
 	public void validarRemolque() {
 		this.plan.validarRemolquePara(this);
 	}

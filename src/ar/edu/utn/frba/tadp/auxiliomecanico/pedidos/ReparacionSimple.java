@@ -43,7 +43,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		Tiempo tiempoReparacionTiempo = Tiempo.multiplicarTiempo(ReparacionSimple.tiempoEmpleadoEnReparacion, ReparacionSimple.cantidadAtendidos);
+		Tiempo tiempoReparacionTiempo = Tiempo.promediarTiempo(ReparacionSimple.tiempoEmpleadoEnReparacion, ReparacionSimple.cantidadAtendidos);
 		return tiempoReparacionTiempo;
 	}
 	

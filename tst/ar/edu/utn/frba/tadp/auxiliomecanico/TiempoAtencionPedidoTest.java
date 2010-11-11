@@ -5,6 +5,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.builders.CPedidoBuilder;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
 
@@ -20,50 +21,20 @@ public class TiempoAtencionPedidoTest extends AuxilioMecanicoTest {
 		tiempoPrueba = new Tiempo();
 	}
 	
-	@Test 
-	public void tiempoDeAtencionDeUnIncendioInicialmente(){
+	@Test ( expected = ValorEscalarIncorrectoException.class )
+	public void tiempoDeAtencionInicialmente(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
 		
 		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(0,0)));
 	}
 	
 	@Test 
-	public void tiempoDeAtencionDeUnIncendio(){
+	public void tiempoDeAtencionDeUnaReparacion(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
 		
 		sumarTiempos(pedidoNuevo);
 		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(34,2)));
-	}
-	
-	@Test 
-	public void tiempoDeAtencionDeUnaInundacionInicialmente(){
-		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(0,0)));
-	}
-	@Test 
-	public void tiempoDeAtencionDeUnaInundacion(){
-		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
-		
-		sumarTiempos(pedidoNuevo);
-		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(34,2)));
-	}
-
-	@Test 
-	public void tiempoDeAtencionDeUnVuelcoInicialmente(){
-		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
-		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(0,0)));
-	}
-	
-	@Test 
-	public void tiempoDeAtencionDeUnVuelco(){
-		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
-		
-		sumarTiempos(pedidoNuevo);
-		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(34,2)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoNuevo.calcularTiempoDeAtencion(), tiempoPrueba.nuevoTiempo(11,20)));
 	}
 	
 	private void sumarTiempos(Pedido pedidoNuevo) {

@@ -137,8 +137,6 @@ public abstract class Pedido {
 	public void finalizar(Tiempo tiempo) {
 		
 		this.terminarServicioDelPedido(tiempo);
-		
-		this.getCliente().finalizoPedido(this);
 	}
 	
 	public abstract boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones);

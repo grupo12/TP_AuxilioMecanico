@@ -7,6 +7,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ElPedidoBaseNoPuedeFinalizarseExcepcion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoFinalizadoCorrectamente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoNoFinalizadoCorrectamente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.builders.*;
@@ -31,30 +32,29 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	
 	/*
 	 * finalizarUnPedidoDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 
-	 * de un pedido 
+	 * de un pedido, dos veces con lo cual se suma 6 veces dos tiempos distintos de finalizacion
+	 * por utlimo se calcula el promedio de atencion de Reparacion Simple comprobando que da el resultado
+	 * Deseado 
 	 * */
 	@Test //(expected = UnsupportedOperationException.class )
 	public void finalizarUnPedidoDeUnClient(){
+		Tiempo tiempoDeFinalizacion = new Tiempo().nuevoTiempo(10, 15);
 		
-		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).addReparacionSimple().addRemolque().build(); 
+		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).addReparacionSimple().addReparacionSimple().addReparacionSimple().build();
 		
 		clienteClassicSinDeuda.agregarPedido(pedidoAgregar);
 		
-		clienteClassicSinDeuda.finalizoPedido(pedidoAgregar);
+		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		//assertTrue();
+		tiempoDeFinalizacion = new Tiempo().nuevoTiempo(12, 10);
+		
+		clienteClassicSinDeuda.agregarPedido(pedidoAgregar);
+		
+		pedidoAgregar.finalizar(tiempoDeFinalizacion);
+		
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(11, 12)));
 	}
 	
-	/*
-	 * finalizarUnPedidoDeUnClient() consiste en la creacion y posterior finalizacion 
-	 * de un pedido basico 
-	 * */
-	@Test (expected = ElPedidoBaseNoPuedeFinalizarseExcepcion.class )
-	public void finalizarUnPedidoBase(){
-		
-		Pedido pedidoBase = builderPedido.armarPedidoBase(autoDePrueba).build(); 
-		pedidoBase.terminarServicioDelPedido(null);
-	}
 
 
 }
