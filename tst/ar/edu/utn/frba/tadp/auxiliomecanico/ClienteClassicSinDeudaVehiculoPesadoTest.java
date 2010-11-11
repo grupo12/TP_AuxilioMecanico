@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Remolque;
@@ -34,7 +35,7 @@ public class ClienteClassicSinDeudaVehiculoPesadoTest extends AuxilioMecanicoTes
 		this.tallerMecanico.asistir(this.pedidoRemolque);
 		this.validarAsignacionPedido();
 
-		this.tallerMecanico.finalizoPedido(this.grangruaConTaller, this.pedidoRemolque);
+		this.tallerMecanico.finalizoPedido(this.grangruaConTaller, this.pedidoRemolque,new Tiempo().nuevoTiempo(0,0));
 		this.validarFinalizacionPedido();
 	}
 

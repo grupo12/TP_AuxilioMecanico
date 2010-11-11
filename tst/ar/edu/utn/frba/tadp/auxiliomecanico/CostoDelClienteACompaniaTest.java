@@ -11,6 +11,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.builders.CPedidoBuilder;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.*;
 
@@ -83,7 +84,7 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	private void tratarUnPedido(Cliente clienteQuePidio,Pedido pedidoRealizado){
 		clienteQuePidio.agregarPedido(pedidoRealizado);
 		tallerMecanico.asistir(pedidoRealizado);
-		tallerMecanico.finalizoPedido(camionQueRealizo(pedidoRealizado), pedidoRealizado);
+		tallerMecanico.finalizoPedido(camionQueRealizo(pedidoRealizado), pedidoRealizado,new Tiempo().nuevoTiempo(0,0));
 	}
 	
 	/*

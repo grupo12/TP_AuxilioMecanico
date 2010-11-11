@@ -107,7 +107,6 @@ public abstract class Pedido {
 	 *            Pedido a calcular tiempo
 	 * @return Tiempo
 	 */
-	public abstract Tiempo calcularTiempoDeAtencion(Pedido pedido);
 	public abstract Tiempo calcularTiempoDeAtencion();
 
 
@@ -127,21 +126,18 @@ public abstract class Pedido {
 	public void aumentarEconomicidad(double economicidad) {
 		this.economicidad += economicidad;
 	}
-
-	/**
-	 * FALTA IMPLEMENTAR TAMBIEN finaliza el pedido siempre y cuando sea posible
-	 * hacerlo, es decir que el mismo sea previamente terminado
-	 */
-	public void finalizarElPedido() {
-		throw new UnsupportedOperationException();
-	}
-
 	
 	public Tiempo CuantoTardasEnTerminarte() {
 		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), gps.ubicacionCamion(camionAtendio));
 	}
 	
-	public void finalizar() {
+	/*Todos los servicios deben terminarse utilizando esta funcion la cual avisa al cliente y 
+	 * además realiza la operatoria necesaria para sumar los tiempos
+	 * */
+	public void finalizar(Tiempo tiempo) {
+		
+		this.terminarServicioDelPedido(tiempo);
+		
 		this.getCliente().finalizoPedido(this);
 	}
 	
@@ -160,7 +156,6 @@ public abstract class Pedido {
 		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
 	}
 
-	public abstract Tiempo calcularTiempoEstimado();
 
 	public static void setGps(modeloGps gps) {
 		Pedido.gps = gps;

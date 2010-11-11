@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
+import static org.junit.Assert.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.*;
@@ -32,14 +33,16 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	 * finalizarUnPedidoDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 
 	 * de un pedido 
 	 * */
-	@Test (expected = UnsupportedOperationException.class )
+	@Test //(expected = UnsupportedOperationException.class )
 	public void finalizarUnPedidoDeUnClient(){
 		
-		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).build(); 
+		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).addReparacionSimple().addRemolque().build(); 
 		
 		clienteClassicSinDeuda.agregarPedido(pedidoAgregar);
 		
 		clienteClassicSinDeuda.finalizoPedido(pedidoAgregar);
+		
+		//assertTrue();
 	}
 	
 	/*

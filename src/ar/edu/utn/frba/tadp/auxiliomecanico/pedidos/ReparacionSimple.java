@@ -46,6 +46,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 	public Tiempo calcularTiempoDeAtencion() {
 		return ReparacionSimple.tiempoEmpleadoEnReparacion;
 	}
+	
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion=Tiempo.sumarTiempos(ReparacionSimple.tiempoEmpleadoEnReparacion, tiempo);
@@ -68,12 +69,6 @@ public class ReparacionSimple extends EspecialidadPedido {
 	@Override
 	public boolean puedoAtenderte(Camion camion) {
 		return this.doPuedeSerAtendidoPorCamion(camion, super.getAutomovil());
-	}
-
-	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 	
 	@Override

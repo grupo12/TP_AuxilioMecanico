@@ -59,11 +59,6 @@ public class InundacionPedido extends DesastrePedido {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
 	
 	public Tiempo calcularTiempoDeAtencion() {
 		return InundacionPedido.tiempoEmpleadoEnReparacion;

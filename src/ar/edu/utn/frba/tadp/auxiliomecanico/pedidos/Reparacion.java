@@ -40,10 +40,6 @@ public class Reparacion extends EspecialidadPedido {
 		this.complejidad.validarEspecialidadPara(cliente, this);
 	}
 
-	@Override
-	public Tiempo calcularTiempoDeAtencion() {
-		return Reparacion.tiempoEmpleadoEnReparacion;
-	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
@@ -51,12 +47,6 @@ public class Reparacion extends EspecialidadPedido {
 		cantidadAtendidos += 1;
 
 		this.terminado = true;
-	}
-
-	@Override
-	public void finalizarElPedido() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 	// BEGIN SANTI
@@ -72,7 +62,7 @@ public class Reparacion extends EspecialidadPedido {
 	// END SANTI
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

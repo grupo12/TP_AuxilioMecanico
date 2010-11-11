@@ -9,6 +9,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -166,9 +167,9 @@ public class TallerMecanico {
 	 * @param pedido
 	 *            Pedido resuelto
 	 */
-	public void finalizoPedido(Camion camion, Pedido pedido) {
+	public void finalizoPedido(Camion camion, Pedido pedido,Tiempo tiempo) {
 		camion.finalizoPedido(pedido);
-		pedido.finalizar();
+		pedido.finalizar(tiempo);
 	}
 
 	/**

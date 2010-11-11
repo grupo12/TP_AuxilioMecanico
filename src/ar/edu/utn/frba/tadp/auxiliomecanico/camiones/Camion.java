@@ -173,7 +173,7 @@ public abstract class Camion {
 		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
 		for (Pedido pedido : pedidosAsignados) {
 			tiempoEstimado = Tiempo.sumarTiempos(tiempoEstimado,
-					pedido.calcularTiempoEstimado());
+					pedido.calcularTiempoDeAtencion());
 		}
 		return tiempoEstimado;
 	}

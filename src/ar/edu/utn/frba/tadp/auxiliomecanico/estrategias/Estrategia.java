@@ -64,7 +64,7 @@ public class Estrategia {
 	
 	
 	public Tiempo getTiempoEstimado(){
-		return Tiempo.sumarTiempos(this.tiempoDePedidosPendientes(),pedido.calcularTiempoEstimado());
+		return Tiempo.sumarTiempos(this.tiempoDePedidosPendientes(),pedido.calcularTiempoDeAtencion());
 	}
 	
 	public Tiempo tiempoDePedidosPendientes(){
@@ -83,7 +83,7 @@ public class Estrategia {
 		for(Camion camion: camiones){
 			costoHoraCamiones += camion.getCostoHora();
 		}
-		return Tiempo.calcularCosto(pedido.calcularTiempoEstimado(), costoHoraCamiones);
+		return Tiempo.calcularCosto(pedido.calcularTiempoDeAtencion(), costoHoraCamiones);
 	}
 	
 	public void atender() {

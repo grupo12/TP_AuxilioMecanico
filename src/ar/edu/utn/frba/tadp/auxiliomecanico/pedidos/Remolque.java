@@ -11,8 +11,7 @@ public class Remolque extends EspecialidadPedido {
 	private boolean terminado;
 
 	static {
-		cantidadAtendidos = 0;
-		
+		cantidadAtendidos = 0;	
 	}
 	
 	public Remolque(Pedido sujeto) {
@@ -34,19 +33,6 @@ public class Remolque extends EspecialidadPedido {
 		cliente.validarRemolque();
 	}
 
-	
-	@Override
-	public Tiempo calcularTiempoDeAtencion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void finalizarElPedido() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		cantidadAtendidos += 1;
@@ -62,7 +48,7 @@ public class Remolque extends EspecialidadPedido {
 	// END SANTI
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
+	public Tiempo calcularTiempoDeAtencion() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

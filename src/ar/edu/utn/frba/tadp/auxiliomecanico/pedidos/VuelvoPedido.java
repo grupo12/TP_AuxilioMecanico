@@ -25,12 +25,6 @@ public class VuelvoPedido extends DesastrePedido {
 	}
 
 	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
