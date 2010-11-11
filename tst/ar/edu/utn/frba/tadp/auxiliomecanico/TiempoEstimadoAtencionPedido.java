@@ -55,7 +55,6 @@ public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {
 	public void probarCuantoTardaEnTerminarseElTrabajoQueDigaElGps(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovilOtro).addRemolque().build();
 		pedidoNuevo.setCamion(minitaller);
-		Pedido.setGps(gps);
 		assertTrue(Tiempo.sonTiemposIguales( gps.paraIrDesdeHasta(Lugar.tigre, Lugar.moreno), pedidoNuevo.CuantoTardasEnTerminarte()));
 	}
 	

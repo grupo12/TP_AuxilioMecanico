@@ -12,6 +12,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
+import ar.edu.utn.frba.tadp.auxiliomecanico.gps.MockGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.modeloGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
@@ -31,6 +32,10 @@ public abstract class Pedido {
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
 	 * en el sistema.
 	 */
+	static {
+		modeloGps gps = new MockGps().nuevoGps(); 
+		Pedido.setGps(gps);
+	}
 	public void validar() {
 		this.validarExistenciaModuloPagos();
 		this.validarCliente();
