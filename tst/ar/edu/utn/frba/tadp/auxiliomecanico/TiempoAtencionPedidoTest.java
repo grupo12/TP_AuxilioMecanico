@@ -21,7 +21,7 @@ public class TiempoAtencionPedidoTest extends AuxilioMecanicoTest {
 		tiempoPrueba = new Tiempo();
 	}
 	
-	@Test ( expected = ValorEscalarIncorrectoException.class )
+	@Test 
 	public void tiempoDeAtencionInicialmente(){
 		Pedido pedidoNuevo = new CPedidoBuilder().armarPedidoBase(automovil).addReparacionSimple().build();
 		

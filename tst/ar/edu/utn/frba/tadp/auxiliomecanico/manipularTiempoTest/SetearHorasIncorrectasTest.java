@@ -97,10 +97,11 @@ public class SetearHorasIncorrectasTest {
 		assertEquals(tiempoDePrueba.getMinutos(),27);
 	}
 	
-	@Test( expected = ValorEscalarIncorrectoException.class)
+	@Test
 	public void promediarTiemposConValoresIncorrectos(){
 		tiempoDePrueba = Tiempo.multiplicarTiempo(new Tiempo().nuevoTiempo(2, 27),3);
 		
 		tiempoDePrueba = Tiempo.promediarTiempo(tiempoDePrueba, 0);
+		assertTrue(Tiempo.sonTiemposIguales(tiempoDePrueba, new Tiempo().nuevoTiempo(0, 0)));
 	}
 }
