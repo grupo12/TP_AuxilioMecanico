@@ -90,7 +90,7 @@ public class IncendioPedido extends DesastrePedido {
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
 		if (this.isPeligroso())
-			return unCamion.tenesEquipoEspecial();
+			return unCamion.hayEquipoEspecialContraIncendio();
 		return true;
 		// no es peligroso, puede manejarlo cualquier camion de
 		// auxilio

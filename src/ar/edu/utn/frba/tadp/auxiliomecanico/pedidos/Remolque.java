@@ -27,7 +27,7 @@ public class Remolque extends EspecialidadPedido {
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 			Automovil a = super.getAutomovil();
-			return unCamion.puedeAtenderRemolque(a);
+			return unCamion.hayRemolque(a);
 	}
 
 	@Override

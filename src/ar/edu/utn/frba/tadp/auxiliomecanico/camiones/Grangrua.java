@@ -24,7 +24,7 @@ public class Grangrua extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderRemolque(Automovil automovil) {
+	public boolean hayRemolque(Automovil automovil) {
 		return true;
 	}
 
@@ -34,7 +34,7 @@ public class Grangrua extends Camion {
 	}
 
 	@Override
-	public boolean tenesEquipoEspecial() {
+	public boolean hayEquipoEspecialContraIncendio() {
 		return true;
 	}
 

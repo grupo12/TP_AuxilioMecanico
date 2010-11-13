@@ -20,7 +20,7 @@ public class Minigrua extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderRemolque(Automovil automovil) {
+	public boolean hayRemolque(Automovil automovil) {
 		return !automovil.esMasPesadoQue(LIMITE_PESO);
 	}
 

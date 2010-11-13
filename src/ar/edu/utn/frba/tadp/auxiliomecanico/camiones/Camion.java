@@ -7,8 +7,7 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.camionSinPersonalAsignadoException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 
 /**
@@ -22,10 +21,9 @@ public abstract class Camion {
 
 	protected boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
 													// o no
-	protected boolean tieneEquipoEspecial;
-	
+	protected boolean tieneEquipoEspecialContraIncendio;
+
 	protected Personal personal;
-	
 
 	public Personal getPersonal() {
 		return personal;
@@ -130,10 +128,12 @@ public abstract class Camion {
 
 		return total;
 	}
-	
+
 	public boolean podesAtender(EspecialidadPedido ep) {
-		if(this.personal == null)
-			throw new camionSinPersonalAsignadoException("No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",ep);
+		if (this.personal == null)
+			throw new camionSinPersonalAsignadoException(
+					"No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",
+					ep);
 		return ep.puedeSerAtendidoPorCamion(this, ep.getAutomovil());
 	}
 
@@ -149,24 +149,15 @@ public abstract class Camion {
 		return personal.hayUnMecanico();
 	}
 
-	public boolean tenesEquipoEspecial() {
-		return tieneEquipoEspecial;
-	}
-
-	public boolean puedeAtenderIncendio() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean puedeAtenderInundacion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public boolean hayEquipoEspecialContraIncendio() {
+		return tieneEquipoEspecialContraIncendio;
 	}
 
 	public boolean hayTecnicoExpertoInundaciones() {
 		return this.personal.hayUnTecnicoExpertoInundaciones();
 	}
-	public abstract boolean puedeAtenderRemolque(Automovil automovil);
+
+	public abstract boolean hayRemolque(Automovil automovil);
 
 	public boolean hayReparacionCompleja() {
 		return false;
