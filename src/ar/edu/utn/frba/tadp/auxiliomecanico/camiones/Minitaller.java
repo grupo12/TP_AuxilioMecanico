@@ -18,11 +18,6 @@ public class Minitaller extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderReparacionCompleja() {
-		return false;
-	}
-
-	@Override
 	public void validarPesonal(Personal personal) {
 		if(!personal.hayUnExperto())
 			throw new PersonalSinExpertoException("Por cada grupo de personal, se debe contar con un experto.",personal);

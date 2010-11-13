@@ -77,15 +77,7 @@ public class InundacionPedido extends DesastrePedido {
 	
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderInundacion();
+		return unCamion.puedeAtenderRemolque(super.getAutomovil())
+		&& unCamion.hayTecnicoExpertoInundaciones();
 	}
-
-	// BEGIN SANTI
-	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		return camion.puedeAtenderRemolque(super.getAutomovil())
-				&& camion.hayTecnicoExpertoInundaciones();
-
-	}
-	// END SANTI
 }

@@ -21,14 +21,14 @@ public interface IPedidoBuilder {
 	
 	public abstract Pedido build();
 
-	IPedidoBuilder addIncendio();
+	public abstract CPedidoBuilder addIncendio();
 
-	IPedidoBuilder addInundacion();
+	public abstract CPedidoBuilder addInundacion();
 
-	IPedidoBuilder addVuelco();
+	public abstract CPedidoBuilder addVuelco();
 
-	IPedidoBuilder addReparacionElectrica(Complejidad c);
+	public abstract CPedidoBuilder addReparacionElectrica();
 
-	IPedidoBuilder addReparacionMecanica(Complejidad c);
+	public abstract CPedidoBuilder addReparacionMecanica(Complejidad c);
 
 }

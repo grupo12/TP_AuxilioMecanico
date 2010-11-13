@@ -64,8 +64,6 @@ public abstract class EspecialidadPedido extends Pedido {
 		return this.sujeto.getAutomovil();
 	}
 
-	public abstract boolean puedoAtenderte(Camion camion);
-
 	@Override
 	public boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones){
 		return this.algunCamionPuedeResolver(camiones) && sujeto.puedeSerAtendidoPorCamiones(camiones);		
@@ -93,5 +91,4 @@ public abstract class EspecialidadPedido extends Pedido {
 	public Tiempo calcularTiempoEstimado(){
 		return Tiempo.sumarTiempos(this.calcularTiempoDeAtencion(), sujeto.calcularTiempoEstimado());
 	}
-
 }

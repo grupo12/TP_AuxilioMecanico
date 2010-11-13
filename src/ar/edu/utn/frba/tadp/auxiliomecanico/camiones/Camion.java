@@ -23,7 +23,9 @@ public abstract class Camion {
 	protected boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
 													// o no
 	protected boolean tieneEquipoEspecial;
+	
 	protected Personal personal;
+	
 
 	public Personal getPersonal() {
 		return personal;
@@ -37,6 +39,7 @@ public abstract class Camion {
 		 */
 		this.validarPesonal(personal);
 		this.personal = personal;
+		this.getClass();
 	}
 
 	public abstract void validarPesonal(Personal personal2);
@@ -86,35 +89,6 @@ public abstract class Camion {
 	}
 
 	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de reparación simple.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public boolean puedeAtenderReparacionSimple() {
-		return true;
-	}
-
-	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de remolque.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public abstract boolean puedeAtenderRemolque(Automovil automovil);
-
-	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de reparación compleja.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public abstract boolean puedeAtenderReparacionCompleja();
-
-	/**
 	 * Nivel de economicidad según el camión y sus características. Permite su
 	 * ordenamiento según el valor económico del mismo.
 	 * 
@@ -137,10 +111,30 @@ public abstract class Camion {
 		this.pedidosAsignados.remove(pedido);
 	}
 
+	public Tiempo tiempoDePedidosPendientes() {
+		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
+		for (Pedido pedido : pedidosAsignados) {
+			tiempoEstimado = Tiempo.sumarTiempos(tiempoEstimado,
+					pedido.calcularTiempoEstimado());
+		}
+		return tiempoEstimado;
+	}
+
+	public Tiempo cuantoTeFaltaParaFinalizarPendiente() {
+		Collection<Pedido> pedidoAsignados = getPedidosAsignados();
+		Tiempo total = new Tiempo().nuevoTiempo(0, 0);
+
+		for (Pedido pedido : pedidoAsignados)
+			total = Tiempo.sumarTiempos(total,
+					pedido.calcularTiempoDeAtencion());
+
+		return total;
+	}
+	
 	public boolean podesAtender(EspecialidadPedido ep) {
 		if(this.personal == null)
 			throw new camionSinPersonalAsignadoException("No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",ep);
-		return ep.puedoAtenderte(this);
+		return ep.puedeSerAtendidoPorCamion(this, ep.getAutomovil());
 	}
 
 	public int cantidadAyudantes() {
@@ -169,27 +163,13 @@ public abstract class Camion {
 		throw new UnsupportedOperationException();
 	}
 
-	public Tiempo tiempoDePedidosPendientes() {
-		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
-		for (Pedido pedido : pedidosAsignados) {
-			tiempoEstimado = Tiempo.sumarTiempos(tiempoEstimado,
-					pedido.calcularTiempoEstimado());
-		}
-		return tiempoEstimado;
-	}
-
-	public Tiempo cuantoTeFaltaParaFinalizarPendiente() {
-		Collection<Pedido> pedidoAsignados = getPedidosAsignados();
-		Tiempo total = new Tiempo().nuevoTiempo(0, 0);
-
-		for (Pedido pedido : pedidoAsignados)
-			total = Tiempo.sumarTiempos(total,
-					pedido.calcularTiempoDeAtencion());
-
-		return total;
-	}
-
 	public boolean hayTecnicoExpertoInundaciones() {
 		return this.personal.hayUnTecnicoExpertoInundaciones();
 	}
+	public abstract boolean puedeAtenderRemolque(Automovil automovil);
+
+	public boolean hayReparacionCompleja() {
+		return false;
+	}
+
 }

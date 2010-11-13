@@ -25,11 +25,6 @@ public class Minigrua extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderReparacionCompleja() {
-		return false;
-	}
-
-	@Override
 	public void validarPesonal(Personal personal) {
 		if (!personal.hayUnExperto())
 			throw new PersonalSinExpertoException(

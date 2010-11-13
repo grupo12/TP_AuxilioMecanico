@@ -29,7 +29,7 @@ public class Grangrua extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderReparacionCompleja() {
+	public boolean hayReparacionCompleja() {
 		return this.tallerAltaComplejidad;
 	}
 
