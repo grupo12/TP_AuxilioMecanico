@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
 /**
@@ -21,7 +23,8 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
-		/**
+
+	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
 	 * 
 	 * @param camiones
@@ -40,12 +43,14 @@ public class TallerMecanico {
 	 */
 	public void asistir(Pedido pedido) {
 		pedido.validar();
-		this.asignarCamion(pedido.getAutomovil(), pedido);
+		// this.asignarCamion(pedido.getAutomovil(), pedido);
 		this.asignarEstrategia(pedido);
 	}
 
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
+	 * 
+	 * @deprecated Sólo para versión anterior
 	 * 
 	 * @param automovil
 	 *            Automóvil a atender
@@ -90,8 +95,15 @@ public class TallerMecanico {
 		return pedido.getCliente().selectCamion(this.camionesPuedenAtender(pedido, pedido.getAutomovil()));
 	}
 
+	/**
+	 * Determina la estrategia para atender un cierto pedido.
+	 * 
+	 * @param pedido
+	 *            Pedido de atención
+	 * @return estrategia Seleccionada para ser asignada
+	 */
 	public Estrategia estrategiaParaAsignarA(Pedido pedido) {
-		return pedido.getCliente().selectEstrategia(this.estrategiasPuedenAtender(pedido));
+		return pedido.getCliente().selectEstrategia(pedido.estrategiasAtencionEn(this));
 	}
 
 	/**
@@ -107,7 +119,7 @@ public class TallerMecanico {
 	protected Collection<Camion> camionesPuedenAtender(Pedido pedido, Automovil automovil) {
 		// #select:
 		Collection<Camion> camionesPuedenAtender = new LinkedList<Camion>();
-		
+
 		for (Camion camion : camiones)
 			if (pedido.puedeSerAtendidoPorCamion(camion, automovil))
 				camionesPuedenAtender.add(camion);
@@ -119,28 +131,11 @@ public class TallerMecanico {
 	 * Arma todas las estrategias que pueden resolver el Pedido
 	 * 
 	 * @param pedido
-	 * 			Pedido de atención
+	 *            Pedido de atención
 	 * @return Estrategias que pueden resolver el pedido
-	 * 	 */
-	private Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
-		ArrayList<Estrategia> posiblesEstrategias = new ArrayList<Estrategia>();
-		ArrayList<Estrategia> estrategiasResultantes = new ArrayList<Estrategia>();
-
-		for(Camion camion: camiones){
-			for(Estrategia estrategia: posiblesEstrategias){
-				estrategia.agregarCamion(camion);
-			}
-			if(pedido.puedeSerAtendidoPorCamion(camion, pedido.getAutomovil()))
-				posiblesEstrategias.add(new Estrategia(pedido, camion));
-		}
-		pedido.estrategiasAtencionEn(this);
-
-		for(Estrategia estrategia: posiblesEstrategias){
-			if (estrategia.puedeResolverPedido())
-				estrategiasResultantes.add(estrategia);
-		}
-		
-		return estrategiasResultantes;
+	 * */
+	public Collection<Estrategia> estrategiasPuedenAtender(Pedido pedido) {
+		return pedido.estrategiasAtencionEn(this);
 	}
 
 	/**
@@ -167,16 +162,27 @@ public class TallerMecanico {
 	 * @param pedido
 	 *            Pedido resuelto
 	 */
-	public void finalizoPedido(Camion camion, Pedido pedido,Tiempo tiempo) {
+	public void finalizoPedido(Camion camion, Pedido pedido, Tiempo tiempo) {
 		camion.finalizoPedido(pedido);
 		pedido.finalizar(tiempo);
 	}
 
 	/**
 	 * Revisar personal hasta encontrar un experto.
+	 * 
 	 * @return
 	 */
 	public boolean tenesExpertoDisponible() {
 		return false;
+	}
+
+	public List<Camion> camionesParaAtender(EspecialidadPedido especialidadPedido) {
+		List<Camion> camionesParaEspecialidad = new LinkedList<Camion>();
+
+		for (Camion camion : this.camiones)
+			if (camion.podesAtender(especialidadPedido))
+				camionesParaEspecialidad.add(camion);
+
+		return camionesParaEspecialidad;
 	}
 }

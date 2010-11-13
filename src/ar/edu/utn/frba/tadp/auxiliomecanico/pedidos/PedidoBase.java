@@ -1,7 +1,10 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
+import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
@@ -76,6 +79,11 @@ public class PedidoBase extends Pedido {
 	@Override
 	public boolean algunCamionPuedeResolver(Collection<Camion> camiones) {
 		return true;
+	}
+
+	@Override
+	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		return new LinkedList<List<Camion>>();
 	}
 
 	

@@ -1,41 +1,42 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
-
-
 import java.util.Collection;
-
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.*;
-import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ModuloPagosFaltanteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.MockGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.modeloGps;
+import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.ModeloGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 
 /**
- * SSSSSSSSSSSSSSSSSSSSSSs Representa un pedido dado, realizado por un cliente
+ * Representa un pedido dado, realizado por un cliente
  * al sistema de auxilio mecánico.
  * 
  */
 public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
+	
 	private double economicidad;
-	private static modeloGps gps;
+	private static ModeloGps gps;
 	public Camion camionAtendio;
 	/**
 	 * Realiza todas las operaciones correspondientes a la validación del mismo
 	 * en el sistema.
 	 */
 	static {
-		modeloGps gps = new MockGps().nuevoGps(); 
+		ModeloGps gps = new MockGps().nuevoGps();
 		Pedido.setGps(gps);
 	}
+
 	public void validar() {
 		this.validarExistenciaModuloPagos();
 		this.validarCliente();
@@ -105,15 +106,13 @@ public abstract class Pedido {
 
 	/**
 	 * FALTA IMPLEMENTAR TAMBIEN Determina el tiempo que tarda un tipo de pedido
-	 *Determina el tiempo que tarda un tipo de pedido
-	 * en ser atendido
+	 * Determina el tiempo que tarda un tipo de pedido en ser atendido
 	 * 
 	 * @param pedido
 	 *            Pedido a calcular tiempo
 	 * @return Tiempo
 	 */
 	public abstract Tiempo calcularTiempoDeAtencion();
-
 
 	/**
 	 * A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario
@@ -131,40 +130,72 @@ public abstract class Pedido {
 	public void aumentarEconomicidad(double economicidad) {
 		this.economicidad += economicidad;
 	}
-	
+
 	public Tiempo CuantoTardasEnTerminarte() {
 		return gps.paraIrDesdeHasta(gps.ubicacionCliente(this.getCliente()), gps.ubicacionCamion(this.camionAtendio));
 	}
-	
-	/*Todos los servicios deben terminarse utilizando esta funcion la cual avisa al cliente y 
-	 * además realiza la operatoria necesaria para sumar los tiempos
-	 * */
+
+	/*
+	 * Todos los servicios deben terminarse utilizando esta funcion la cual
+	 * avisa al cliente y además realiza la operatoria necesaria para sumar los
+	 * tiempos
+	 */
 	public void finalizar(Tiempo tiempo) {
-		
+
 		this.terminarServicioDelPedido(tiempo);
 	}
-	
+
 	public abstract boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones);
-	
+
 	public abstract boolean algunCamionPuedeResolver(Collection<Camion> camiones);
-	
+
 	public abstract boolean seComplementan(Collection<Camion> camiones, Camion camion);
 
 	public Collection<Estrategia> estrategiasAtencionEn(TallerMecanico tallerMecanico) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-		// taller camiones para atender (especialidad propia)
-		// una colección de camiones por especialidad (salvo el pedidobase que está todo mal)
-		// con esas colecciones, buscar las distintas variaciones para atender el pedido (armar TODAS las estrategias)
-		// a cada estrategia (colección de camiones) asSet, new HashSet<Camion>(colección de camiones con repetidos)
+		List<List<Camion>> camionesPorEspecialidad = this.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+
+		return this.armarEstrategiasPorEspecialidad(camionesPorEspecialidad);
 	}
 
+	private Collection<Estrategia> armarEstrategiasPorEspecialidad(List<List<Camion>> camionesParaAtenderPorEspecialidad) {
+		Collection<Estrategia> estrategias = new HashSet<Estrategia>();
+		estrategias.add(new Estrategia(this));
+		
+		return this.armarEstrategiasPorEspecialidadRecursivo(estrategias, camionesParaAtenderPorEspecialidad);
+	}
 
-	public static void setGps(modeloGps gps) {
+	private Collection<Estrategia> armarEstrategiasPorEspecialidadRecursivo(Collection<Estrategia> estrategias,
+			List<List<Camion>> camionesPorEspecialidad) {
+
+		if (camionesPorEspecialidad.isEmpty())
+			return estrategias;
+
+		Collection<Estrategia> estrategiasNuevas = new LinkedList<Estrategia>();
+		
+		// La primera collección de camiones por especialidad
+		Collection<Camion> camionesEspecialidad = camionesPorEspecialidad.iterator().next();
+
+		for (Estrategia estrategia : estrategias) {
+			for (Camion camion : camionesEspecialidad) {
+				Estrategia clone = estrategia.clone();
+				clone.agregarCamion(camion);
+				estrategiasNuevas.add(clone);
+			}
+		}
+
+		List<List<Camion>> camionesPorEspecialidadResto = camionesPorEspecialidad.subList(1,
+				camionesPorEspecialidad.size());
+
+		return this.armarEstrategiasPorEspecialidadRecursivo(estrategiasNuevas, camionesPorEspecialidadResto);
+	}
+
+	protected abstract List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal);
+
+	public static void setGps(ModeloGps gps) {
 		Pedido.gps = gps;
 	}
 
-	public static modeloGps getGps() {
+	public static ModeloGps getGps() {
 		return gps;
 	}
 

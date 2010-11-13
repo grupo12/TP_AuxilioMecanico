@@ -3,13 +3,13 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.gps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.modeloGps;
+import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.ModeloGps;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class MockGps extends modeloGps{
+public class MockGps extends ModeloGps{
 private MockGps Gps;
 private List<TallerAuxiliar>  talleresConocidos;
 private List<Hospital>  hospitalesConocidos;

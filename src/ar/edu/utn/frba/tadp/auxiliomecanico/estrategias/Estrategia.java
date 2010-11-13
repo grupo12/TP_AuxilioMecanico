@@ -1,18 +1,18 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.estrategias;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 
-public class Estrategia {
+public class Estrategia implements Cloneable {
 	/**
 	 * Una estrategia es un conjunto de camiones que pueden resolver todos los requisitos de un pedido
 	 */
-	private Collection<Camion> camiones = new LinkedList<Camion>();
+	private Set<Camion> camiones = new HashSet<Camion>();
 	private Pedido pedido;
 	
 	/**
@@ -28,9 +28,21 @@ public class Estrategia {
 	}
 
 	public Estrategia(Camion... camiones) {
-		this.camiones = Arrays.asList(camiones);
+		this.camiones = new HashSet<Camion>(Arrays.asList(camiones));
 	}
 
+	public Estrategia(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public Estrategia clone() {
+		try {
+			return (Estrategia) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public void atender(Pedido pedido) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();

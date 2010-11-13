@@ -7,8 +7,8 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.TallerAuxiliar;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
-public abstract class modeloGps {
-	public abstract modeloGps nuevoGps();
+public abstract class ModeloGps {
+	public abstract ModeloGps nuevoGps();
 	public abstract Lugar ubicacionCamion(Camion unCamion);
 	public abstract Lugar ubicacionCliente(Cliente uncliente);
 	public abstract Hospital dondeQuedaHospitalMasCercano(Lugar lugarDado);

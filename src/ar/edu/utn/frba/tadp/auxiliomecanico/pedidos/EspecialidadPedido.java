@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
 import java.util.Collection;
+import java.util.List;
 
+import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
@@ -89,5 +91,12 @@ public abstract class EspecialidadPedido extends Pedido {
 
 	public abstract Tiempo calcularTiempoDeAtencion();
 
+	@Override
+	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		List<List<Camion>> camionesParaAtenderPorEspecialidad = this.sujeto
+				.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+		camionesParaAtenderPorEspecialidad.add(tallerMecanico.camionesParaAtender(this));
+		return camionesParaAtenderPorEspecialidad;
+	}
 
 }

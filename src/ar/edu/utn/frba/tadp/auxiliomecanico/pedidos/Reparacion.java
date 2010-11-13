@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
+import java.util.List;
+
+import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
@@ -40,7 +43,6 @@ public class Reparacion extends EspecialidadPedido {
 		this.complejidad.validarEspecialidadPara(cliente, this);
 	}
 
-
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(Reparacion.tiempoEmpleadoEnReparacion, tiempo);
@@ -52,19 +54,30 @@ public class Reparacion extends EspecialidadPedido {
 	// BEGIN SANTI
 	@Override
 	public boolean puedoAtenderte(Camion camion) {
-		return complejidad.puedeAtenderte(camion)
-				&& especialidad.puedeAtenderte(camion);
+		return complejidad.puedeAtenderte(camion) && especialidad.puedeAtenderte(camion);
 	}
-	
-	public int cantAyudantesRequeridos(){
+
+	public int cantAyudantesRequeridos() {
 		return this.complejidad.cantAyudantesRequeridos();
 	}
+
 	// END SANTI
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		Tiempo tiempoRetorno = Tiempo.promediarTiempo(Reparacion.tiempoEmpleadoEnReparacion, Reparacion.cantidadAtendidos);
-	return tiempoRetorno;
+		Tiempo tiempoRetorno = Tiempo.promediarTiempo(Reparacion.tiempoEmpleadoEnReparacion,
+				Reparacion.cantidadAtendidos);
+		return tiempoRetorno;
+	}
+
+	@Override
+	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		// Si requiere remolque, entonces no se agregan camiones que puedan
+		// atender reparaciones
+		if (pedidoOriginal.isRemolque())
+			return this.sujeto.camionesParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
+
+		return super.camionesParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
 	}
 
 }
