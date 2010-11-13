@@ -7,8 +7,7 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.camionSinPersonalAsignadoException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 
 /**
@@ -22,7 +21,8 @@ public abstract class Camion {
 
 	protected boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
 													// o no
-	protected boolean tieneEquipoEspecial;
+	protected boolean tieneEquipoEspecialContraIncendio;
+
 	protected Personal personal;
 
 	public Personal getPersonal() {
@@ -37,6 +37,7 @@ public abstract class Camion {
 		 */
 		this.validarPesonal(personal);
 		this.personal = personal;
+		this.getClass();
 	}
 
 	public abstract void validarPesonal(Personal personal2);
@@ -86,35 +87,6 @@ public abstract class Camion {
 	}
 
 	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de reparación simple.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public boolean puedeAtenderReparacionSimple() {
-		return true;
-	}
-
-	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de remolque.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public abstract boolean puedeAtenderRemolque(Automovil automovil);
-
-	/**
-	 * Determina si un cierto camión puede atender un pedido de atención que
-	 * necesite servicios de reparación compleja.
-	 * 
-	 * @return <b>true</b> - El camión puede antender este servicio<br>
-	 *         <b>false</b> - Caso contrario
-	 */
-	public abstract boolean puedeAtenderReparacionCompleja();
-
-	/**
 	 * Nivel de economicidad según el camión y sus características. Permite su
 	 * ordenamiento según el valor económico del mismo.
 	 * 
@@ -137,38 +109,6 @@ public abstract class Camion {
 		this.pedidosAsignados.remove(pedido);
 	}
 
-	public boolean podesAtender(EspecialidadPedido ep) {
-		if(this.personal == null)
-			throw new camionSinPersonalAsignadoException("No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",ep);
-		return ep.puedoAtenderte(this);
-	}
-
-	public int cantidadAyudantes() {
-		return personal.cantidadAyudantesDisponibles();
-	}
-
-	public boolean tenesUnElectricista() {
-		return personal.hayUnElectricista();
-	}
-
-	public boolean hayUnMecanico() {
-		return personal.hayUnMecanico();
-	}
-
-	public boolean tenesEquipoEspecial() {
-		return tieneEquipoEspecial;
-	}
-
-	public boolean puedeAtenderIncendio() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean puedeAtenderInundacion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 	public Tiempo tiempoDePedidosPendientes() {
 		Tiempo tiempoEstimado = new Tiempo().nuevoTiempo(0, 0);
 		for (Pedido pedido : pedidosAsignados) {
@@ -189,7 +129,38 @@ public abstract class Camion {
 		return total;
 	}
 
+	public boolean podesAtender(EspecialidadPedido ep) {
+		if (this.personal == null)
+			throw new camionSinPersonalAsignadoException(
+					"No puede atenderse un servicio si un camión no tiene personal asignado que lo haga.",
+					ep);
+		return ep.puedeSerAtendidoPorCamion(this, ep.getAutomovil());
+	}
+
+	public int cantidadAyudantes() {
+		return personal.cantidadAyudantesDisponibles();
+	}
+
+	public boolean tenesUnElectricista() {
+		return personal.hayUnElectricista();
+	}
+
+	public boolean hayUnMecanico() {
+		return personal.hayUnMecanico();
+	}
+
+	public boolean hayEquipoEspecialContraIncendio() {
+		return tieneEquipoEspecialContraIncendio;
+	}
+
 	public boolean hayTecnicoExpertoInundaciones() {
 		return this.personal.hayUnTecnicoExpertoInundaciones();
 	}
+
+	public abstract boolean hayRemolque(Automovil automovil);
+
+	public boolean hayReparacionCompleja() {
+		return false;
+	}
+
 }

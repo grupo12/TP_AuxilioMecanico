@@ -44,7 +44,7 @@ public class ProblemasElectricosTest extends AuxilioMecanicoTest {
 	public void pedidoConVuelcoGruaSoportaPesoTest() {
 		EspecialidadPedido p = (EspecialidadPedido) builder
 				.armarPedidoBase(automovilOtro).addVuelco().build();
-		assertTrue(p.puedoAtenderte(minigrua));
+		assertTrue(p.puedeSerAtendidoPorCamion(minigrua, automovilOtro));
 	}
 
 	@Test

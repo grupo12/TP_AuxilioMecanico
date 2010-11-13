@@ -13,12 +13,7 @@ public class Minitaller extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderRemolque(Automovil automovil) {
-		return false;
-	}
-
-	@Override
-	public boolean puedeAtenderReparacionCompleja() {
+	public boolean hayRemolque(Automovil automovil) {
 		return false;
 	}
 

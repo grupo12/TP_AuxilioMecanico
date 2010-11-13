@@ -32,7 +32,7 @@ public class ReparacionSimple extends EspecialidadPedido {
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderReparacionSimple();
+		return true;
 	}
 
 	@Override
@@ -66,10 +66,6 @@ public class ReparacionSimple extends EspecialidadPedido {
 	 * estaba en la 1era entrega, pero luego se utilizará una forma común a
 	 * todo.
 	 */
-	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		return this.doPuedeSerAtendidoPorCamion(camion, super.getAutomovil());
-	}
 	
 	@Override
 	public Tiempo CuantoTardasEnTerminarte() {

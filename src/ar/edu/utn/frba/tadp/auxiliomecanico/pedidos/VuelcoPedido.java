@@ -15,7 +15,7 @@ public class VuelcoPedido extends DesastrePedido {
 		// Inicialización de cantidad de atendidos
 		cantidadAtendidos = 0;
 	}
-	
+
 	public VuelcoPedido(Pedido sujeto) {
 		super(sujeto);
 		// TODO Auto-generated constructor stub
@@ -27,7 +27,8 @@ public class VuelcoPedido extends DesastrePedido {
 	}
 
 	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
+			Automovil automovil) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -64,11 +65,12 @@ public class VuelcoPedido extends DesastrePedido {
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		VuelcoPedido.cantidadAtendidos += 1;
-		VuelcoPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(VuelcoPedido.tiempoEmpleadoEnReparacion, tiempo);
+		VuelcoPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(
+				VuelcoPedido.tiempoEmpleadoEnReparacion, tiempo);
 		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
-	//Queda vacío porque el enunciado no especifica nada.
+	// Queda vacío porque el enunciado no especifica nada.
 	@Override
 	protected void doValidarEspecialidadPara(Cliente cliente) {
 	}
@@ -76,15 +78,8 @@ public class VuelcoPedido extends DesastrePedido {
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
-		// TODO Auto-generated method stub
-		return false;
+		return unCamion.hayRemolque(super.getAutomovil());
 	}
 
-	// BEGIN SANTI
 	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		return camion.puedeAtenderRemolque(super.getAutomovil());
-	}
-	// END SANTI
-
 }

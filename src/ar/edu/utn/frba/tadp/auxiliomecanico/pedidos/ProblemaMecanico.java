@@ -8,14 +8,12 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.Especialidad;
 
-public class Reparacion extends EspecialidadPedido {
+public class ProblemaMecanico extends EspecialidadPedido {
 
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
-	private Especialidad especialidad;
 	private Complejidad complejidad;
 	private boolean terminado;
 
@@ -26,16 +24,16 @@ public class Reparacion extends EspecialidadPedido {
 		cantidadAtendidos = 0;
 	}
 
-	public Reparacion(Pedido sujeto, Especialidad especialidad, Complejidad complejidad) {
+	public ProblemaMecanico(Pedido sujeto, Complejidad complejidad) {
 		super(sujeto);
-		this.especialidad = especialidad;
 		this.complejidad = complejidad;
 		this.terminado = false;
 	}
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderReparacionCompleja();
+		return complejidad.puedeAtenderte(unCamion)
+		&& unCamion.hayUnMecanico();
 	}
 
 	@Override
@@ -44,24 +42,12 @@ public class Reparacion extends EspecialidadPedido {
 	}
 
 	@Override
-	public void terminarServicioDelPedido(Tiempo tiempo) {
-		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(Reparacion.tiempoEmpleadoEnReparacion, tiempo);
+	public Tiempo calcularTiempoDeAtencion() {		return ProblemaMecanico.tiempoEmpleadoEnReparacion;	}	@Override	public void terminarServicioDelPedido(Tiempo tiempo) {
+		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(ProblemaMecanico.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
 		terminado = true;
 		sujeto.terminarServicioDelPedido(tiempo);
 	}
-
-	// BEGIN SANTI
-	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		return complejidad.puedeAtenderte(camion) && especialidad.puedeAtenderte(camion);
-	}
-
-	public int cantAyudantesRequeridos() {
-		return this.complejidad.cantAyudantesRequeridos();
-	}
-
-	// END SANTI
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {

@@ -2,17 +2,13 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Reparacion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ProblemaMecanico;
 
 public abstract class Complejidad {
 
 	public abstract void validarEspecialidadPara(Cliente cliente,
-			Reparacion reparacion);
+			ProblemaMecanico reparacion);
 
-	public abstract int cantAyudantesRequeridos();
-	
-	public boolean puedeAtenderte(Camion camion) {
-		return camion.cantidadAyudantes() == this.cantAyudantesRequeridos();
-	}
+	public abstract boolean puedeAtenderte(Camion camion);
 
 }

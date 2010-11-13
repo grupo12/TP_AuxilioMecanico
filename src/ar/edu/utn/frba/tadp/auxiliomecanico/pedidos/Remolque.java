@@ -28,7 +28,8 @@ public class Remolque extends EspecialidadPedido {
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderRemolque(automovil);
+			Automovil a = super.getAutomovil();
+			return unCamion.hayRemolque(a);
 	}
 
 	@Override
@@ -43,16 +44,6 @@ public class Remolque extends EspecialidadPedido {
 		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
-	// BEGIN SANTI
-	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		Automovil a = super.getAutomovil();
-		return camion.puedeAtenderRemolque(a);
-	}
-
-	// END SANTI
-
-	/* Esto lo resuelve el objeto gps */
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
 		throw new UnsupportedOperationException();

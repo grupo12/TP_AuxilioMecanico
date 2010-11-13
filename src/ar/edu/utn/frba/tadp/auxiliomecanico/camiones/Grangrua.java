@@ -24,17 +24,17 @@ public class Grangrua extends Camion {
 	}
 
 	@Override
-	public boolean puedeAtenderRemolque(Automovil automovil) {
+	public boolean hayRemolque(Automovil automovil) {
 		return true;
 	}
 
 	@Override
-	public boolean puedeAtenderReparacionCompleja() {
+	public boolean hayReparacionCompleja() {
 		return this.tallerAltaComplejidad;
 	}
 
 	@Override
-	public boolean tenesEquipoEspecial() {
+	public boolean hayEquipoEspecialContraIncendio() {
 		return true;
 	}
 

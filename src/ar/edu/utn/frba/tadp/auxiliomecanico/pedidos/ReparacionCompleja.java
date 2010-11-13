@@ -21,7 +21,7 @@ public class ReparacionCompleja extends EspecialidadPedido {
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderReparacionCompleja();
+		return unCamion.hayReparacionCompleja();
 	}
 
 	@Override
@@ -58,10 +58,6 @@ public class ReparacionCompleja extends EspecialidadPedido {
 	 */
 
 	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		return camion.puedeAtenderReparacionCompleja(); 
-	}
-	// END SANTI
 	
 	@Override
 	public Tiempo CuantoTardasEnTerminarte() {

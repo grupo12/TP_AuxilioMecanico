@@ -6,9 +6,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class IncendioPedido extends DesastrePedido {
-	
-	
+
 	boolean isPeligroso;
+
 	public IncendioPedido(Pedido sujeto) {
 		super(sujeto);
 		// TODO Auto-generated constructor stub
@@ -23,7 +23,7 @@ public class IncendioPedido extends DesastrePedido {
 		// Inicialización de cantidad de atendidos
 		cantidadAtendidos = 0;
 	}
-	
+
 	@Override
 	protected void validarEspecialidadPara(Cliente cliente) {
 		// TODO Auto-generated method stub
@@ -31,7 +31,8 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
+	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
+			Automovil automovil) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -47,7 +48,7 @@ public class IncendioPedido extends DesastrePedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public Cliente getCliente() {
 		// TODO Auto-generated method stub
@@ -59,7 +60,7 @@ public class IncendioPedido extends DesastrePedido {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public Tiempo calcularTiempoDeAtencion() {
 		Tiempo tiempoARetornar = Tiempo.promediarTiempo(IncendioPedido.tiempoEmpleadoEnReparacion, IncendioPedido.cantidadAtendidos);
 		return tiempoARetornar ;
@@ -67,19 +68,10 @@ public class IncendioPedido extends DesastrePedido {
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		IncendioPedido.cantidadAtendidos +=1;
-		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(IncendioPedido.tiempoEmpleadoEnReparacion,tiempo); 
+		IncendioPedido.cantidadAtendidos += 1;
+		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(
+				IncendioPedido.tiempoEmpleadoEnReparacion, tiempo);
 		sujeto.terminarServicioDelPedido(tiempo) ;
-	}
-
-// BEGIN SANTI
-	@Override
-	public boolean puedoAtenderte(Camion camion) {
-		if (this.isPeligroso())
-			return camion.tenesEquipoEspecial();
-		return true; // no es peligroso, puede manejarlo cualquier camión de
-						// auxilio
-
 	}
 
 	public void setPeligroso(boolean isPeligroso) {
@@ -91,8 +83,12 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 	@Override
-	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.puedeAtenderIncendio();
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
+			Automovil automovil) {
+		if (this.isPeligroso())
+			return unCamion.hayEquipoEspecialContraIncendio();
+		return true;
+		// no es peligroso, puede manejarlo cualquier camion de
+		// auxilio
 	}
 }
-//END SANTI

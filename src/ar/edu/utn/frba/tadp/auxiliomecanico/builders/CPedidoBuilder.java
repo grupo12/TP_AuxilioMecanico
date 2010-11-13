@@ -4,9 +4,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.AsignaPedidoBaseAUnoExistenteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoExistePedidoBaseException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.ElectricaEspecialidad;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.especialidades.MecanicaEspecialidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.*;
 
 /**
  * Implementa IPedidoBuilder. Precondición: pedidoBase(Automovil automovil) como
@@ -55,37 +53,37 @@ public class CPedidoBuilder implements IPedidoBuilder {
 
 
 	@Override
-	public IPedidoBuilder addVuelco() {
+	public CPedidoBuilder addVuelco() {
 		pedidoBaseConstruido();
 		pedido = new VuelcoPedido(pedido);
 		return this;
 	}
 
 	@Override
-	public IPedidoBuilder addInundacion() {
+	public CPedidoBuilder addInundacion() {
 		pedidoBaseConstruido();
 		pedido = new InundacionPedido(pedido);
 		return this;
 	}
 
 	@Override
-	public IPedidoBuilder addIncendio() {
+	public CPedidoBuilder addIncendio() {
 		pedidoBaseConstruido();
 		pedido = new IncendioPedido(pedido);
 		return this;
 	}
 	
 	@Override
-	public IPedidoBuilder addReparacionElectrica(Complejidad c) {
+	public CPedidoBuilder addReparacionElectrica() {
 		pedidoBaseConstruido();
-		pedido = new Reparacion(pedido, new ElectricaEspecialidad(), c);
+		pedido = new ProblemaElectrico(pedido);
 		return this;
 	}
 	
 	@Override
-	public IPedidoBuilder addReparacionMecanica(Complejidad c) {
+	public CPedidoBuilder addReparacionMecanica(Complejidad c) {
 		pedidoBaseConstruido();
-		pedido = new Reparacion(pedido, new MecanicaEspecialidad(), c);
+		pedido = new ProblemaMecanico(pedido, c);
 		return this;
 	}
 
