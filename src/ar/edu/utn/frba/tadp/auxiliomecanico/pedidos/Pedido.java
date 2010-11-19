@@ -105,14 +105,13 @@ public abstract class Pedido {
 	}
 
 	/**
-	 * FALTA IMPLEMENTAR TAMBIEN Determina el tiempo que tarda un tipo de pedido
-	 * Determina el tiempo que tarda un tipo de pedido en ser atendido
+	 *Determina el tiempo que tarda un tipo de pedido
+	 * en ser atendido
 	 * 
-	 * @param pedido
-	 *            Pedido a calcular tiempo
-	 * @return Tiempo
+	 * @return Tiempo Que tarda.
 	 */
 	public abstract Tiempo calcularTiempoDeAtencion();
+
 
 	/**
 	 * A diferencia de finalizar pedido , terminar se ocupa de trabajo necesario

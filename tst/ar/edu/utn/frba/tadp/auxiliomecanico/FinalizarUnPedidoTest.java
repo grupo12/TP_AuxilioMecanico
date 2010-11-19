@@ -29,6 +29,20 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 		autoDePrueba= new Automovil(1, super.clienteClassicSinDeuda);
 		builderPedido = new CPedidoBuilder();
 	}
+	/*
+	 * finalizarUnPedidoBaseDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 
+	 * de un pedido base y se espera que el mismo tire la excepcion que no puede finalizarse. 
+	 * */
+	@Test  (expected= ElPedidoBaseNoPuedeFinalizarseExcepcion.class)
+	public void finalizarUnPedidoBaseDeUnClient(){
+		Tiempo tiempoDeFinalizacion = new Tiempo().nuevoTiempo(10, 15);
+		
+		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).build();
+		
+		pedidoAgregar.finalizar(tiempoDeFinalizacion);
+		
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(11, 12)));
+	}
 	
 	/*
 	 * finalizarUnPedidoDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 

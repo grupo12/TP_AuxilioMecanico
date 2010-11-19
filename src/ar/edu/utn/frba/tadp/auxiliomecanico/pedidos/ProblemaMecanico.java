@@ -41,8 +41,7 @@ public class ProblemaMecanico extends EspecialidadPedido {
 		this.complejidad.validarEspecialidadPara(cliente, this);
 	}
 
-	@Override
-	public Tiempo calcularTiempoDeAtencion() {		return ProblemaMecanico.tiempoEmpleadoEnReparacion;	}	@Override	public void terminarServicioDelPedido(Tiempo tiempo) {
+		@Override	public void terminarServicioDelPedido(Tiempo tiempo) {
 		tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(ProblemaMecanico.tiempoEmpleadoEnReparacion, tiempo);
 		cantidadAtendidos += 1;
 		terminado = true;
@@ -51,8 +50,7 @@ public class ProblemaMecanico extends EspecialidadPedido {
 
 	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		Tiempo tiempoRetorno = Tiempo.promediarTiempo(Reparacion.tiempoEmpleadoEnReparacion,
-				Reparacion.cantidadAtendidos);
+		Tiempo tiempoRetorno = Tiempo.promediarTiempo(ProblemaMecanico.tiempoEmpleadoEnReparacion,ProblemaMecanico.cantidadAtendidos);
 		return tiempoRetorno;
 	}
 

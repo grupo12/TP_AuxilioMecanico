@@ -57,8 +57,7 @@ public class ReparacionCompleja extends EspecialidadPedido {
 	 * todo.
 	 */
 
-	@Override
-	
+
 	@Override
 	public Tiempo CuantoTardasEnTerminarte() {
 		return this.calcularTiempoDeAtencion();

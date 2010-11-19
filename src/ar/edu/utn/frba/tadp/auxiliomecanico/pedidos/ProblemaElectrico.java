@@ -48,16 +48,4 @@ public class ProblemaElectrico extends EspecialidadPedido {
 		this.terminado = true;
 	}
 
-	@Override
-	public void finalizarElPedido() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Tiempo calcularTiempoDeAtencion(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 }

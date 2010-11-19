@@ -80,6 +80,4 @@ public class VuelcoPedido extends DesastrePedido {
 			Automovil automovil) {
 		return unCamion.hayRemolque(super.getAutomovil());
 	}
-
-	@Override
 }
