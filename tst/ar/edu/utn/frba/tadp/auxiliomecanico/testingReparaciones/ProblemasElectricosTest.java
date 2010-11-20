@@ -33,11 +33,11 @@ public class ProblemasElectricosTest extends AuxilioMecanicoTest {
 		Tecnico srMecanico = new Tecnico(new EspecialidadMecanica());
 		Tecnico ingElectrico = new Tecnico(new EspecialidadElectricidad());
 		Tecnico mecanicoPepe = new Tecnico(new EspecialidadMecanica());
+		Tecnico mrExperto = new Tecnico(new EspecialidadElectricidad());
 
 		trioLoco.addTecnico(srMecanico);
 		trioLoco.addTecnico(ingElectrico);
 		trioLoco.addTecnico(mecanicoPepe);
-
 	}
 
 	@Test

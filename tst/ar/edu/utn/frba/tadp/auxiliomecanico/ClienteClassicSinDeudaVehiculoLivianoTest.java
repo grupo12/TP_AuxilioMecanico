@@ -25,8 +25,8 @@ public class ClienteClassicSinDeudaVehiculoLivianoTest extends AuxilioMecanicoTe
 	}
 
 	@Test
-	public void testAsignacionGrangrua() {
-		assertEquals(this.minigrua, this.tallerMecanico.camionParaAsignarA(pedidoRemolque));
+	public void testAsignacionMinitaller() {
+		assertEquals(this.minitaller, this.tallerMecanico.camionParaAsignarA(pedidoRemolque));
 	}
 
 	@Test

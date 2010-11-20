@@ -44,8 +44,9 @@ public class Estrategia implements Cloneable {
 	}
 	
 	public void atender(Pedido pedido) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		for (Camion camion: camiones){
+			camion.atender(pedido);
+		}
 	}
 	
 	/**

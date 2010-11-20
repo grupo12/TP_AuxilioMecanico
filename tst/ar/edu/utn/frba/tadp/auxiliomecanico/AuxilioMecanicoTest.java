@@ -11,6 +11,10 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.MockModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
+import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadElectricidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadMecanica;
+import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
+import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Tecnico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
 
@@ -41,6 +45,9 @@ public abstract class AuxilioMecanicoTest {
 
 	protected TallerMecanico tallerMecanico;
 	protected Cliente clienteClassicSinDeuda;
+	
+	private Personal personal;
+	private Personal personalMini;
 
 	public void setUp() {
 		
@@ -50,6 +57,23 @@ public abstract class AuxilioMecanicoTest {
 		this.grangruaConTaller = new Grangrua(true);
 		this.minigrua = new Minigrua();
 		this.minigrua.atender(new ReparacionSimple(new PedidoBase(automovilOtro)));
+		personal = new Personal();
+		personalMini = new Personal();
+		
+		Tecnico mecanico1 = new Tecnico(new EspecialidadMecanica());
+		Tecnico mecanico2 = new Tecnico(new EspecialidadMecanica());
+		Tecnico experto1 = new Tecnico(new EspecialidadElectricidad());
+		experto1.addEspecialidad(new EspecialidadMecanica());
+		
+		personal.addTecnico(mecanico1);
+		personal.addTecnico(mecanico2);
+		personal.addTecnico(experto1);
+		personalMini.addTecnico(experto1);
+		
+		minitaller.asignarPersonal(personalMini);
+		minigrua.asignarPersonal(personal);
+		grangruaConTaller.asignarPersonal(personal);
+		
 		this.tallerMecanico = new TallerMecanico(this.minitaller, this.minigrua, this.grangruaConTaller);
 		Pedido.setModuloPagos(new MockModuloPagos(DEUDA_CLIENTE_CLASSIC));
 
