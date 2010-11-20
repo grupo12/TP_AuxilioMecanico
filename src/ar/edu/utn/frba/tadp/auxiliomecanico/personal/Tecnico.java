@@ -1,28 +1,17 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.personal;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.InundacionPedido;
 
 public class Tecnico {
 
-	private Collection<EspecialidadTecnico> especialidades;
 	private int participacionesEnInundaciones;
-
+	private NivelTecnico nivelTecnico;
 	
 	// Si o sí tiene que tener al menos una especialidad
-	public Tecnico(EspecialidadTecnico e) {
+	public Tecnico(NivelTecnico nivelTecnico) {
 		super();
-		this.especialidades = new ArrayList<EspecialidadTecnico>();
-		this.addEspecialidad(e);
-		this.participacionesEnInundaciones = 0;
-	}
-
-	public boolean isTecnicoExperto() {
-		return especialidades.size() > 1;
-	}
-	
-	public void addEspecialidad(EspecialidadTecnico e){
-		this.especialidades.add(e);
+		this.nivelTecnico = nivelTecnico;
 	}
 
 	public boolean isExpertoEnInundaciones() {
@@ -31,21 +20,29 @@ public class Tecnico {
 
 	public void participarEnInundacion() {
 		participacionesEnInundaciones++;
-
+		if(participacionesEnInundaciones == 3)
+			if(this.isExperto())
+				nivelTecnico.addEspecialidad(new InundacionPedido());
+			else
+				this.ascenderAExperto(new InundacionPedido());
 	}
 
-	public boolean isElectricista() {
-		for(EspecialidadTecnico e: this.especialidades)
-			if(e.sosElectricista())
-				return true;
-		return false;
+	public boolean isEspecialistaEn(EspecialidadPedido ep){
+		return this.nivelTecnico.isEspecialistaEn(ep);
 	}
 
-	public boolean isMecanico() {
-		for(EspecialidadTecnico e: this.especialidades)
-			if(e.sosMecanico())
-				return true;
-		return false;
+	public boolean isExperto(){
+		return this.nivelTecnico.isExperto();
+	}
+
+
+	public void ascenderAExperto(EspecialidadPedido e){
+		if(!nivelTecnico.isExperto()){
+		NivelPrincipiante aux = (NivelPrincipiante) nivelTecnico;
+		nivelTecnico = new NivelExperto();
+		nivelTecnico.addEspecialidad(e);
+		nivelTecnico.addEspecialidad(aux.getEspecialidad());
+		}
 	}
 
 }

@@ -3,6 +3,8 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.personal;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
+
 public class Personal {
 
 	private Collection<Tecnico> tecnicos;
@@ -10,13 +12,6 @@ public class Personal {
 	public Personal() {
 		super();
 		tecnicos = new ArrayList<Tecnico>();
-	}
-
-	public boolean hayUnExperto() {
-		for (Tecnico t : tecnicos)
-			if (t.isTecnicoExperto())
-				return true;
-		return false;
 	}
 
 	public void addTecnico(Tecnico t) {
@@ -29,33 +24,30 @@ public class Personal {
 		}
 	}
 
-	//Así modelo los ayudantes, todo lo que no sea 
+	//Supongo q cada camion tiene un experto, el resto, sean lo que sean, son ayudantes 
 	public int cantidadAyudantesDisponibles() {
 		return this.cantPersonas() - 1;
-	}
-
-	public boolean hayUnElectricista() {
-		for (Tecnico t : tecnicos)
-			if (t.isElectricista())
-				return true;
-		return false;
-	}
-
-	public boolean hayUnMecanico() {
-		for (Tecnico t : tecnicos)
-			if (t.isMecanico())
-				return true;
-		return false;
-	}
-
-	public boolean hayUnTecnicoExpertoInundaciones() {
-		for (Tecnico t : tecnicos)
-			if (t.isExpertoEnInundaciones())
-				return true;
-		return false;
 	}
 
 	public int cantPersonas() {
 		return this.tecnicos.size();
 	}
+
+
+	public boolean hayUnExperto() {
+		for (Tecnico t : tecnicos)
+			if (t.isExperto())
+				return true;
+		return false;
+	}
+
+	public boolean hayAlgunaTecnicoEspecialistaEn(EspecialidadPedido ep) {
+		for(Tecnico t: tecnicos){
+			if(t.isEspecialistaEn(ep)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
