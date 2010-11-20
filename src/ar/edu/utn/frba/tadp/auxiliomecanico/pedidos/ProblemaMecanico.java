@@ -8,6 +8,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 public class ProblemaMecanico extends EspecialidadPedido {
 
@@ -55,7 +56,7 @@ public class ProblemaMecanico extends EspecialidadPedido {
 	}
 
 	@Override
-	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
 		// Si requiere remolque, entonces no se agregan camiones que puedan
 		// atender reparaciones
 		if (pedidoOriginal.isRemolque())

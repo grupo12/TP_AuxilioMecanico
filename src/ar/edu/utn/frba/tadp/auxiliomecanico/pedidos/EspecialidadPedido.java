@@ -8,6 +8,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 /**
  * Decorador abstracto de un pedido. Por defecto, delega al sujeto (el pedido
@@ -35,8 +36,8 @@ public abstract class EspecialidadPedido extends Pedido {
 		this.doValidarEspecialidadPara(cliente);
 		this.sujeto.validarEspecialidadPara(cliente);
 	}
-	
-	protected void doValidarEspecialidadPara(Cliente cliente){
+
+	protected void doValidarEspecialidadPara(Cliente cliente) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -67,22 +68,23 @@ public abstract class EspecialidadPedido extends Pedido {
 	}
 
 	@Override
-	public boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones){
-		return this.algunCamionPuedeResolver(camiones) && sujeto.puedeSerAtendidoPorCamiones(camiones);		
+	public boolean puedeSerAtendidoPorCamiones(Collection<Camion> camiones) {
+		return this.algunCamionPuedeResolver(camiones) && sujeto.puedeSerAtendidoPorCamiones(camiones);
 	}
-	
+
 	@Override
-	public boolean algunCamionPuedeResolver(Collection<Camion> camiones){
-		for(Camion camion: camiones ){
+	public boolean algunCamionPuedeResolver(Collection<Camion> camiones) {
+		for (Camion camion : camiones) {
 			if (this.puedeSerAtendidoPorCamion(camion, this.getAutomovil()))
 				return true;
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean seComplementan(Collection<Camion> camiones, Camion camion){
-		return ((!this.algunCamionPuedeResolver(camiones) && this.puedeSerAtendidoPorCamion(camion, this.getAutomovil())) || sujeto.seComplementan(camiones, camion));
+	public boolean seComplementan(Collection<Camion> camiones, Camion camion) {
+		return ((!this.algunCamionPuedeResolver(camiones) && this
+				.puedeSerAtendidoPorCamion(camion, this.getAutomovil())) || sujeto.seComplementan(camiones, camion));
 	}
 
 	public abstract void terminarServicioDelPedido(Tiempo tiempo);
@@ -90,10 +92,24 @@ public abstract class EspecialidadPedido extends Pedido {
 	public abstract Tiempo calcularTiempoDeAtencion();
 
 	@Override
-	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
-		List<List<Camion>> camionesParaAtenderPorEspecialidad = this.sujeto
+	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico,
+			Pedido pedidoOriginal) {
+		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto
 				.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
-		camionesParaAtenderPorEspecialidad.add(tallerMecanico.camionesParaAtender(this));
+
+		camionesParaAtenderPorEspecialidad.add(tallerMecanico.camionesParaAtenderEspecialidad(this));
+
 		return camionesParaAtenderPorEspecialidad;
+	}
+
+	/**
+	 * Verifica si un camión puede atender a la especialidad de pedido concreta.
+	 * 
+	 * @param camion
+	 *            Camion para atender especialidad
+	 * @return Valor de verdad representante de la operación
+	 */
+	public boolean puedeAtenderte(Camion camion) {
+		return this.doPuedeSerAtendidoPorCamion(camion, this.getAutomovil());
 	}
 }

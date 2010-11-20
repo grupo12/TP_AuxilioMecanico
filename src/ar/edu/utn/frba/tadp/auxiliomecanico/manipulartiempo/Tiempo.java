@@ -146,4 +146,8 @@ public class Tiempo {
 		return respuesta;//retorno el tiempo 
 		
 	}	
+	
+	public int calcularCosto(int costoHora) {
+		return ((this.horas * costoHora) + (this.minutos * costoHora / 60));
+	}
 }

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.clientes;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CuotaDesactualizadaException;
@@ -10,6 +11,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
+import ar.edu.utn.frba.tadp.auxiliomecanico.servicios.NuloServicio;
+import ar.edu.utn.frba.tadp.auxiliomecanico.servicios.Servicio;
 
 /**
  * Representa un cliente dado dentro del sistema de Auxilio Mecánico.
@@ -20,6 +24,7 @@ public class Cliente {
 	private Plan plan;
 	private Collection<Pedido> pedidosRealizados;
 	private double cuotaMensual;
+	private Servicio servicio;
 
 	/**
 	 * Crea un cliente con un plan de servicios dado y la cuota mensual del
@@ -34,6 +39,7 @@ public class Cliente {
 		this.plan = plan;
 		this.cuotaMensual = cuotaMensual;
 		this.pedidosRealizados = new LinkedList<Pedido>();
+		this.setServicio(NuloServicio.getInstance());
 	}
 
 	public double getCuotaMensual() {
@@ -152,5 +158,17 @@ public class Cliente {
 
 	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
 		return this.plan.selectEstrategia(estrategias);
+	}
+
+	public PrestadorServicios prestadorParaServicioEnTaller(TallerMecanico tallerMecanico) {
+		return this.plan.prestadorParaServicioEnTaller(tallerMecanico, this);
+	}
+
+	public Servicio getServicio() {
+		return this.servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 }

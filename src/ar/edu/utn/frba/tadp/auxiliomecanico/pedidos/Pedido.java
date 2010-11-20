@@ -15,6 +15,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.gps.MockGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.ModeloGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 /**
  * Representa un pedido dado, realizado por un cliente
@@ -151,12 +152,12 @@ public abstract class Pedido {
 	public abstract boolean seComplementan(Collection<Camion> camiones, Camion camion);
 
 	public Collection<Estrategia> estrategiasAtencionEn(TallerMecanico tallerMecanico) {
-		List<List<Camion>> camionesPorEspecialidad = this.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+		List<List<PrestadorServicios>> camionesPorEspecialidad = this.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
 
 		return this.armarEstrategiasPorEspecialidad(camionesPorEspecialidad);
 	}
 
-	private Collection<Estrategia> armarEstrategiasPorEspecialidad(List<List<Camion>> camionesParaAtenderPorEspecialidad) {
+	private Collection<Estrategia> armarEstrategiasPorEspecialidad(List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad) {
 		Collection<Estrategia> estrategias = new HashSet<Estrategia>();
 		estrategias.add(new Estrategia(this));
 		
@@ -164,31 +165,31 @@ public abstract class Pedido {
 	}
 
 	private Collection<Estrategia> armarEstrategiasPorEspecialidadRecursivo(Collection<Estrategia> estrategias,
-			List<List<Camion>> camionesPorEspecialidad) {
+			List<List<PrestadorServicios>> prestadoresPorEspecialidad) {
 
-		if (camionesPorEspecialidad.isEmpty())
+		if (prestadoresPorEspecialidad.isEmpty())
 			return estrategias;
 
 		Collection<Estrategia> estrategiasNuevas = new LinkedList<Estrategia>();
 		
 		// La primera collección de camiones por especialidad
-		Collection<Camion> camionesEspecialidad = camionesPorEspecialidad.iterator().next();
+		Collection<PrestadorServicios> prestadoresEspecialidad = prestadoresPorEspecialidad.iterator().next();
 
 		for (Estrategia estrategia : estrategias) {
-			for (Camion camion : camionesEspecialidad) {
+			for (PrestadorServicios prestador : prestadoresEspecialidad) {
 				Estrategia clone = estrategia.clone();
-				clone.agregarCamion(camion);
+				clone.agregarPrestador(prestador);
 				estrategiasNuevas.add(clone);
 			}
 		}
 
-		List<List<Camion>> camionesPorEspecialidadResto = camionesPorEspecialidad.subList(1,
-				camionesPorEspecialidad.size());
+		List<List<PrestadorServicios>> camionesPorEspecialidadResto = prestadoresPorEspecialidad.subList(1,
+				prestadoresPorEspecialidad.size());
 
 		return this.armarEstrategiasPorEspecialidadRecursivo(estrategiasNuevas, camionesPorEspecialidadResto);
 	}
 
-	protected abstract List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal);
+	protected abstract List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal);
 
 	public static void setGps(ModeloGps gps) {
 		Pedido.gps = gps;

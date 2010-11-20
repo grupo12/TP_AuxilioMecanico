@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,9 +10,14 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayEstrategiasPosiblesException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.Ambulancia;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.AutoReemplazo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.Remis;
 
 /**
  * Representa un taller de reparación y asistencia de automóviles. Es el
@@ -23,6 +28,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 public class TallerMecanico {
 
 	private Collection<Camion> camiones;
+	private Collection<Remis> remises;
+	private Collection<AutoReemplazo> autosReemplazos;
+	private List<PrestadorServicios> ambulancias;
 
 	/**
 	 * Instancia un nuevo taller con los camiones pasados por parámetro.
@@ -64,9 +72,6 @@ public class TallerMecanico {
 	}
 
 	private void asignarEstrategia(Pedido pedido) {
-		// FIXME La posta sería validar que si no hay estrategias para asistir
-		// el pedido, se tira LA excepción
-		// this.validarCamionesParaPedido(pedido.getAutomovil(), pedido);
 		this.estrategiaParaAsignarA(pedido).atender(pedido);
 	}
 
@@ -103,7 +108,26 @@ public class TallerMecanico {
 	 * @return estrategia Seleccionada para ser asignada
 	 */
 	public Estrategia estrategiaParaAsignarA(Pedido pedido) {
-		return pedido.getCliente().selectEstrategia(pedido.estrategiasAtencionEn(this));
+		final Collection<Estrategia> estrategiasPosibles = pedido.estrategiasAtencionEn(this);
+		
+		this.validarEstrategiasPosibles(pedido, estrategiasPosibles);
+		
+		final Estrategia estrategiaElegida = pedido.getCliente().selectEstrategia(estrategiasPosibles);
+		this.agregarAutoServicio(pedido, estrategiaElegida);
+		
+		return estrategiaElegida;
+	}
+
+	private void agregarAutoServicio(Pedido pedido, final Estrategia estrategiaElegida) {
+		PrestadorServicios prestadorRemis = pedido.getCliente().prestadorParaServicioEnTaller(this);
+		if (prestadorRemis != null)
+			estrategiaElegida.agregarPrestador(prestadorRemis);
+	}
+
+	private void validarEstrategiasPosibles(Pedido pedido, final Collection<Estrategia> estrategiasPosibles)
+			throws NoHayEstrategiasPosiblesException {
+		if (estrategiasPosibles.isEmpty())
+			throw new NoHayEstrategiasPosiblesException(pedido, this);
 	}
 
 	/**
@@ -176,8 +200,8 @@ public class TallerMecanico {
 		return false;
 	}
 
-	public List<Camion> camionesParaAtender(EspecialidadPedido especialidadPedido) {
-		List<Camion> camionesParaEspecialidad = new LinkedList<Camion>();
+	public List<PrestadorServicios> camionesParaAtender(EspecialidadPedido especialidadPedido) {
+		List<PrestadorServicios> camionesParaEspecialidad = new LinkedList<PrestadorServicios>();
 
 		for (Camion camion : this.camiones)
 			if (camion.podesAtender(especialidadPedido))
@@ -185,4 +209,27 @@ public class TallerMecanico {
 
 		return camionesParaEspecialidad;
 	}
+	
+	public List<PrestadorServicios> camionesParaAtenderEspecialidad(EspecialidadPedido especialidadPedido) {
+		List<PrestadorServicios> camionesParaEspecialidad = new LinkedList<PrestadorServicios>();
+
+		for (Camion camion : this.camiones)
+			if (especialidadPedido.puedeAtenderte(camion))
+				camionesParaEspecialidad.add(camion);
+
+		return camionesParaEspecialidad;
+	}
+
+	public PrestadorServicios algunAutoReemplazo() {
+		return this.autosReemplazos.iterator().next();
+	}
+
+	public PrestadorServicios algunRemis() {
+		return this.remises.iterator().next();
+	}
+
+	public List<PrestadorServicios> getAmbulancias() {
+		return this.ambulancias;
+	}
+	
 }

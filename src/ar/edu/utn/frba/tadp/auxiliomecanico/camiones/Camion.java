@@ -7,19 +7,21 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.camionSinPersonalAsignadoException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 /**
  * Representa la unidad básica de atención de un taller mecánico. Se encarga de
  * la asistencia de pedidos.
  * 
  */
-public abstract class Camion {
+public abstract class Camion implements PrestadorServicios {
 
 	protected List<Pedido> pedidosAsignados;
 
-	protected boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
+	private boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
 													// o no
 	protected boolean tieneEquipoEspecialContraIncendio;
 
@@ -74,7 +76,7 @@ public abstract class Camion {
 	 *            Pedido que tiene la condicion de urgente
 	 */
 	public void atenderUrgencia(Pedido unPedido) {
-		this.pedidosAsignados.add(1, unPedido);
+		this.pedidosAsignados.add(0, unPedido);
 	}
 
 	/**
@@ -163,4 +165,13 @@ public abstract class Camion {
 		return false;
 	}
 
+	public boolean tieneEquipoPrimerosAuxilios() {
+		return tieneEquipoPrimerosAuxilios;
+	}
+
+	@Override
+	public int getCosto(Tiempo tiempoAtencion) {
+		return tiempoAtencion.calcularCosto(costoHora);
+	}
+	
 }

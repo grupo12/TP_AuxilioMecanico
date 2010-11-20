@@ -3,6 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.camiones;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CapacidadTecnicosExcedidaException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PersonalSinExpertoException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 
 /**
@@ -45,4 +46,5 @@ public class Grangrua extends Camion {
 		if(personal.cantPersonas() > 3)
 			throw new CapacidadTecnicosExcedidaException("La cant. de tecnicos debe ser iguala  1.",personal);
 	}
+
 }

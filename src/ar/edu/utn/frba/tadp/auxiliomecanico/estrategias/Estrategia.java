@@ -7,28 +7,29 @@ import java.util.Set;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 public class Estrategia implements Cloneable {
 	/**
 	 * Una estrategia es un conjunto de camiones que pueden resolver todos los requisitos de un pedido
 	 */
-	private Set<Camion> camiones = new HashSet<Camion>();
+	private Set<PrestadorServicios> prestadores = new HashSet<PrestadorServicios>();
 	private Pedido pedido;
 	
 	/**
 	 * Inicializa la estrategia con el pedido correspondiente y un primer camion que resuelva alguno de los requisitos del pedido
 	 * @param unPedido
 	 * 				El pedido al que pertenece la estrategia
-	 * @param camion
+	 * @param prestador
 	 * 				El primer camion de la estrategia
 	 */
-	public Estrategia(Pedido unPedido, Camion camion){
+	public Estrategia(Pedido unPedido, PrestadorServicios prestador){
 		pedido = unPedido;
-		camiones.add(camion);
+		prestadores.add(prestador);
 	}
 
-	public Estrategia(Camion... camiones) {
-		this.camiones = new HashSet<Camion>(Arrays.asList(camiones));
+	public Estrategia(PrestadorServicios... prestadores) {
+		this.prestadores = new HashSet<PrestadorServicios>(Arrays.asList(prestadores));
 	}
 
 	public Estrategia(Pedido pedido) {
@@ -44,37 +45,19 @@ public class Estrategia implements Cloneable {
 	}
 	
 	public void atender(Pedido pedido) {
-		for (Camion camion: camiones){
-			camion.atender(pedido);
+		for (PrestadorServicios prestador: prestadores){
+			prestador.atender(pedido);
 		}
-	}
-	
-	/**
-	 * Determina si la estrategia puede resolver la totalidad del pedido
-	 */
-	public boolean puedeResolverPedido(){
-		return pedido.puedeSerAtendidoPorCamiones(camiones);
-	}
-	
-	/**
-	 * Chequea que el camion a agregar haga un aporte a la solucion del pedido y en caso de ser afirmativo lo suma a la estrategia
-	 * @param camion
-	 * 				Un camion a agregar a la estrategia
-	 */
-	public void agregarCamion(Camion camion){
-		if (this.haceFalta(camion))
-			camiones.add(camion);		
 	}
 
 	/**
-	 * Chequea que el camion haga falta o si no aporta en la solucion del pedido
-	 * @param camion
-	 * 				El camion a ser comprobado
+	 * Chequea que el camion a agregar haga un aporte a la solucion del pedido y en caso de ser afirmativo lo suma a la estrategia
+	 * @param prestador
+	 * 				Un camion a agregar a la estrategia
 	 */
-	public boolean haceFalta(Camion camion){
-		return pedido.seComplementan(camiones, camion);
+	public void agregarPrestador(PrestadorServicios prestador){
+			prestadores.add(prestador);		
 	}
-	
 	
 	public Tiempo getTiempoEstimado(){
 		return Tiempo.sumarTiempos(this.tiempoDePedidosPendientes(),pedido.calcularTiempoDeAtencion());
@@ -83,8 +66,8 @@ public class Estrategia implements Cloneable {
 	public Tiempo tiempoDePedidosPendientes(){
 		Tiempo max = new Tiempo().nuevoTiempo(0,0);
 		Tiempo aux = new Tiempo().nuevoTiempo(0,0);
-		for(Camion camion: camiones){
-			aux = camion.tiempoDePedidosPendientes();
+		for(PrestadorServicios prestador: prestadores){
+			aux = prestador.tiempoDePedidosPendientes();
 			if (Tiempo.esMayor(aux, max))
 				max = aux;
 		}
@@ -92,22 +75,26 @@ public class Estrategia implements Cloneable {
 	}
 
 	public int getCosto() {
-		int costoHoraCamiones = 0;
-		for(Camion camion: camiones){
-			costoHoraCamiones += camion.getCostoHora();
+		final Tiempo tiempoAtencion = pedido.calcularTiempoDeAtencion();
+		int costo = 0;
+		
+		for(PrestadorServicios prestador: prestadores){
+			costo += prestador.getCosto(tiempoAtencion);
 		}
-		return Tiempo.calcularCosto(pedido.calcularTiempoDeAtencion(), costoHoraCamiones);
+		
+		return costo;
 	}
 	
 	public void atender() {
-		for(Camion camion: camiones){
+		for(PrestadorServicios camion: prestadores){
 			camion.atender(pedido);
 		}
 	}
 	
 	public void atenderUrgencia() {
-		for(Camion camion: camiones){
-			camion.atenderUrgencia(pedido);
+		for(PrestadorServicios prestador: prestadores){
+			prestador.atenderUrgencia(pedido);
 		}
 	}
+
 }

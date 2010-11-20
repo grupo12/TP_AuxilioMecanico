@@ -8,8 +8,10 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ElPedidoBaseNoPuedeFinalizarseExcepcion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 /**
  * Representa un pedido base, sin ningún tipo de servicio real asociado al
  * mismo.<br>
@@ -82,8 +84,8 @@ public class PedidoBase extends Pedido {
 	}
 
 	@Override
-	protected List<List<Camion>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
-		return new LinkedList<List<Camion>>();
+	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		return new LinkedList<List<PrestadorServicios>>();
 	}
 
 	

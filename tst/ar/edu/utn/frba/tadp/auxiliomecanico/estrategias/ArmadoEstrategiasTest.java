@@ -1,8 +1,9 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.estrategias;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
@@ -17,8 +18,8 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadElectricidad;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadMecanica;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Tecnico;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
 
 public class ArmadoEstrategiasTest {
 
@@ -28,28 +29,42 @@ public class ArmadoEstrategiasTest {
 	private final Cliente cliente = new Cliente(planClassic, 300);
 	private final Automovil automovil = new Automovil(3, cliente);
 
-	private Pedido pedidoReparacionMecanica;
 
 	private Camion minigrua;
 
 	private TallerMecanico tallerMecanico;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void beforeClass() {
 		Pedido.setModuloPagos(new MockModuloPagos(0));
-		pedidoReparacionMecanica = pedidoBuilder.armarPedidoBase(automovil).addReparacionSimple().build();
-		minigrua = new Minigrua();
+	}
+	
+	@Before
+	public void setUp() {
+		Tecnico t = new Tecnico(new EspecialidadMecanica());
+		t.addEspecialidad(new EspecialidadElectricidad());
+		
 		Personal personal = new Personal();
-		Tecnico t = new Tecnico(new EspecialidadElectricidad());
-		t.addEspecialidad(new EspecialidadMecanica());
 		personal.addTecnico(t);
+
+		minigrua = new Minigrua();
 		minigrua.asignarPersonal(personal);
+
 		tallerMecanico = new TallerMecanico(minigrua);
 	}
 
 	@Test
-	public void armadoEstrategiasPedidoReparacionMecanica() {
+	public void armadoEstrategiasPedidoReparacionMecanicaUnicaSolucion() {
+		Pedido pedidoReparacionMecanica = pedidoBuilder.armarPedidoBase(automovil).addReparacionSimple().build();
+
 		assertEquals(1, tallerMecanico.estrategiasPuedenAtender(pedidoReparacionMecanica).size());
 	}
 
+	@Test
+	public void armadoEstrategiasPedidoIncendioSinSolucion() {
+		Pedido pedidoIncendio = pedidoBuilder.armarPedidoBase(automovil).addIncendio().build();
+		
+		assertEquals(0, tallerMecanico.estrategiasPuedenAtender(pedidoIncendio).size());
+	}
+	
 }
