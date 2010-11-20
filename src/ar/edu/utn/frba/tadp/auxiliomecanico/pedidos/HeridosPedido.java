@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayAmbulanciasEnElTallerException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
@@ -52,7 +53,12 @@ public class HeridosPedido extends EspecialidadPedido {
 		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto.prestadoresParaAtenderPorEspecialidad(tallerMecanico, this);
 
 		// Agrego a las ambulancias que pueden atender tanto heridos leves como graves
-		camionesParaAtenderPorEspecialidad.add(tallerMecanico.getAmbulancias());
+		final List<PrestadorServicios> ambulancias = tallerMecanico.getAmbulancias();
+		if (this.grave && ambulancias.isEmpty())
+			throw new NoHayAmbulanciasEnElTallerException(tallerMecanico);
+			
+		camionesParaAtenderPorEspecialidad.add(ambulancias);
+			
 		if (!this.grave)
 			// Agrego además a los camiones que pueden atender heridos leves
 			camionesParaAtenderPorEspecialidad.add(tallerMecanico.camionesParaAtenderEspecialidad(this));

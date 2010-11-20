@@ -2,7 +2,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.excepciones;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 
-public class NoHayAutoReemplazoEnElTallerException extends SystemException {
+public class NoHayAutoReemplazoEnElTallerException extends UserException {
 	private static final long serialVersionUID = 1L;
 
 	private final TallerMecanico tallerMecanico;
