@@ -23,7 +23,7 @@ public abstract class Camion implements PrestadorServicios {
 
 	private boolean tieneEquipoPrimerosAuxilios; // cada camion puede tenerlo
 													// o no
-	protected boolean tieneEquipoEspecialContraIncendio;
+	private boolean tieneEquipoEspecialContraIncendio;
 
 	protected Personal personal;
 
@@ -169,9 +169,17 @@ public abstract class Camion implements PrestadorServicios {
 		return tieneEquipoPrimerosAuxilios;
 	}
 
+	public void setTieneEquipoPrimerosAuxilios(boolean tieneEquipoPrimerosAuxilios) {
+		this.tieneEquipoPrimerosAuxilios = tieneEquipoPrimerosAuxilios;
+	}
+
 	@Override
 	public int getCosto(Tiempo tiempoAtencion) {
 		return tiempoAtencion.calcularCosto(costoHora);
+	}
+
+	public void setTieneEquipoEspecialContraIncendio(boolean tieneEquipoEspecialContraIncendio) {
+		this.tieneEquipoEspecialContraIncendio = tieneEquipoEspecialContraIncendio;
 	}
 	
 }

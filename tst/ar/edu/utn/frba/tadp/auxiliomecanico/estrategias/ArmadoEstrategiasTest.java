@@ -9,17 +9,20 @@ import org.junit.Test;
 import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.builders.CPedidoBuilder;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
+import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Grangrua;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidad;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.MockModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadElectricidad;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadMecanica;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Tecnico;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.Plan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.Ambulancia;
 
 public class ArmadoEstrategiasTest {
 
@@ -49,7 +52,7 @@ public class ArmadoEstrategiasTest {
 
 		minigrua = new Minigrua();
 		minigrua.asignarPersonal(personal);
-
+		
 		tallerMecanico = new TallerMecanico(minigrua);
 	}
 
@@ -60,11 +63,36 @@ public class ArmadoEstrategiasTest {
 		assertEquals(1, tallerMecanico.estrategiasPuedenAtender(pedidoReparacionMecanica).size());
 	}
 
-	@Test
+	@Test (expected = NoSePuedeAtenderEspecialidad.class)
 	public void armadoEstrategiasPedidoIncendioSinSolucion() {
 		Pedido pedidoIncendio = pedidoBuilder.armarPedidoBase(automovil).addIncendioPeligroso().build();
 		
-		assertEquals(0, tallerMecanico.estrategiasPuedenAtender(pedidoIncendio).size());
+		tallerMecanico.estrategiasPuedenAtender(pedidoIncendio).size();
+	}
+	
+	@Test
+	public void pedidoRemolque() {
+		Grangrua grangrua = new Grangrua(true);
+		tallerMecanico.agregarCamion(grangrua);
+		
+		Pedido pedidoRemolque = pedidoBuilder.armarPedidoBase(automovil).addRemolque().build();
+		
+		assertEquals(2, tallerMecanico.estrategiasPuedenAtender(pedidoRemolque).size());
+	}
+	
+	@Test
+	public void pedidoHeridosIncendioRemolque() {
+		Grangrua grangrua = new Grangrua(true);
+		grangrua.setTieneEquipoPrimerosAuxilios(true);
+		grangrua.setTieneEquipoEspecialContraIncendio(false);
+		minigrua.setTieneEquipoEspecialContraIncendio(false);
+		tallerMecanico.agregarCamion(grangrua);
+		Ambulancia ambulancia = new Ambulancia();
+		tallerMecanico.agregarAmbulancia(ambulancia);
+		
+		Pedido pedidoRemolque = pedidoBuilder.armarPedidoBase(automovil).addIncendioPeligroso().addHeridos(false).addRemolque().build();
+
+		assertEquals(4, tallerMecanico.estrategiasPuedenAtender(pedidoRemolque).size());
 	}
 	
 }

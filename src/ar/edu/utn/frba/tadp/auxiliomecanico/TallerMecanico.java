@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,10 +39,14 @@ public class TallerMecanico {
 	 *            Camiones a ser asignados al taller para atender pedidos
 	 */
 	public TallerMecanico(Camion... camiones) {
-		this.camiones = Arrays.asList(camiones);
+//		this.camiones = Arrays.asList(camiones); // No permite AGREGAR nuevos camiones esta forma
+		this.camiones = new LinkedList<Camion>();
 		this.remises = new LinkedList<Remis>();
 		this.ambulancias = new LinkedList<PrestadorServicios>();
 		this.autosReemplazos = new LinkedList<AutoReemplazo>();
+
+		for (Camion camion : camiones)
+			this.camiones.add(camion);
 	}
 
 	/**
@@ -240,6 +243,10 @@ public class TallerMecanico {
 	
 	public void agregarAutoReemplazo(AutoReemplazo a) {
 		this.autosReemplazos.add(a);
+	}
+
+	public void agregarCamion(Camion camion) {
+		this.camiones.add(camion);
 	}
 	
 }

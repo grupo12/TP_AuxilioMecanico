@@ -67,20 +67,26 @@ public class CPedidoBuilder implements IPedidoBuilder {
 	}
 
 	@Override
-	public CPedidoBuilder addIncendio() {
+	public CPedidoBuilder addIncendioPeligroso() {
 		pedidoBaseConstruido();
-		IncendioPedido incendio = new IncendioPedido(pedido);
-		incendio.setPeligroso(false);
+		IncendioPedido incendio = new IncendioPedido(pedido, true);
+		pedido = incendio;
+		return this;
+	}
+
+	@Override
+	public CPedidoBuilder addIncendioInofensivo() {
+		pedidoBaseConstruido();
+		IncendioPedido incendio = new IncendioPedido(pedido, false);
 		pedido = incendio;
 		return this;
 	}
 	
 	@Override
-	public CPedidoBuilder addIncendioPeligroso() {
+	public CPedidoBuilder addHeridos(boolean grave) {
 		pedidoBaseConstruido();
-		IncendioPedido incendio = new IncendioPedido(pedido);
-		incendio.setPeligroso(true);
-		pedido = incendio;
+		HeridosPedido heridos = new HeridosPedido(pedido, grave);
+		pedido = heridos;
 		return this;
 	}
 	

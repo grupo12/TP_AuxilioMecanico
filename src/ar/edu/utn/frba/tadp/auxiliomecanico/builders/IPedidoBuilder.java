@@ -29,4 +29,8 @@ public interface IPedidoBuilder {
 
 	public abstract CPedidoBuilder addReparacionMecanica(Complejidad c);
 
-	public abstract CPedidoBuilder addIncendioPeligroso();}
+	public abstract CPedidoBuilder addIncendioPeligroso();
+
+	CPedidoBuilder addIncendioInofensivo();
+
+	CPedidoBuilder addHeridos(boolean grave);}
