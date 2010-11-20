@@ -24,25 +24,15 @@ public class Grangrua extends Camion {
 	}
 
 	@Override
-	public boolean hayRemolque(Automovil automovil) {
-		return true;
-	}
-
-	@Override
-	public boolean hayReparacionCompleja() {
-		return this.tallerAltaComplejidad;
-	}
-
-	@Override
-	public boolean hayEquipoEspecialContraIncendio() {
-		return true;
-	}
-
-	@Override
 	public void validarPesonal(Personal personal) {
 		if(!personal.hayUnExperto())
 			throw new PersonalSinExpertoException("Por cada grupo de personal, se debe contar con un experto.",personal);
 		if(personal.cantPersonas() > 3)
 			throw new CapacidadTecnicosExcedidaException("La cant. de tecnicos debe ser iguala  1.",personal);
+	}
+
+	@Override
+	public boolean podesRemolcar(Automovil automovil) {
+		return true;
 	}
 }

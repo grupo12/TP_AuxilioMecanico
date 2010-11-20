@@ -76,7 +76,7 @@ public class VuelcoPedido extends DesastrePedido {
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
-		return unCamion.hayRemolque(super.getAutomovil());
+		return unCamion.podesRemolcar(super.getAutomovil());
 	}
 
 	@Override

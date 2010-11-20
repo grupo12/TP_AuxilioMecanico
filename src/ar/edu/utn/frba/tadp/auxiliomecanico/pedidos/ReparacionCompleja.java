@@ -19,9 +19,12 @@ public class ReparacionCompleja extends EspecialidadPedido {
 		terminado=false;
 	}
 
+	public ReparacionCompleja() {
+	}
+
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.hayReparacionCompleja();
+		return unCamion.hayEspecialidadParaAuto(this);
 	}
 
 	@Override

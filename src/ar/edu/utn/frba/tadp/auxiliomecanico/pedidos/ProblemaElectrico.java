@@ -27,7 +27,7 @@ public class ProblemaElectrico extends EspecialidadPedido {
 
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-			return unCamion.tenesUnElectricista();
+			return unCamion.hayAlgunTecnicoEspecialistaEn(this);
 	}
 
 	@Override

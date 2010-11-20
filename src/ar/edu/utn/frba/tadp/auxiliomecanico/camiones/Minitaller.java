@@ -13,16 +13,16 @@ public class Minitaller extends Camion {
 	}
 
 	@Override
-	public boolean hayRemolque(Automovil automovil) {
-		return false;
-	}
-
-	@Override
 	public void validarPesonal(Personal personal) {
 		if(!personal.hayUnExperto())
 			throw new PersonalSinExpertoException("Por cada grupo de personal, se debe contar con un experto.",personal);
 		if(personal.cantPersonas() != 1)
 			throw new CapacidadTecnicosExcedidaException("Un minitaller no puede tener más de",personal);
+	}
+
+	@Override
+	public boolean podesRemolcar(Automovil automovil) {
+		return false;
 	}
 	
 }

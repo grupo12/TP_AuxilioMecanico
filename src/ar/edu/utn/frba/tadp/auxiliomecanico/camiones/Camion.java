@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.camiones;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +25,8 @@ public abstract class Camion {
 	protected boolean tieneEquipoEspecialContraIncendio;
 
 	protected Personal personal;
+
+	private Collection <EspecialidadPedido> serviciosQuePresta = new ArrayList <EspecialidadPedido>();
 
 	public Personal getPersonal() {
 		return personal;
@@ -137,30 +140,38 @@ public abstract class Camion {
 		return ep.puedeSerAtendidoPorCamion(this, ep.getAutomovil());
 	}
 
+	/**
+	 * Requerimientos personal
+	 */
+
+
+	public boolean hayAlgunTecnicoEspecialistaEn(EspecialidadPedido ep) {
+		return personal.hayAlgunaTecnicoEspecialistaEn(ep);
+	}
+
+	
+	/**
+	 * Requerimientos camion
+	 */
+
+	public boolean hayEspecialidadParaAuto(EspecialidadPedido ep){
+		for(EspecialidadPedido unaEp : this.serviciosQuePresta)
+			if(unaEp.getClass() == ep.getClass())
+				return true;
+		return false;
+	}
+	
+	/**
+	 * Otros requerimientos
+	 */
+	
 	public int cantidadAyudantes() {
 		return personal.cantidadAyudantesDisponibles();
 	}
+	public abstract boolean podesRemolcar(Automovil automovil);
 
-	public boolean tenesUnElectricista() {
-		return personal.hayUnElectricista();
-	}
-
-	public boolean hayUnMecanico() {
-		return personal.hayUnMecanico();
-	}
-
-	public boolean hayEquipoEspecialContraIncendio() {
-		return tieneEquipoEspecialContraIncendio;
-	}
-
-	public boolean hayTecnicoExpertoInundaciones() {
-		return this.personal.hayUnTecnicoExpertoInundaciones();
-	}
-
-	public abstract boolean hayRemolque(Automovil automovil);
-
-	public boolean hayReparacionCompleja() {
-		return false;
+	public void addEspecialidad(EspecialidadPedido ep) {
+		this.serviciosQuePresta .add(ep);
 	}
 
 }

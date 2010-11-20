@@ -14,6 +14,9 @@ public class IncendioPedido extends DesastrePedido {
 		// TODO Auto-generated constructor stub
 	}
 
+	public IncendioPedido() {
+	}
+
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
@@ -90,7 +93,7 @@ public class IncendioPedido extends DesastrePedido {
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
 		if (this.isPeligroso())
-			return unCamion.hayEquipoEspecialContraIncendio();
+			return unCamion.hayEspecialidadParaAuto(this);
 		return true;
 		// no es peligroso, puede manejarlo cualquier camion de
 		// auxilio

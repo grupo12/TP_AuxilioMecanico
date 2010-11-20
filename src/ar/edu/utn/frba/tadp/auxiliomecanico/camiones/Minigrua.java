@@ -20,11 +20,6 @@ public class Minigrua extends Camion {
 	}
 
 	@Override
-	public boolean hayRemolque(Automovil automovil) {
-		return !automovil.esMasPesadoQue(LIMITE_PESO);
-	}
-
-	@Override
 	public void validarPesonal(Personal personal) {
 		if (!personal.hayUnExperto())
 			throw new PersonalSinExpertoException(
@@ -33,5 +28,10 @@ public class Minigrua extends Camion {
 		if (personal.cantPersonas() > 3)
 			throw new CapacidadTecnicosExcedidaException(
 					"La cant. de tecnicos debe ser iguala  1.", personal);
+	}
+
+	@Override
+	public boolean podesRemolcar(Automovil automovil) {
+		return !automovil.esMasPesadoQue(LIMITE_PESO);
 	}
 }

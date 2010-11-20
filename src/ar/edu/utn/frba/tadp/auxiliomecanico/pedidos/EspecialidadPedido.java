@@ -20,6 +20,9 @@ public abstract class EspecialidadPedido extends Pedido {
 		this.sujeto = sujeto;
 	}
 
+	public EspecialidadPedido() {
+	}
+
 	public boolean isReparacionSimple() {
 		return false;
 	}

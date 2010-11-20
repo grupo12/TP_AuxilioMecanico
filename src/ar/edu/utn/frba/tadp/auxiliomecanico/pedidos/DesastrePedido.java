@@ -8,8 +8,12 @@ public abstract class DesastrePedido extends EspecialidadPedido {
 		super(sujeto);
 	}
 
+	public DesastrePedido() {
+	}
+	
 	public abstract void terminarServicioDelPedido(Tiempo tiempo);
 
 	public abstract Tiempo calcularTiempoDeAtencion();
 
+	
 }

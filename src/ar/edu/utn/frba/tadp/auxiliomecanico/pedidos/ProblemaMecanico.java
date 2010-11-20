@@ -27,10 +27,13 @@ public class ProblemaMecanico extends EspecialidadPedido {
 		this.terminado = false;
 	}
 
+	public ProblemaMecanico() {
+	}
+
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		return complejidad.puedeAtenderte(unCamion)
-		&& unCamion.hayUnMecanico();
+		&& unCamion.hayAlgunTecnicoEspecialistaEn(this);
 	}
 
 	@Override

@@ -13,6 +13,9 @@ public class InundacionPedido extends DesastrePedido {
 		// TODO Auto-generated constructor stub
 	}
 
+	public InundacionPedido() {
+	}
+
 	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 
@@ -77,7 +80,7 @@ public class InundacionPedido extends DesastrePedido {
 	
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
-		return unCamion.hayRemolque(super.getAutomovil())
-		&& unCamion.hayTecnicoExpertoInundaciones();
+		return unCamion.podesRemolcar(super.getAutomovil())
+		&& unCamion.hayAlgunTecnicoEspecialistaEn(this);
 	}
 }
