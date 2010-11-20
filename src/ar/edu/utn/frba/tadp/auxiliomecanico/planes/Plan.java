@@ -10,6 +10,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.MasEconomicoComparator;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.estrategias.EstrategiaEconomica;
 
 /**
  * Representa un plan de servicios ofrecido por el sistema de taller mecánico a
@@ -55,7 +56,6 @@ public abstract class Plan {
 	}
 
 	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return new EstrategiaEconomica().elegirEstrategia(estrategias);
 	}
 }
