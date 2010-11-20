@@ -155,6 +155,6 @@ public class Cliente {
 	}
 
 	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
-		return this.plan.selectEstrategia(estrategias);
+		return this.plan.selectEstrategia(estrategias, this);
 	}
 }

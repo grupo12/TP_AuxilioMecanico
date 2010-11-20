@@ -10,7 +10,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.MenosPedidosComparator;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.estrategias.EstrategiaEconomica;
 
 public class PlatinumPlan extends Plan {
 
@@ -44,7 +43,8 @@ public class PlatinumPlan extends Plan {
 	}
 	
 	@Override
-	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias, Cliente unCliente) {
+		estado.verificarEstado(unCliente);
 		return estado.seleccionarEstrategia(estrategias);
 	}
 }

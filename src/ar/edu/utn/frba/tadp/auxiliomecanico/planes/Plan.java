@@ -55,7 +55,7 @@ public abstract class Plan {
 		// Por defecto es válida una reparación compleja para los planes
 	}
 
-	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias, Cliente unCliente) {
 		return new EstrategiaEconomica().elegirEstrategia(estrategias);
 	}
 }
