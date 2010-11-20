@@ -31,4 +31,6 @@ public interface IPedidoBuilder {
 
 	public abstract CPedidoBuilder addReparacionMecanica(Complejidad c);
 
+	public abstract CPedidoBuilder addIncendioPeligroso();
+
 }

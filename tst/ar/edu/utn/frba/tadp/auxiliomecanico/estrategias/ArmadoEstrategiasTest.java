@@ -62,7 +62,7 @@ public class ArmadoEstrategiasTest {
 
 	@Test
 	public void armadoEstrategiasPedidoIncendioSinSolucion() {
-		Pedido pedidoIncendio = pedidoBuilder.armarPedidoBase(automovil).addIncendio().build();
+		Pedido pedidoIncendio = pedidoBuilder.armarPedidoBase(automovil).addIncendioPeligroso().build();
 		
 		assertEquals(0, tallerMecanico.estrategiasPuedenAtender(pedidoIncendio).size());
 	}
