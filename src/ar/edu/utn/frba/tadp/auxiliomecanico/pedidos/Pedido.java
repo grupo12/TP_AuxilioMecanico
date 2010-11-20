@@ -158,7 +158,7 @@ public abstract class Pedido {
 	}
 
 	private Collection<Estrategia> armarEstrategiasPorEspecialidad(List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad) {
-		Collection<Estrategia> estrategias = new HashSet<Estrategia>();
+		Collection<Estrategia> estrategias = new LinkedList<Estrategia>();
 		estrategias.add(new Estrategia(this));
 		
 		return this.armarEstrategiasPorEspecialidadRecursivo(estrategias, camionesParaAtenderPorEspecialidad);

@@ -82,17 +82,15 @@ public class ArmadoEstrategiasTest {
 	
 	@Test
 	public void pedidoHeridosIncendioRemolque() {
-		Grangrua grangrua = new Grangrua(true);
-		grangrua.setTieneEquipoPrimerosAuxilios(true);
-		grangrua.setTieneEquipoEspecialContraIncendio(false);
-		minigrua.setTieneEquipoEspecialContraIncendio(false);
-		tallerMecanico.agregarCamion(grangrua);
+		minigrua.setTieneEquipoEspecialContraIncendio(true);
+		minigrua.setTieneEquipoPrimerosAuxilios(true);
+		
 		Ambulancia ambulancia = new Ambulancia();
 		tallerMecanico.agregarAmbulancia(ambulancia);
 		
 		Pedido pedidoRemolque = pedidoBuilder.armarPedidoBase(automovil).addIncendioPeligroso().addHeridos(false).addRemolque().build();
 
-		assertEquals(4, tallerMecanico.estrategiasPuedenAtender(pedidoRemolque).size());
+		assertEquals(2, tallerMecanico.estrategiasPuedenAtender(pedidoRemolque).size());
 	}
 	
 }
