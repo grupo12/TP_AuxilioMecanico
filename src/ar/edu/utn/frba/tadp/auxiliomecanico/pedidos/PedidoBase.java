@@ -11,7 +11,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ElPedidoBaseNoPuedeFinalizarseExcepcion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
-import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 /**
  * Representa un pedido base, sin ningún tipo de servicio real asociado al
  * mismo.<br>

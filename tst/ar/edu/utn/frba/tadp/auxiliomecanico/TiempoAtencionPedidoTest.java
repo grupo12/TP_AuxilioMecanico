@@ -5,7 +5,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.builders.CPedidoBuilder;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Excepciones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
 

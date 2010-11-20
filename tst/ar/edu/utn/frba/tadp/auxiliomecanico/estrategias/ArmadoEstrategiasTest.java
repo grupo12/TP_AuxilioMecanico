@@ -13,7 +13,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Grangrua;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Minigrua;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidad;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidadExeption;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.MockModuloPagos;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadElectricidad;
@@ -63,7 +63,7 @@ public class ArmadoEstrategiasTest {
 		assertEquals(1, tallerMecanico.estrategiasPuedenAtender(pedidoReparacionMecanica).size());
 	}
 
-	@Test (expected = NoSePuedeAtenderEspecialidad.class)
+	@Test (expected = NoSePuedeAtenderEspecialidadExeption.class)
 	public void armadoEstrategiasPedidoIncendioSinSolucion() {
 		Pedido pedidoIncendio = pedidoBuilder.armarPedidoBase(automovil).addIncendioPeligroso().build();
 		

@@ -11,11 +11,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.gps.Lugar;
 import ar.edu.utn.frba.tadp.auxiliomecanico.gps.MockGps;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionCompleja;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.ClassicPlan;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.PlatinumPlan;
 
 public class TiempoEstimadoAtencionPedido extends AuxilioMecanicoTest {

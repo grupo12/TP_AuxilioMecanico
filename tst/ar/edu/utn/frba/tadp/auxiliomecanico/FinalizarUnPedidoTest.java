@@ -1,15 +1,9 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico;
 
 import static org.junit.Assert.*;
-import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
-import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.*;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.ElPedidoBaseNoPuedeFinalizarseExcepcion;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoFinalizadoCorrectamente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.PedidoNoFinalizadoCorrectamente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
-import ar.edu.utn.frba.tadp.auxiliomecanico.planes.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.builders.*;
 
 import org.junit.*;
@@ -37,11 +31,11 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	public void finalizarUnPedidoBaseDeUnClient(){
 		Tiempo tiempoDeFinalizacion = new Tiempo().nuevoTiempo(10, 15);
 		
-		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).build();
+		Pedido pedidoAgregar = builderPedido.armarPedidoBase(autoDePrueba).addReparacionSimple().build();
 		
 		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(0, 0)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(10, 15)));
 	}
 	
 	/*
@@ -60,13 +54,13 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 		
 		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		tiempoDeFinalizacion = new Tiempo().nuevoTiempo(12, 10);
+		tiempoDeFinalizacion = new Tiempo().nuevoTiempo(12, 15);
 		
 		clienteClassicSinDeuda.agregarPedido(pedidoAgregar);
 		
 		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),new Tiempo().nuevoTiempo(12, 10)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),new Tiempo().nuevoTiempo(11, 15)));
 	}
 	
 

@@ -4,7 +4,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
-import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.Complejidad;
 
 public class ProblemaElectrico extends EspecialidadPedido {
 

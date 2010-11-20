@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 

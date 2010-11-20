@@ -7,7 +7,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.moduloGps.ModeloGps;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class MockGps extends ModeloGps{
 private MockGps Gps;

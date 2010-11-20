@@ -13,10 +13,6 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Remolque;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionCompleja;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
-import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadElectricidad;
-import ar.edu.utn.frba.tadp.auxiliomecanico.personal.EspecialidadMecanica;
-import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Personal;
-import ar.edu.utn.frba.tadp.auxiliomecanico.personal.Tecnico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.EconomicPlan;
 
 public class ClienteEconomicNoPuedeAtenderseRemolque extends AuxilioMecanicoTest {
