@@ -9,7 +9,9 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.CamionNoDisponibleException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayAutoReemplazoEnElTallerException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayEstrategiasPosiblesException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayRemisEnElTallerException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
@@ -39,6 +41,9 @@ public class TallerMecanico {
 	 */
 	public TallerMecanico(Camion... camiones) {
 		this.camiones = Arrays.asList(camiones);
+		this.remises = new LinkedList<Remis>();
+		this.ambulancias = new LinkedList<PrestadorServicios>();
+		this.autosReemplazos = new LinkedList<AutoReemplazo>();
 	}
 
 	/**
@@ -208,10 +213,16 @@ public class TallerMecanico {
 	}
 
 	public PrestadorServicios algunAutoReemplazo() {
+		if (this.autosReemplazos.isEmpty())
+			throw new NoHayAutoReemplazoEnElTallerException(this);
+
 		return this.autosReemplazos.iterator().next();
 	}
 
 	public PrestadorServicios algunRemis() {
+		if (this.remises.isEmpty())
+			throw new NoHayRemisEnElTallerException(this);
+
 		return this.remises.iterator().next();
 	}
 
