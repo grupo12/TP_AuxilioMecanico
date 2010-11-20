@@ -33,7 +33,7 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 	 * finalizarUnPedidoBaseDeUnClient() consiste en la creacion, asignacion y posterior finalizacion 
 	 * de un pedido base y se espera que el mismo tire la excepcion que no puede finalizarse. 
 	 * */
-	@Test  (expected= ElPedidoBaseNoPuedeFinalizarseExcepcion.class)
+	@Test  
 	public void finalizarUnPedidoBaseDeUnClient(){
 		Tiempo tiempoDeFinalizacion = new Tiempo().nuevoTiempo(10, 15);
 		
@@ -41,7 +41,7 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 		
 		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(11, 12)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(0, 0)));
 	}
 	
 	/*
@@ -66,7 +66,7 @@ public class FinalizarUnPedidoTest extends AuxilioMecanicoTest {
 		
 		pedidoAgregar.finalizar(tiempoDeFinalizacion);
 		
-		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),tiempoDeFinalizacion.nuevoTiempo(11, 12)));
+		assertTrue(Tiempo.sonTiemposIguales(pedidoAgregar.calcularTiempoDeAtencion(),new Tiempo().nuevoTiempo(12, 10)));
 	}
 	
 
