@@ -17,8 +17,8 @@ public abstract class DesastrePedido extends EspecialidadPedido {
 	public abstract Tiempo calcularTiempoDeAtencion();
 
 	@Override
-	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
-		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = super.camionesParaAtenderPorEspecialidad(
+	protected List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = super.prestadoresParaAtenderPorEspecialidad(
 				tallerMecanico, pedidoOriginal);
 
 		// TODO Acá necesito saber si yo (este pedido) tiene heridos graves o

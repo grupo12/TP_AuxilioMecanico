@@ -152,9 +152,9 @@ public abstract class Pedido {
 	public abstract boolean seComplementan(Collection<Camion> camiones, Camion camion);
 
 	public Collection<Estrategia> estrategiasAtencionEn(TallerMecanico tallerMecanico) {
-		List<List<PrestadorServicios>> camionesPorEspecialidad = this.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+		List<List<PrestadorServicios>> prestadoresPorEspecialidad = this.prestadoresParaAtenderPorEspecialidad(tallerMecanico, this);
 
-		return this.armarEstrategiasPorEspecialidad(camionesPorEspecialidad);
+		return this.armarEstrategiasPorEspecialidad(prestadoresPorEspecialidad);
 	}
 
 	private Collection<Estrategia> armarEstrategiasPorEspecialidad(List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad) {
@@ -189,7 +189,7 @@ public abstract class Pedido {
 		return this.armarEstrategiasPorEspecialidadRecursivo(estrategiasNuevas, camionesPorEspecialidadResto);
 	}
 
-	protected abstract List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal);
+	protected abstract List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal);
 
 	public static void setGps(ModeloGps gps) {
 		Pedido.gps = gps;

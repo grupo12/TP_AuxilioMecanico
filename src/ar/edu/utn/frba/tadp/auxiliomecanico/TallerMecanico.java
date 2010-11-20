@@ -112,16 +112,7 @@ public class TallerMecanico {
 		
 		this.validarEstrategiasPosibles(pedido, estrategiasPosibles);
 		
-		final Estrategia estrategiaElegida = pedido.getCliente().selectEstrategia(estrategiasPosibles);
-		this.agregarAutoServicio(pedido, estrategiaElegida);
-		
-		return estrategiaElegida;
-	}
-
-	private void agregarAutoServicio(Pedido pedido, final Estrategia estrategiaElegida) {
-		PrestadorServicios prestadorRemis = pedido.getCliente().prestadorParaServicioEnTaller(this);
-		if (prestadorRemis != null)
-			estrategiaElegida.agregarPrestador(prestadorRemis);
+		return pedido.getCliente().selectEstrategia(estrategiasPosibles);
 	}
 
 	private void validarEstrategiasPosibles(Pedido pedido, final Collection<Estrategia> estrategiasPosibles)

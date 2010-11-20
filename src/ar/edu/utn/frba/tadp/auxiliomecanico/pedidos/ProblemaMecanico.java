@@ -56,13 +56,13 @@ public class ProblemaMecanico extends EspecialidadPedido {
 	}
 
 	@Override
-	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+	protected List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
 		// Si requiere remolque, entonces no se agregan camiones que puedan
 		// atender reparaciones
 		if (pedidoOriginal.isRemolque())
-			return this.sujeto.camionesParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
+			return this.sujeto.prestadoresParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
 
-		return super.camionesParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
+		return super.prestadoresParaAtenderPorEspecialidad(tallerMecanico, pedidoOriginal);
 	}
 
 }

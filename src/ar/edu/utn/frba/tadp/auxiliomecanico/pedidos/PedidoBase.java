@@ -84,7 +84,7 @@ public class PedidoBase extends Pedido {
 	}
 
 	@Override
-	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+	protected List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
 		return new LinkedList<List<PrestadorServicios>>();
 	}
 

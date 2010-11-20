@@ -92,10 +92,10 @@ public abstract class EspecialidadPedido extends Pedido {
 	public abstract Tiempo calcularTiempoDeAtencion();
 
 	@Override
-	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico,
+	protected List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico,
 			Pedido pedidoOriginal) {
 		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto
-				.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+				.prestadoresParaAtenderPorEspecialidad(tallerMecanico, this);
 
 		camionesParaAtenderPorEspecialidad.add(tallerMecanico.camionesParaAtenderEspecialidad(this));
 

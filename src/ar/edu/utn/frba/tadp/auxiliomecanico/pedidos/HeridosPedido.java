@@ -48,8 +48,8 @@ public class HeridosPedido extends EspecialidadPedido {
 	}
 
 	@Override
-	protected List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
-		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto.camionesParaAtenderPorEspecialidad(tallerMecanico, this);
+	protected List<List<PrestadorServicios>> prestadoresParaAtenderPorEspecialidad(TallerMecanico tallerMecanico, Pedido pedidoOriginal) {
+		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto.prestadoresParaAtenderPorEspecialidad(tallerMecanico, this);
 
 		// Agrego a las ambulancias que pueden atender tanto heridos leves como graves
 		camionesParaAtenderPorEspecialidad.add(tallerMecanico.getAmbulancias());
