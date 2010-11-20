@@ -27,12 +27,10 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	 * compania
 	 */
 	private Cliente clienteDeTest;
-	private CPedidoBuilder builderPedido; 
 	
 	@Before
 	public void setUp(){
 		super.setUp();
-		builderPedido = new CPedidoBuilder();
 	}
 	
 	@Test 
@@ -68,13 +66,16 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	
 	private void doClienteRealizarPedidos() {
 		Pedido pedidoBase;
-		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
+		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
+		pedidoBase.aumentarEconomicidad(0.5);
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
-		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
+		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
+		pedidoBase.aumentarEconomicidad(0.5);
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
-		pedidoBase = builderPedido.armarPedidoBase(super.automovilOtro).build(); 
+		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
+		pedidoBase.aumentarEconomicidad(0.5); 
 		tratarUnPedido(clienteDeTest,pedidoBase);
 	}
 	/*
@@ -84,7 +85,7 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	private void tratarUnPedido(Cliente clienteQuePidio,Pedido pedidoRealizado){
 		clienteQuePidio.agregarPedido(pedidoRealizado);
 		tallerMecanico.asistir(pedidoRealizado);
-		tallerMecanico.finalizoPedido(camionQueRealizo(pedidoRealizado), pedidoRealizado,new Tiempo().nuevoTiempo(0,0));
+		tallerMecanico.finalizoPedido(camionQueRealizo(pedidoRealizado), pedidoRealizado,new Tiempo().nuevoTiempo(0,40));
 	}
 	
 	/*

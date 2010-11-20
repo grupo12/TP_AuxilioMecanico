@@ -25,7 +25,7 @@ public abstract class Pedido {
 
 	private static ModuloPagos ModuloDePagos;
 	
-	private double economicidad;
+	private double economicidad = 0;
 	private static ModeloGps gps;
 	public Camion camionAtendio;
 	/**
