@@ -6,7 +6,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayAmbulanciasEnElTallerException;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidadExeption;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidadException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
@@ -67,7 +67,7 @@ public class HeridosPedido extends EspecialidadPedido {
 				prestadores.add(prestador);
 		
 		if (prestadores.isEmpty())
-			throw new NoSePuedeAtenderEspecialidadExeption("No se puede atender la especialidad", this);
+			throw new NoSePuedeAtenderEspecialidadException("No se puede atender la especialidad", this);
 		
 		camionesParaAtenderPorEspecialidad.add(prestadores);
 

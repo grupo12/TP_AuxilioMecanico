@@ -43,4 +43,9 @@ public class InundacionPedido extends DesastrePedido {
 	public boolean tieneUrgencias(){
 		return true;
 	}
+	
+	@Override
+	public boolean isInundacion() {
+		return true;
+	}
 }

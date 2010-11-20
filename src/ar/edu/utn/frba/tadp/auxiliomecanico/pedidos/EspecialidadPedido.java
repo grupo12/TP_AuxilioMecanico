@@ -7,7 +7,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.TallerMecanico;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
-import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidadExeption;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoSePuedeAtenderEspecialidadException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
@@ -39,7 +39,7 @@ public abstract class EspecialidadPedido extends Pedido {
 	}
 
 	protected void doValidarEspecialidadPara(Cliente cliente) {
-		//Por defecto se validan las especialidades para todos los clientes
+		// Por defecto se validan las especialidades para todos los clientes
 	}
 
 	@Override
@@ -98,14 +98,14 @@ public abstract class EspecialidadPedido extends Pedido {
 		List<List<PrestadorServicios>> camionesParaAtenderPorEspecialidad = this.sujeto
 				.prestadoresParaAtenderPorEspecialidad(tallerMecanico, this);
 
-		final List<PrestadorServicios> camionesParaAtenderEspecialidad = tallerMecanico.camionesParaAtenderEspecialidad(this);
-		
+		final List<PrestadorServicios> camionesParaAtenderEspecialidad = tallerMecanico
+				.camionesParaAtenderEspecialidad(this);
+
 		if (camionesParaAtenderEspecialidad.isEmpty())
-			throw new NoSePuedeAtenderEspecialidadExeption("No se puede atender la especialidad", this);
+			throw new NoSePuedeAtenderEspecialidadException("No se puede atender la especialidad", this);
 
 		camionesParaAtenderPorEspecialidad.add(camionesParaAtenderEspecialidad);
 
-		
 		return camionesParaAtenderPorEspecialidad;
 	}
 
@@ -119,8 +119,19 @@ public abstract class EspecialidadPedido extends Pedido {
 	public boolean puedeAtenderte(Camion camion) {
 		return this.doPuedeSerAtendidoPorCamion(camion, this.getAutomovil());
 	}
-	
-	public boolean tieneUrgencias(){
+
+	public boolean tieneUrgencias() {
 		return false;
 	}
+
+	@Override
+	public boolean isIncendio() {
+		return sujeto.isIncendio();
+	}
+
+	@Override
+	public boolean isInundacion() {
+		return sujeto.isInundacion();
+	}
+
 }

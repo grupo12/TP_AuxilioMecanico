@@ -3,6 +3,7 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.builders;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.AsignaPedidoBaseAUnoExistenteException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoExistePedidoBaseException;
+import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoPuedeHaberHeridosSinIncendioOInundacionException;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.*;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.complejidades.*;
 
@@ -85,9 +86,15 @@ public class CPedidoBuilder implements IPedidoBuilder {
 	@Override
 	public CPedidoBuilder addHeridos(boolean grave) {
 		pedidoBaseConstruido();
+		validarHeridos();
 		HeridosPedido heridos = new HeridosPedido(pedido, grave);
 		pedido = heridos;
 		return this;
+	}
+
+	private void validarHeridos() {
+		if (pedido.isIncendio() || pedido.isInundacion())
+			throw new NoPuedeHaberHeridosSinIncendioOInundacionException(pedido);
 	}
 	
 	@Override

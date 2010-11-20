@@ -204,4 +204,8 @@ public abstract class Pedido {
 
 	public abstract boolean tieneUrgencias();
 
+	public abstract boolean isIncendio();
+
+	public abstract boolean isInundacion();
+
 }

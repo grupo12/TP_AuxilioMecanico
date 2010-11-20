@@ -24,16 +24,17 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 	public Tiempo calcularTiempoDeAtencion() {
-		Tiempo tiempoARetornar = Tiempo.promediarTiempo(IncendioPedido.tiempoEmpleadoEnReparacion, IncendioPedido.cantidadAtendidos);
-		return tiempoARetornar ;
+		Tiempo tiempoARetornar = Tiempo.promediarTiempo(IncendioPedido.tiempoEmpleadoEnReparacion,
+				IncendioPedido.cantidadAtendidos);
+		return tiempoARetornar;
 	}
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
 		IncendioPedido.cantidadAtendidos += 1;
-		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(
-				IncendioPedido.tiempoEmpleadoEnReparacion, tiempo);
-		sujeto.terminarServicioDelPedido(tiempo) ;
+		IncendioPedido.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(IncendioPedido.tiempoEmpleadoEnReparacion,
+				tiempo);
+		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
 	public void setPeligroso(boolean isPeligroso) {
@@ -45,17 +46,21 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 	@Override
-	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
-			Automovil automovil) {
+	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion, Automovil automovil) {
 		if (this.isPeligroso())
 			return unCamion.hayEquipoEspecialContraIncendio();
 		return true;
 		// no es peligroso, puede manejarlo cualquier camion de
 		// auxilio
 	}
-	
+
 	@Override
-	public boolean tieneUrgencias(){
+	public boolean tieneUrgencias() {
+		return true;
+	}
+
+	@Override
+	public boolean isIncendio() {
 		return true;
 	}
 }
