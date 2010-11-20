@@ -42,7 +42,7 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 		
 		doClienteRealizarPedidos();
 		
-		assertFalse(clienteDeTest.EsRentableElCliente());
+		assertFalse(clienteDeTest.esRentableElCliente());
 	}
 	
 	@Test 
@@ -52,7 +52,7 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 		
 		doClienteRealizarPedidos();
 		
-		assertTrue(clienteDeTest.EsRentableElCliente());
+		assertTrue(clienteDeTest.esRentableElCliente());
 	}
 
 	

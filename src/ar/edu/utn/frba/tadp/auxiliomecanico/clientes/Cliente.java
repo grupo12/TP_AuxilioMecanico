@@ -126,11 +126,15 @@ public class Cliente {
 		this.plan.validarReparacionComplejaPara(this);
 	}
 
-	public boolean EsRentableElCliente() {
+	public boolean esRentableElCliente() {
+		return getRelacionCostoBeneficio() < 100;
+	}
+
+	public double getRelacionCostoBeneficio() {
 		double gastadoEnCliente = injectInto();
 		double cuotaAnual = getCuotaAnual();
 
-		return gastadoEnCliente <= cuotaAnual;
+		return 100 * gastadoEnCliente / cuotaAnual;
 	}
 
 	private double injectInto() {

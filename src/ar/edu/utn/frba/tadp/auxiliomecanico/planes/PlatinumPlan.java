@@ -8,10 +8,18 @@ import java.util.List;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.MenosPedidosComparator;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
+import ar.edu.utn.frba.tadp.auxiliomecanico.estrategias.Estrategia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.modulopagos.ModuloPagos;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.estrategias.EstrategiaEconomica;
 
 public class PlatinumPlan extends Plan {
 
+	EstadoPlatinum estado;
+	
+	public PlatinumPlan(){
+		estado = new EstadoRapido(this);
+	}
+	
 	@Override
 	public Camion selectCamion(Collection<Camion> camiones) {
 		List<Camion> camionesOrdenados = new ArrayList<Camion>(camiones);
@@ -29,5 +37,14 @@ public class PlatinumPlan extends Plan {
 	@Override
 	public void validarRemolquePara(Cliente cliente) {
 		// Un cliente con plan Platinum siempre puede pedir remolque
+	}
+	
+	public void setEstado(EstadoPlatinum unEstado) {
+		estado = unEstado;
+	}
+	
+	@Override
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias) {
+		return estado.seleccionarEstrategia(estrategias);
 	}
 }
