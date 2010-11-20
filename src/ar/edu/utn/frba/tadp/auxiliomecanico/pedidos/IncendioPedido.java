@@ -2,7 +2,6 @@ package ar.edu.utn.frba.tadp.auxiliomecanico.pedidos;
 
 import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Automovil;
-import ar.edu.utn.frba.tadp.auxiliomecanico.clientes.Cliente;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 
 public class IncendioPedido extends DesastrePedido {
@@ -53,5 +52,10 @@ public class IncendioPedido extends DesastrePedido {
 		return true;
 		// no es peligroso, puede manejarlo cualquier camion de
 		// auxilio
+	}
+	
+	@Override
+	public boolean tieneUrgencias(){
+		return true;
 	}
 }

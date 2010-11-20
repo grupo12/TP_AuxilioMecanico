@@ -65,4 +65,9 @@ public class HeridosPedido extends EspecialidadPedido {
 		
 		return camionesParaAtenderPorEspecialidad;
 	}
+	
+	@Override
+	public boolean tieneUrgencias(){
+		return grave;
+	}
 }

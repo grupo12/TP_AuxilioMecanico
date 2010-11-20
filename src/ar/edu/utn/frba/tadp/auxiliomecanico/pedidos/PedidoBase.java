@@ -88,5 +88,7 @@ public class PedidoBase extends Pedido {
 		return new LinkedList<List<PrestadorServicios>>();
 	}
 
-	
+	public boolean tieneUrgencias(){
+		return false;
+	}
 }
