@@ -2,7 +2,6 @@ package ar.edu.utn.frba.tadp.auxiliomecanico;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,21 +50,18 @@ public class TallerMecanico {
 	 */
 	public void asistir(Pedido pedido) {
 		pedido.validar();
-		// this.asignarCamion(pedido.getAutomovil(), pedido);
 		this.asignarEstrategia(pedido);
 	}
 
 	/**
 	 * Determina y asigna un camión para un automóvil con un pedido dado.
 	 * 
-	 * @deprecated Sólo para versión anterior
-	 * 
 	 * @param automovil
 	 *            Automóvil a atender
 	 * @param pedido
 	 *            Pedido de atención
 	 */
-	private void asignarCamion(Automovil automovil, Pedido pedido) {
+	protected void asignarCamion(Automovil automovil, Pedido pedido) {
 		this.validarCamionesParaPedido(automovil, pedido);
 		this.camionParaAsignarA(pedido).atender(pedido);
 		pedido.setCamion(this.camionParaAsignarA(pedido));
@@ -221,6 +217,18 @@ public class TallerMecanico {
 
 	public List<PrestadorServicios> getAmbulancias() {
 		return this.ambulancias;
+	}
+	
+	public void agregarAmbulancia(Ambulancia a) {
+		this.ambulancias.add(a);
+	}
+	
+	public void agregarRemis(Remis a) {
+		this.remises.add(a);
+	}
+	
+	public void agregarAutoReemplazo(AutoReemplazo a) {
+		this.autosReemplazos.add(a);
 	}
 	
 }
