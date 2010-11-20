@@ -141,7 +141,7 @@ public abstract class Pedido {
 	 * tiempos
 	 */
 	public void finalizar(Tiempo tiempo) {
-
+		this.getCliente().agregarPedido(this);
 		this.terminarServicioDelPedido(tiempo);
 	}
 

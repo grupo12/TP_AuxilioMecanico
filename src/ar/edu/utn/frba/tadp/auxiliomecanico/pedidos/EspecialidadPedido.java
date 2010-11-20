@@ -38,7 +38,7 @@ public abstract class EspecialidadPedido extends Pedido {
 	}
 
 	protected void doValidarEspecialidadPara(Cliente cliente) {
-		throw new UnsupportedOperationException();
+		//Por defecto se validan las especialidades para todos los clientes
 	}
 
 	@Override

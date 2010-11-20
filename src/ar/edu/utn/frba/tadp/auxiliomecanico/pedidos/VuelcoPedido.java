@@ -29,8 +29,7 @@ public class VuelcoPedido extends DesastrePedido {
 	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return unCamion.hayRemolque(automovil);
 	}
 
 	@Override
@@ -41,17 +40,6 @@ public class VuelcoPedido extends DesastrePedido {
 
 	@Override
 	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Cliente getCliente() {
-		return super.getCliente();
-	}
-
-	@Override
-	public Automovil getAutomovil() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

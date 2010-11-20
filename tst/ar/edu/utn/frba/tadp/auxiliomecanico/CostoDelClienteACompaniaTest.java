@@ -46,7 +46,7 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	@Test 
 	public void clienteRentableParaCompaníaTest(){
 		
-		setUpCliente(new  PlatinumPlan(), 10);
+		setUpCliente(new  PlatinumPlan(), 100);
 		
 		doClienteRealizarPedidos();
 		
@@ -66,16 +66,13 @@ public class CostoDelClienteACompaniaTest extends AuxilioMecanicoTest {
 	
 	private void doClienteRealizarPedidos() {
 		Pedido pedidoBase;
-		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
-		pedidoBase.aumentarEconomicidad(0.5);
+		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build();
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
 		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
-		pedidoBase.aumentarEconomicidad(0.5);
 		tratarUnPedido(clienteDeTest,pedidoBase);
 		
 		pedidoBase = new CPedidoBuilder().armarPedidoBase(super.automovilOtro).addReparacionSimple().build(); 
-		pedidoBase.aumentarEconomicidad(0.5); 
 		tratarUnPedido(clienteDeTest,pedidoBase);
 	}
 	/*

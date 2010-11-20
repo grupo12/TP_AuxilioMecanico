@@ -12,10 +12,14 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
 
 public class Remolque extends EspecialidadPedido {
 
+	private static Tiempo tiempoEmpleadoEnReparacion;
 	private static int cantidadAtendidos;
 	private boolean terminado;
 
 	static {
+		// Inicialización de variables del tiempo de reparación
+		tiempoEmpleadoEnReparacion = new Tiempo().nuevoTiempo(0, 0);
+		// Inicialización de cantidad de atendidos
 		cantidadAtendidos = 0;
 	}
 
@@ -41,14 +45,14 @@ public class Remolque extends EspecialidadPedido {
 
 	@Override
 	public void terminarServicioDelPedido(Tiempo tiempo) {
-		cantidadAtendidos += 1;
-		terminado = true;
+		Remolque.cantidadAtendidos +=1;
+		Remolque.tiempoEmpleadoEnReparacion = Tiempo.sumarTiempos(Remolque.tiempoEmpleadoEnReparacion,tiempo); 
 		sujeto.terminarServicioDelPedido(tiempo);
 	}
 
-	@Override
 	public Tiempo calcularTiempoDeAtencion() {
-		throw new UnsupportedOperationException();
+		Tiempo tiempoARetornar = Tiempo.promediarTiempo(Remolque.tiempoEmpleadoEnReparacion, Remolque.cantidadAtendidos);
+		return tiempoARetornar;
 	}
 
 	@Override

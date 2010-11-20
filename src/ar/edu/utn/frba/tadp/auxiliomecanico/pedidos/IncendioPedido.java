@@ -25,12 +25,6 @@ public class IncendioPedido extends DesastrePedido {
 	}
 
 	@Override
-	protected void validarEspecialidadPara(Cliente cliente) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
 		// TODO Auto-generated method stub
@@ -45,18 +39,6 @@ public class IncendioPedido extends DesastrePedido {
 
 	@Override
 	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Automovil getAutomovil() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
