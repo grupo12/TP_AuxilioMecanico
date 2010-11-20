@@ -18,30 +18,12 @@ public class VuelcoPedido extends DesastrePedido {
 
 	public VuelcoPedido(Pedido sujeto) {
 		super(sujeto);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	protected void validarEspecialidadPara(Cliente cliente) {
-		this.doValidarEspecialidadPara(cliente);
 	}
 
 	@Override
 	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
 		return unCamion.hayRemolque(automovil);
-	}
-
-	@Override
-	public boolean isReparacionSimple() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -66,6 +48,6 @@ public class VuelcoPedido extends DesastrePedido {
 	@Override
 	protected boolean doPuedeSerAtendidoPorCamion(Camion unCamion,
 			Automovil automovil) {
-		return unCamion.hayRemolque(super.getAutomovil());
+		return unCamion.hayRemolque(this.getAutomovil());
 	}
 }

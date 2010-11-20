@@ -67,9 +67,9 @@ public class CPedidoBuilder implements IPedidoBuilder {
 	}
 
 	@Override
-	public CPedidoBuilder addIncendio() {
+	public CPedidoBuilder addIncendio(boolean isPeligroso) {
 		pedidoBaseConstruido();
-		pedido = new IncendioPedido(pedido);
+		pedido = new IncendioPedido(pedido, isPeligroso);
 		return this;
 	}
 	
@@ -103,4 +103,5 @@ public class CPedidoBuilder implements IPedidoBuilder {
 			throw new NoExistePedidoBaseException("Precondición: PedidoBase",
 					pedido);
 	}
+
 }

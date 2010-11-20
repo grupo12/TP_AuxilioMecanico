@@ -12,6 +12,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.PedidoBase;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Remolque;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.ReparacionSimple;
 import ar.edu.utn.frba.tadp.auxiliomecanico.planes.PlatinumPlan;
+import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.AutoReemplazo;
 
 public class ClientePlatinumSeLeAsignaCamionMasLibreTest extends AuxilioMecanicoTest {
 	private static final int PESO_AUTO_LIVIANO = 1;
@@ -24,6 +25,7 @@ public class ClientePlatinumSeLeAsignaCamionMasLibreTest extends AuxilioMecanico
 	@Before
 	public void setUp(){
 		super.setUp();
+		this.tallerMecanico.agregarAutoReemplazo(new AutoReemplazo(50));
 		this.clientePlatinumSinDeuda = new Cliente(new PlatinumPlan(), CUOTA_MENSUAL_PLATINUM);
 		this.automovilLivianoPlatinum = new Automovil(PESO_AUTO_LIVIANO, this.clientePlatinumSinDeuda);
 		this.pedidoPlatinum = new Remolque(new ReparacionSimple(new PedidoBase(this.automovilLivianoPlatinum)));

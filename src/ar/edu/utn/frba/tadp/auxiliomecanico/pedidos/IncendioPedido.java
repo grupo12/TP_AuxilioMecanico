@@ -9,9 +9,9 @@ public class IncendioPedido extends DesastrePedido {
 
 	boolean isPeligroso;
 
-	public IncendioPedido(Pedido sujeto) {
+	public IncendioPedido(Pedido sujeto, boolean isPeligroso) {
 		super(sujeto);
-		// TODO Auto-generated constructor stub
+		this.isPeligroso = isPeligroso;
 	}
 
 	private static Tiempo tiempoEmpleadoEnReparacion;
@@ -22,25 +22,6 @@ public class IncendioPedido extends DesastrePedido {
 		tiempoEmpleadoEnReparacion = new Tiempo().nuevoTiempo(0, 0);
 		// Inicialización de cantidad de atendidos
 		cantidadAtendidos = 0;
-	}
-
-	@Override
-	public boolean puedeSerAtendidoPorCamion(Camion unCamion,
-			Automovil automovil) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isReparacionSimple() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isRemolque() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 	public Tiempo calcularTiempoDeAtencion() {

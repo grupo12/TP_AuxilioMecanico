@@ -21,8 +21,6 @@ public interface IPedidoBuilder {
 	
 	public abstract Pedido build();
 
-	public abstract CPedidoBuilder addIncendio();
-
 	public abstract CPedidoBuilder addInundacion();
 
 	public abstract CPedidoBuilder addVuelco();
@@ -30,5 +28,7 @@ public interface IPedidoBuilder {
 	public abstract CPedidoBuilder addReparacionElectrica();
 
 	public abstract CPedidoBuilder addReparacionMecanica(Complejidad c);
+
+	public abstract CPedidoBuilder addIncendio(boolean isPeligroso);
 
 }
