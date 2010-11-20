@@ -38,4 +38,9 @@ public class InundacionPedido extends DesastrePedido {
 		return unCamion.hayRemolque(super.getAutomovil())
 		&& unCamion.hayTecnicoExpertoInundaciones();
 	}
+	
+	@Override
+	public boolean tieneUrgencias(){
+		return true;
+	}
 }

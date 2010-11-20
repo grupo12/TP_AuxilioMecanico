@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import ar.edu.utn.frba.tadp.auxiliomecanico.camiones.Camion;
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
@@ -91,10 +90,11 @@ public class Estrategia implements Cloneable {
 		}
 	}
 	
-	public void atenderUrgencia() {
+	public void atenderUrgencia(Pedido pedido) {
 		for(PrestadorServicios prestador: prestadores){
 			prestador.atenderUrgencia(pedido);
 		}
 	}
+
 
 }

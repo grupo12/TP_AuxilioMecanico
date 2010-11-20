@@ -119,4 +119,8 @@ public abstract class EspecialidadPedido extends Pedido {
 	public boolean puedeAtenderte(Camion camion) {
 		return this.doPuedeSerAtendidoPorCamion(camion, this.getAutomovil());
 	}
+	
+	public boolean tieneUrgencias(){
+		return false;
+	}
 }

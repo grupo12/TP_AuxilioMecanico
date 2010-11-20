@@ -14,6 +14,7 @@ import ar.edu.utn.frba.tadp.auxiliomecanico.excepciones.NoHayRemisEnElTallerExce
 import ar.edu.utn.frba.tadp.auxiliomecanico.manipulartiempo.Tiempo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.EspecialidadPedido;
 import ar.edu.utn.frba.tadp.auxiliomecanico.pedidos.Pedido;
+import ar.edu.utn.frba.tadp.auxiliomecanico.planes.estrategias.EstrategiaRapida;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.Ambulancia;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.AutoReemplazo;
 import ar.edu.utn.frba.tadp.auxiliomecanico.prestadores.PrestadorServicios;
@@ -76,7 +77,10 @@ public class TallerMecanico {
 	}
 
 	private void asignarEstrategia(Pedido pedido) {
-		this.estrategiaParaAsignarA(pedido).atender(pedido);
+		if (pedido.tieneUrgencias())
+			this.estrategiaParaAsignarA(pedido).atenderUrgencia(pedido);
+		else
+			this.estrategiaParaAsignarA(pedido).atender(pedido);
 	}
 
 	/**
@@ -116,6 +120,8 @@ public class TallerMecanico {
 		
 		this.validarEstrategiasPosibles(pedido, estrategiasPosibles);
 		
+		if (pedido.tieneUrgencias())
+			return (new EstrategiaRapida().elegirEstrategia(estrategiasPosibles));
 		return pedido.getCliente().selectEstrategia(estrategiasPosibles);
 	}
 

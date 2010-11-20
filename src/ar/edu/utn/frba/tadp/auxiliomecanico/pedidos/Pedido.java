@@ -203,4 +203,6 @@ public abstract class Pedido {
 		camionAtendio = camionParaAsignarA;
 	}
 
+	public abstract boolean tieneUrgencias();
+
 }

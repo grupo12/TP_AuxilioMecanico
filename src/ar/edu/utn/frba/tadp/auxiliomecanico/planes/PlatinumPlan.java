@@ -40,4 +40,24 @@ public class PlatinumPlan extends Plan {
 	public void validarRemolquePara(Cliente cliente) {
 		// Un cliente con plan Platinum siempre puede pedir remolque
 	}
-		public void setEstado(EstadoPlatinum unEstado) {		estado = unEstado;	}		@Override	public Estrategia selectEstrategia(Collection<Estrategia> estrategias, Cliente unCliente) {		estado.verificarEstado(unCliente);		return estado.seleccionarEstrategia(estrategias);	}	@Override	public PrestadorServicios prestadorParaServicioEnTaller(TallerMecanico tallerMecanico, Cliente cliente) {		return AutoReemplazoServicio.getInstance().getPrestadorServicio(tallerMecanico);	}}
+	
+	public void setEstado(EstadoPlatinum unEstado) {
+		estado = unEstado;
+	}
+	
+	@Override
+	public Estrategia selectEstrategia(Collection<Estrategia> estrategias, Cliente unCliente) {
+		
+		estado.verificarEstado(unCliente);
+		return estado.seleccionarEstrategia(estrategias);
+		
+	}
+	
+	@Override
+	public PrestadorServicios prestadorParaServicioEnTaller(TallerMecanico tallerMecanico, Cliente cliente) {
+		
+		return AutoReemplazoServicio.getInstance().getPrestadorServicio(tallerMecanico);
+		
+	}
+	
+}

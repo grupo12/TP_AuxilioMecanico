@@ -53,4 +53,9 @@ public class IncendioPedido extends DesastrePedido {
 		// no es peligroso, puede manejarlo cualquier camion de
 		// auxilio
 	}
+	
+	@Override
+	public boolean tieneUrgencias(){
+		return true;
+	}
 }
